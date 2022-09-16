@@ -1,0 +1,55 @@
+﻿@model Client
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Add Client</h2>
+            <hr />
+        </div>
+        <!--creates all of the error messages as a summary at top-->
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3">
+            <!--tag helper start with asp and help bind the c# object-->
+            <label asp-for="Name"></label>
+            <!--this automatially displays the name field how it is written in the Client Model-->
+            <input asp-for="Name" class="form-control" />
+            <!--tag helper for validation text-danger returns red color-->
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <!--The way that Phone is displayed can be changed in the model-->
+            <label asp-for="Phone"></label>
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+            <!--Custom Errors need to be made in the controller-->
+            <!--note validations do not go away in real time and hard coded validations don't go away at all-->
+        </div>
+        <div class="mb-3">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="Address"></label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Save</button>
+        <!--navigating back to Categories page-->
+        <a asp-controller="Client" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back To List
+        </a>
+    </div>
+</form>
+<!--adding client side validation requires adding scripts from the _ValidationScriptsPartial file in Shared folder-->
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    }
+    @*
+    For more info on data annotations/ validation options go to
+    docs.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations?view=net-5.0
+*@
+
