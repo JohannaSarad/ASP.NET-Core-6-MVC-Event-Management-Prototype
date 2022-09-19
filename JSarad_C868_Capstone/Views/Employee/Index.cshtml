@@ -36,6 +36,9 @@
                 <th>
                     Address
                 </th>
+                <th>
+                    Availability
+                </th>
                 @*
                     FIX ME!!! need to add some kind of check boxes for daily availabiliy, and a drop down for the roles
                 *@
@@ -54,9 +57,13 @@
                     <td width=20%>
                         @employee.Email
                     </td>
-                    <td width=30%>
+                    <td width=20%>
                         @employee.Address
                     </td>
+                    <td width="10%">
+                        @employee.Availability
+                    </td>
+                    
                     <!--edit button inside of cell-->
                     <td class="w-75 btn-group" role="group">
                         <!--go back to bootstrap icons and copy and paste pencil square icon-->

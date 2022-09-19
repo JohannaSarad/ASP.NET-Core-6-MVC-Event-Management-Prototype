@@ -60,7 +60,7 @@ namespace JSarad_C868_Capstone.Data
                 {
                     Id = 2,
                     Name = "Rebecca Crocker",
-                    Phone = "66133322111",
+                    Phone = "6613332211",
                     Email = "rcrocker@email.com",
                     Address = "345 Mullberry Way",
                     Role = "Server",

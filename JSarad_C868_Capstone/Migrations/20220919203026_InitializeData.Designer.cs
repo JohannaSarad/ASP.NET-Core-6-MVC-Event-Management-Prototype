@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JSarad_C868_Capstone.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220915195536_InitializeAndSeedDatabase")]
-    partial class InitializeAndSeedDatabase
+    [Migration("20220919203026_InitializeData")]
+    partial class InitializeData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -96,7 +96,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Id = 1,
                             Address = "123 Country Road",
                             Email = "eledford@email.com",
-                            LastUpdate = new DateTime(2022, 9, 15, 12, 55, 35, 892, DateTimeKind.Local).AddTicks(1850),
+                            LastUpdate = new DateTime(2022, 9, 19, 13, 30, 26, 685, DateTimeKind.Local).AddTicks(2642),
                             Name = "Edwin Ledford",
                             Phone = "6613332222"
                         });
@@ -115,7 +115,6 @@ namespace JSarad_C868_Capstone.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Availability")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -134,7 +133,6 @@ namespace JSarad_C868_Capstone.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -148,7 +146,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "2414 Loma Linda Dr",
                             Availability = "MTWRFSU",
                             Email = "jsarad2@wgu.edu",
-                            LastUpdate = new DateTime(2022, 9, 15, 12, 55, 35, 892, DateTimeKind.Local).AddTicks(1898),
+                            LastUpdate = new DateTime(2022, 9, 19, 13, 30, 26, 685, DateTimeKind.Local).AddTicks(2678),
                             Name = "Johanna Sarad",
                             Phone = "6614444763",
                             Role = "Bartender"
@@ -159,9 +157,9 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "345 Mullberry Way",
                             Availability = "TRFSU",
                             Email = "rcrocker@email.com",
-                            LastUpdate = new DateTime(2022, 9, 15, 12, 55, 35, 892, DateTimeKind.Local).AddTicks(1902),
+                            LastUpdate = new DateTime(2022, 9, 19, 13, 30, 26, 685, DateTimeKind.Local).AddTicks(2681),
                             Name = "Rebecca Crocker",
-                            Phone = "66133322111",
+                            Phone = "6613332211",
                             Role = "Server"
                         },
                         new
@@ -170,7 +168,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "765 Atlantic St",
                             Availability = "MWF",
                             Email = "iward@email.com",
-                            LastUpdate = new DateTime(2022, 9, 15, 12, 55, 35, 892, DateTimeKind.Local).AddTicks(1904),
+                            LastUpdate = new DateTime(2022, 9, 19, 13, 30, 26, 685, DateTimeKind.Local).AddTicks(2683),
                             Name = "Ian Ward",
                             Phone = "8057778899",
                             Role = "Server"
@@ -228,7 +226,7 @@ namespace JSarad_C868_Capstone.Migrations
                             EventStart = new DateTime(2022, 11, 10, 4, 30, 0, 0, DateTimeKind.Unspecified),
                             Food = true,
                             Guests = 50,
-                            LastUpdate = new DateTime(2022, 9, 15, 12, 55, 35, 892, DateTimeKind.Local).AddTicks(1915),
+                            LastUpdate = new DateTime(2022, 9, 19, 13, 30, 26, 685, DateTimeKind.Local).AddTicks(2696),
                             Location = "888 Corporate Way",
                             Type = "Corporate Event"
                         });

@@ -1,7 +1,7 @@
 ﻿using JSarad_C868_Capstone.Data;
 using JSarad_C868_Capstone.Models;
 using Microsoft.AspNetCore.Mvc;
-
+using JSarad_C868_Capstone.ViewModels;
 namespace JSarad_C868_Capstone.Controllers
 {
     public class EmployeeController : Controller
@@ -24,19 +24,55 @@ namespace JSarad_C868_Capstone.Controllers
         //Get /Employee/Add
         public IActionResult Add()
         {
-            return View();
+            EmployeeViewModel viewModel = new EmployeeViewModel();
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Add(Employee employee)
+        public IActionResult Add(EmployeeViewModel viewModel)
         {
+            //added viewModel and daysToChar conversion for employee.Availability (May or may not work here)
+            //EmployeeViewModel viewModel = new EmployeeViewModel();
+   
+            string daysToChars = "";
+            if (viewModel.Monday)
+            {
+                daysToChars += "M";
+            }
+            if (viewModel.Tuesday)
+            {
+                daysToChars += "T";
+            }
+            if (viewModel.Wednesday)
+            {
+                daysToChars += "W";
+            }
+            if (viewModel.Thursday)
+            {
+                daysToChars += "R";
+            }
+            if (viewModel.Friday)
+            {
+                daysToChars += "F";
+            }
+            if (viewModel.Saturday)
+            {
+                daysToChars += "S";
+            }
+            if (viewModel.Sunday)
+            {
+                daysToChars += "U";
+            }
+
+            viewModel.Employee.Availability = daysToChars;
+            
             //further validation explained in ClientController
             //validation
             if (ModelState.IsValid)
             {
                 //adding an employee to database
-                _db.Employees.Add(employee);
+                _db.Employees.Add(viewModel.Employee);
 
                 _db.SaveChanges();
                 //redirecting to the main employee page with list of employees
@@ -44,7 +80,7 @@ namespace JSarad_C868_Capstone.Controllers
             }
             else
             {
-                return View(employee);
+                return View(viewModel);
             }
         }
 
