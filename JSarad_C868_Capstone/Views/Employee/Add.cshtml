@@ -6,6 +6,16 @@
             <h2 class="text-primary">Add Employee</h2>
             <hr />
         </div>
+        <div class="mb-3">
+            <div class="form-group">
+                <label asp-for="Employee.Role"></label>
+                <select asp-for="Employee.Role" class="form-control">
+                    <option value="Bartender">Bartender</option>
+                    <option value="Server">Server</option>
+                </select>
+                <span asp-validation-for="Employee.Role" class="text-danger"></span>
+            </div>
+        </div>
         <div asp-validation-summary="All"></div>
         <div class="mb-3">
             <label asp-for="Employee.Name"></label>
@@ -32,48 +42,49 @@
         </div>
         <div class="row pb-4">
             <div class="col">
-        <div class="form-check">
-            <input asp-for="Monday" class="form-check-input" type="checkbox"/>
-            <label asp-for="Monday" class="form-check-label"></label>
-        </div>
-        </div>
+                <div class="form-check">
+                    <input asp-for="Monday" class="form-check-input" type="checkbox"/>
+                    <label asp-for="Monday" class="form-check-label"></label>
+                </div>
+            </div>
             <div class="col">
-        <div class="form-check">
-            <input asp-for="Tuesday" class="form-check-input" type="checkbox"/>
-            <label asp-for="Tuesday" class="form-check-label"></label>
-        </div>
-        </div>
+                <div class="form-check">
+                    <input asp-for="Tuesday" class="form-check-input" type="checkbox"/>
+                    <label asp-for="Tuesday" class="form-check-label"></label>
+                </div>
+            </div>
             <div class="col">
-        <div class="form-check">   
-            <input asp-for="Wednesday" class="form-check-input" type="checkbox" />
-            <label asp-for="Wednesday" class="form-check-label"></label>
-        </div>
-        </div>
-        <div class="col">
-        <div class="form-check">
-            <input asp-for="Thursday" class="form-check-input" type="checkbox" />
-            <label asp-for="Thursday" class="form-check-label"></label>
-        </div>
-        </div>
+                <div class="form-check">   
+                    <input asp-for="Wednesday" class="form-check-input" type="checkbox" />
+                    <label asp-for="Wednesday" class="form-check-label"></label>
+                </div>
+            </div>
             <div class="col">
-        <div class="form-check">
-            <input asp-for="Friday" class="form-check-input" type="checkbox" />
-            <label asp-for="Friday" class="form-check-label"></label>
-        </div>
-        </div>
+                <div class="form-check">
+                    <input asp-for="Thursday" class="form-check-input" type="checkbox" />
+                    <label asp-for="Thursday" class="form-check-label"></label>
+                </div>
+            </div>
             <div class="col">
-        <div class="form-check">
-            <input asp-for="Saturday" class="form-check-input" type="checkbox" />
-            <label asp-for="Saturday" class="form-check-label"></label>
-        </div>
-        </div>
+                <div class="form-check">
+                    <input asp-for="Friday" class="form-check-input" type="checkbox" />
+                    <label asp-for="Friday" class="form-check-label"></label>
+                </div>
+            </div>
             <div class="col">
-        <div class="form-check">
-            <input asp-for="Sunday" class="form-check-input" type="checkbox" />
-            <label asp-for="Sunday" class="form-check-label"></label>
+                <div class="form-check">
+                    <input asp-for="Saturday" class="form-check-input" type="checkbox" />
+                    <label asp-for="Saturday" class="form-check-label"></label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-check">
+                    <input asp-for="Sunday" class="form-check-input" type="checkbox" />
+                    <label asp-for="Sunday" class="form-check-label"></label>
+                </div>
+            </div>
         </div>
-        </div>
-        </div>
+       
             @* between lable tags you can add a name for monday without hardcoding by creating a name ptoperty in the model
                 and inserting @Model.WhateverTheNameIs
             *@
@@ -101,10 +112,11 @@
         </a>
     </div>
 </form>
+
 <!--adding client side validation requires adding scripts from the _ValidationScriptsPartial file in Shared folder-->
 @section Scripts{
     @{
-        <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
     }
     }
     @*

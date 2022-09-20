@@ -3,8 +3,6 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
 <div class="container p3">
     <div class="row pt-4">
         <div class="col-6">
@@ -37,6 +35,9 @@
                     Address
                 </th>
                 <th>
+                    Position
+                </th>
+                <th>
                     Availability
                 </th>
                 @*
@@ -48,24 +49,27 @@
             @foreach (var employee in Model)
             {
                 <tr>
-                    <td width=15%>
+                    <td>
                         @employee.Name
                     </td>
-                    <td width=15%>
+                    <td>
                         @employee.Phone
                     </td>
-                    <td width=20%>
+                    <td>
                         @employee.Email
                     </td>
-                    <td width=20%>
+                    <td>
                         @employee.Address
                     </td>
-                    <td width="10%">
+                    <td>
+                        @employee.Role
+                    </td>
+                    <td>
                         @employee.Availability
                     </td>
                     
                     <!--edit button inside of cell-->
-                    <td class="w-75 btn-group" role="group">
+                    <td class="w-100 btn-group" role="group">
                         <!--go back to bootstrap icons and copy and paste pencil square icon-->
                         @*
                             navigate to /Employee/Edit
