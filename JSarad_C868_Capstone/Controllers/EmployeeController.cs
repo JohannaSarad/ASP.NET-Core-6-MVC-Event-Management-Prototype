@@ -98,45 +98,95 @@ namespace JSarad_C868_Capstone.Controllers
             {
                 return NotFound();
             }
-            return View(selectedEmployee);
+
+            EmployeeViewModel viewModel = new EmployeeViewModel();
+            viewModel.Employee = selectedEmployee;
+
+            if (!string.IsNullOrEmpty(viewModel.Employee.Availability)) {
+                if (viewModel.Employee.Availability.Contains("M"))
+                {
+                    viewModel.Monday = true;
+                }
+                if (viewModel.Employee.Availability.Contains("T"))
+                {
+                    viewModel.Tuesday = true;
+                }
+                if (viewModel.Employee.Availability.Contains("W"))
+                {
+                    viewModel.Wednesday = true;
+                }
+                if (viewModel.Employee.Availability.Contains("R"))
+                {
+                    viewModel.Thursday = true;
+                }
+                if (viewModel.Employee.Availability.Contains("F"))
+                {
+                    viewModel.Friday = true;
+                }
+                if (viewModel.Employee.Availability.Contains("S"))
+                {
+                    viewModel.Saturday = true;
+                }
+                if (viewModel.Employee.Availability.Contains("U"))
+                {
+                    viewModel.Sunday = true;
+                }
+            }
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Employee employee)
+        public IActionResult Edit(EmployeeViewModel viewModel)
         {
+            string daysToChars = "";
+            if (viewModel.Monday)
+            {
+                daysToChars += "M";
+            }
+            if (viewModel.Tuesday)
+            {
+                daysToChars += "T";
+            }
+            if (viewModel.Wednesday)
+            {
+                daysToChars += "W";
+            }
+            if (viewModel.Thursday)
+            {
+                daysToChars += "R";
+            }
+            if (viewModel.Friday)
+            {
+                daysToChars += "F";
+            }
+            if (viewModel.Saturday)
+            {
+                daysToChars += "S";
+            }
+            if (viewModel.Sunday)
+            {
+                daysToChars += "U";
+            }
+
+            viewModel.Employee.Availability = daysToChars;
             //validation
             if (ModelState.IsValid)
             {
                 //updatng a employee in the database
-                _db.Employees.Update(employee);
+                _db.Employees.Update(viewModel.Employee);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
             else
             {
-                return View(employee);
+                return View(viewModel);
             }
         }
 
-        //Get /Employee/Delete
-        public IActionResult Delete(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            var selectedEmployee = _db.Employees.Find(id);
-
-            if (selectedEmployee == null)
-            {
-                return NotFound();
-            }
-            return View(selectedEmployee);
-        }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public IActionResult DeletePOST(int? id)
         {
             var selectedEmployee = _db.Employees.Find(id);
@@ -147,6 +197,7 @@ namespace JSarad_C868_Capstone.Controllers
             _db.Employees.Remove(selectedEmployee);
             _db.SaveChanges();
             return RedirectToAction("Index");
+            
         }
     }
 }

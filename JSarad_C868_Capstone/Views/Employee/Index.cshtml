@@ -22,24 +22,12 @@
     <table class="table table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Phone
-                </th>
-                <th>
-                    Email
-                </th>
-                <th>
-                    Address
-                </th>
-                <th>
-                    Position
-                </th>
-                <th>
-                    Availability
-                </th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Position</th>
+                <th>Availability</th>
                 @*
                     FIX ME!!! need to add some kind of check boxes for daily availabiliy, and a drop down for the roles
                 *@
@@ -48,25 +36,13 @@
         <tbody>
             @foreach (var employee in Model)
             {
-                <tr>
-                    <td>
-                        @employee.Name
-                    </td>
-                    <td>
-                        @employee.Phone
-                    </td>
-                    <td>
-                        @employee.Email
-                    </td>
-                    <td>
-                        @employee.Address
-                    </td>
-                    <td>
-                        @employee.Role
-                    </td>
-                    <td>
-                        @employee.Availability
-                    </td>
+                <tr id="row_@employee.Id">
+                    <td>@employee.Name</td>
+                    <td>@employee.Phone</td>
+                    <td>@employee.Email</td>
+                    <td>@employee.Address</td>
+                    <td>@employee.Role</td>
+                    <td>@employee.Availability</td>
                     
                     <!--edit button inside of cell-->
                     <td class="w-100 btn-group" role="group">
@@ -75,12 +51,23 @@
                             navigate to /Employee/Edit
                         *@
                         <a asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.Id"
-                       class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit</a>
-                        <a asp-controller="Employee" asp-action="Delete" asp-route-id="@employee.Id"
-                       class="btn btn-danger mx-2"> <i class="bi bi-trash"></i> Delete</a>
+                           class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit</a>
+                        <a class="btn btn-danger delete" id="#delete" data-id="@employee.Id"
+                        data-controller="Employee" data-Action="DeletePOST"
+                           data-body-message= "Are you sure you want to delete this employee?">
+                           <i class="bi bi-trash"></i> Delete</a>
+                       
+                      
                     </td>
+                    
                 </tr>
             }
         </tbody>
+        
     </table>
 </div>
+
+
+
+
+                       

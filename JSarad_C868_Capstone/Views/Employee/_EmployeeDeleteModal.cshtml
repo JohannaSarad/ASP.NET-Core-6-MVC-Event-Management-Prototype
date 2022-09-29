@@ -1,0 +1,23 @@
+﻿@model Employee
+
+<div class="modal fade" id="confirmDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Delete Employee</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action=>
+                    <input asp-for="Id" type="hidden" />
+                    <p>Are you sure you would like to delete this employee</p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" asp-controller="Employee" asp-action="DeletePOST" asp-route-id="Id" 
+                   class="btn btn-danger mx-2"> Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
