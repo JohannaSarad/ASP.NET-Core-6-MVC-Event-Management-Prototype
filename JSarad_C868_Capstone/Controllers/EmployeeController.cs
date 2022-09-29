@@ -34,7 +34,10 @@ namespace JSarad_C868_Capstone.Controllers
         {
             //added viewModel and daysToChar conversion for employee.Availability (May or may not work here)
             //EmployeeViewModel viewModel = new EmployeeViewModel();
-   
+
+            //FIX ME!!! move days to charactors to its own class or function
+            //convert days to characters
+
             string daysToChars = "";
             if (viewModel.Monday)
             {

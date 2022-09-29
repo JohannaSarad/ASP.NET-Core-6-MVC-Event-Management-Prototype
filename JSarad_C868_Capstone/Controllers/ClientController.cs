@@ -57,7 +57,6 @@ namespace JSarad_C868_Capstone.Controllers
             else
             {
                 return View(client);
-                //not exacly sure how this works guess it's just returning the view with the same object in it
             }
         }
 
@@ -96,24 +95,7 @@ namespace JSarad_C868_Capstone.Controllers
             }
         }
 
-        //Get /Client/Delete
-        public IActionResult Delete(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            var selectedClient = _db.Clients.Find(id);
-
-            if (selectedClient == null)
-            {
-                return NotFound();
-            }
-            return View(selectedClient);
-        }
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult DeletePOST(int? id)
         {
             var selectedClient = _db.Clients.Find(id);
