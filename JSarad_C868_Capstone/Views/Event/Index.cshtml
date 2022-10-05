@@ -1,0 +1,71 @@
+﻿@model IEnumerable<JSarad_C868_Capstone.ViewModels.EventListViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<div class="container p3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Event Information</h2>
+        </div>
+        <div class="col-6 text-end">
+            <!--add button-->
+            <a asp-controller="Event" asp-action="Add" class="btn btn-primary">
+                @*
+                selected plus icon from bootstrap icons copied and pasted
+                Note that the icon style was first added to _layout, &nbsp is a space
+                *@
+                <i class="bi bi-plus-circle"></i> &nbsp; Add Event
+            </a>
+        </div>
+    </div>
+    <br /><br />
+
+    <!--table row headers-->
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Event Date</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Contact Name</th>
+                <th>Contact Phone</th>
+            </tr>
+        </thead>
+        <!--table body and population info-->
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="row_@item.Id">
+                    <td>@item.StartDate.ToShortDateString()</td>
+                    <td>@item.StartDate.TimeOfDay</td>
+                    <td>@item.EndDate.TimeOfDay</td>
+                    <td>@item.ContactName</td>
+                    <td>@item.Phone</td>
+                   
+
+                    <!--modify buttons (w-100 splits cell, change to 75 when icons are added)-->
+                    <td class="w-30 btn-group" role="group">
+                        <!--go back to bootstrap icons and copy and paste pencil square icon-->
+                        <a class="btn btn-primary mx-2" asp-controller="Event" asp-action="Details" asp-route-id="@item.Id">
+                            <i class="bi bi-pencil-square"></i> Details
+                        </a>
+
+                        <a class="btn btn-primary mx-2" asp-controller="Event" asp-action="Edit" asp-route-id="@item.Id">
+                            <i class="bi bi-pencil-square"></i> Edit
+                        </a>
+
+                        <!--button call to delete modal (js.delete.js)-->
+                        <a class="btn btn-danger delete" id="#delete" data-id="@item.Id"
+                       data-controller="Event" data-Action="DeletePOST"
+                       data-body-message="Are you sure you want to delete this event?">
+                            <i class="bi bi-trash"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

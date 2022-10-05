@@ -17,8 +17,22 @@ namespace JSarad_C868_Capstone.Controllers
         //Get /Event
         public IActionResult Index()
         {
-            IEnumerable<Event> eventList = _db.Events;
-            return View(eventList);
+            //EventListViewModel viewModel = new EventListViewModel();
+
+            //IEnumerable<Event> eventList = _db.Events;
+            //IEnumerable<Client> clientList = _db.Clients;
+            var result = from e in _db.Events
+                         join c in _db.Clients on e.ClientId equals c.Id
+                         select new EventListViewModel
+                         {
+                             Id = e.Id,
+                             StartDate = e.EventStart,
+                             EndDate = e.EventEnd,
+                             Type = e.Type,
+                             ContactName = c.Name,
+                             Phone = c.Phone
+                         }; //.ToList();
+            return View(result);
         }
 
         //Get /Event/Add
@@ -103,5 +117,18 @@ namespace JSarad_C868_Capstone.Controllers
 
         }
 
+        [HttpPost]
+        public JsonResult AutoComplete(string prefix)
+        {
+            var clients =  (from client in _db.Clients
+                           where client.Name.StartsWith(prefix)
+                           select new
+                           {
+                               label = client.Name,
+                               val = client.Name
+                           }).Take(5).ToList();
+
+            return Json(clients);
+        }
     }
 }

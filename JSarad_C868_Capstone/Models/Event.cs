@@ -12,6 +12,7 @@ namespace JSarad_C868_Capstone.Models
         [Required]
         public string Location { get; set; }
         [Required]
+        //[Display(Name = "Start Date")]
         public DateTime EventStart { get; set; }
         [Required]
         public DateTime EventEnd { get; set; }

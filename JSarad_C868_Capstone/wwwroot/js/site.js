@@ -3,13 +3,42 @@
 
 // Write your JavaScript code.
 
-//$(function () {
-//    var PlaceHolderElement = $('#ModalPlaceHolder');
-//    $('button[data-toggle="ajax-modal"]').click(function (event) {
-//        var url = $(this).data('url');
-//        var decodedUrl = decodeURIComponent('url');
-//        $.get(decodedUrl).done(function (data) {
-//            PlaceHolderElement.html(data);
-//            PlaceHolderElement.find('.modal').modal('show');
-//        })
-//    })
+function AutoComplete() {
+    
+    var controller = document.getElementById("completeTxt").getAttribute("controller");
+    console.log(controller);
+    var action = document.getElementById("completeTxt").getAttribute("action");
+    console.log(action);
+    var url = "/" + controller + "/" + action + "/";
+    console.log(url);
+
+    $("#completeTxt").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: url,
+                type: "POST",
+                dataType: "json",
+                data: { "prefix": request.term },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return item;
+
+                    }))
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        },
+        select: function (e, i) {
+            $("#hfCustomer").val(i.item.val);
+        },
+        minLength: 0
+    }).focus(function () {
+        $(this).autocomplete("search");
+    });
+};
+        

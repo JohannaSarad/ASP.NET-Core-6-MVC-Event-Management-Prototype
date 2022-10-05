@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JSarad_C868_Capstone.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220919203026_InitializeData")]
-    partial class InitializeData
+    [Migration("20221001162547_InitializeAndSeedDatabase")]
+    partial class InitializeAndSeedDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -96,7 +96,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Id = 1,
                             Address = "123 Country Road",
                             Email = "eledford@email.com",
-                            LastUpdate = new DateTime(2022, 9, 19, 13, 30, 26, 685, DateTimeKind.Local).AddTicks(2642),
+                            LastUpdate = new DateTime(2022, 10, 1, 9, 25, 47, 16, DateTimeKind.Local).AddTicks(6772),
                             Name = "Edwin Ledford",
                             Phone = "6613332222"
                         });
@@ -146,7 +146,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "2414 Loma Linda Dr",
                             Availability = "MTWRFSU",
                             Email = "jsarad2@wgu.edu",
-                            LastUpdate = new DateTime(2022, 9, 19, 13, 30, 26, 685, DateTimeKind.Local).AddTicks(2678),
+                            LastUpdate = new DateTime(2022, 10, 1, 9, 25, 47, 16, DateTimeKind.Local).AddTicks(6813),
                             Name = "Johanna Sarad",
                             Phone = "6614444763",
                             Role = "Bartender"
@@ -157,7 +157,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "345 Mullberry Way",
                             Availability = "TRFSU",
                             Email = "rcrocker@email.com",
-                            LastUpdate = new DateTime(2022, 9, 19, 13, 30, 26, 685, DateTimeKind.Local).AddTicks(2681),
+                            LastUpdate = new DateTime(2022, 10, 1, 9, 25, 47, 16, DateTimeKind.Local).AddTicks(6817),
                             Name = "Rebecca Crocker",
                             Phone = "6613332211",
                             Role = "Server"
@@ -168,7 +168,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "765 Atlantic St",
                             Availability = "MWF",
                             Email = "iward@email.com",
-                            LastUpdate = new DateTime(2022, 9, 19, 13, 30, 26, 685, DateTimeKind.Local).AddTicks(2683),
+                            LastUpdate = new DateTime(2022, 10, 1, 9, 25, 47, 16, DateTimeKind.Local).AddTicks(6819),
                             Name = "Ian Ward",
                             Phone = "8057778899",
                             Role = "Server"
@@ -226,7 +226,7 @@ namespace JSarad_C868_Capstone.Migrations
                             EventStart = new DateTime(2022, 11, 10, 4, 30, 0, 0, DateTimeKind.Unspecified),
                             Food = true,
                             Guests = 50,
-                            LastUpdate = new DateTime(2022, 9, 19, 13, 30, 26, 685, DateTimeKind.Local).AddTicks(2696),
+                            LastUpdate = new DateTime(2022, 10, 1, 9, 25, 47, 16, DateTimeKind.Local).AddTicks(6829),
                             Location = "888 Corporate Way",
                             Type = "Corporate Event"
                         });
@@ -243,8 +243,14 @@ namespace JSarad_C868_Capstone.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("EventId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -255,19 +261,25 @@ namespace JSarad_C868_Capstone.Migrations
                         {
                             Id = 1,
                             EmployeeId = 1,
-                            EventId = 1
+                            EndDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventId = 1,
+                            StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
                             EmployeeId = 2,
-                            EventId = 1
+                            EndDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventId = 1,
+                            StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
                             EmployeeId = 3,
-                            EventId = 1
+                            EndDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventId = 1,
+                            StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 #pragma warning restore 612, 618

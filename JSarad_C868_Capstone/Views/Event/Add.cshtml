@@ -1,0 +1,101 @@
+﻿@model JSarad_C868_Capstone.ViewModels.EventViewModel
+
+
+<div class="panel panle-body">
+    <div class=" col-md-4">
+       <form method="post">
+           <div class="border p-3 mt-4">
+               <div class="row pb-2">
+                    <h2 class="text-primary">Add Event</h2>
+                    <hr />
+                </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        <label asp-for="Event.Type"></label>
+                        <select asp-for="Event.Type" class="form-control">
+                            <option value="Wedding">Wedding</option>
+                            <option value="Corporate">Corporate</option>
+                            <option value="Social Event">Social Event</option>
+                            <option value="Consession">Consession</option>
+                        </select>
+                        <span asp-validation-for="Event.Type" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label >Client Name</label>
+                    <input type="text" id="completeTxt" oninput="AutoComplete()" controller="Event" action="AutoComplete" />
+                       
+                    
+                </div>
+               
+                
+                <div class="mb-3">
+                    <div id="eventDate" class="input-append">
+                        <label asp-for="Event.EventStart.Date">Event Date</label>
+                        <input asp-for="Event.EventStart.Date" data-format="MM-dd-yyyy" type="date" />
+                        <span class="add-on">
+                            <i data-date-icon="icon-calendar">
+                            </i>
+                        </span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div id="eventDate" class="input-append">
+                        <label asp-for="Event.EventStart.TimeOfDay">Start Time</label>
+                        <input asp-for="Event.EventStart.TimeOfDay" data-format="hh:mm aa" type="time" />
+                        <span class="add-on">
+                            <i data-time-icon="icon-time" >
+                            </i>
+                        </span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div id="eventDate" class="input-append">
+                        <label asp-for="Event.EventEnd.TimeOfDay">End Time</label>
+                        <input asp-for="Event.EventEnd.TimeOfDay" data-format="hh:mm aa" type="time" />
+                        <span class="add-on">
+                            <i data-time-icon="icon-time">
+                            </i>
+                        </span>
+                    </div>
+                </div>
+                
+                <div asp-validation-summary="All"></div>
+                <div class="mb-3">
+                    <label asp-for="Event.Location"></label>
+                    <input asp-for="Event.Location" class="form-control" />
+                    <span asp-validation-for="Event.Location" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Event.Guests">Number of Guests</label>
+                    <input asp-for="Event.Guests" class="form-control" />
+                    <span asp-validation-for="Event.Guests" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <h1>Event Includes: </h1>
+                </div>
+                <div class="row pb-4">
+                    <div class="col">
+                        <div class="form-check">
+                            <input asp-for="Event.Food" class="form-check-input" type="checkbox" />
+                            <label asp-for="Event.Food" class="form-check-label"></label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input asp-for="Event.Bar" class="form-check-input" type="checkbox" />
+                            <label asp-for="Event.Bar" class="form-check-label"></label>
+                        </div>
+                    </div>
+                    </div>
+                <button type="submit" class="btn btn-primary" style="width:150px">Save</button>
+                <!--navigating back to Event page-->
+                <a asp-controller="Event" asp-action="Index" class="btn btn-secondary" style="width:150px">
+                    Back To List
+                </a>
+            </div>
+        </form>
+    </div>
+    </div>
+
+

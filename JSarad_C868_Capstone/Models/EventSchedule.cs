@@ -13,5 +13,8 @@ namespace JSarad_C868_Capstone.Models
         [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
 
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+
     }
 }
