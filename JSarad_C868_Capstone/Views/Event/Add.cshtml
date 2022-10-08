@@ -1,101 +1,167 @@
 ﻿@model JSarad_C868_Capstone.ViewModels.EventViewModel
 
 
-<div class="panel panle-body">
-    <div class=" col-md-4">
-       <form method="post">
-           <div class="border p-3 mt-4">
-               <div class="row pb-2">
-                    <h2 class="text-primary">Add Event</h2>
-                    <hr />
-                </div>
-                <div class="mb-3">
-                    <div class="form-group">
-                        <label asp-for="Event.Type"></label>
-                        <select asp-for="Event.Type" class="form-control">
-                            <option value="Wedding">Wedding</option>
-                            <option value="Corporate">Corporate</option>
-                            <option value="Social Event">Social Event</option>
-                            <option value="Consession">Consession</option>
-                        </select>
-                        <span asp-validation-for="Event.Type" class="text-danger"></span>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+           <form method="post">
+               <div class="border p-2 mt-4">
+                   <div class="row pb-2">
+                        <h2 class="text-primary">Add Event</h2>
+                        <hr />
                     </div>
-                </div>
-                <div class="mb-3">
-                    <label >Client Name</label>
-                    <input type="text" id="completeTxt" oninput="AutoComplete()" controller="Event" action="AutoComplete" />
-                       
-                    
-                </div>
+                    <div class="mb-3">
+                        <div class="form-group">
+                            <label asp-for="Event.Type"></label>
+                            <select asp-for="Event.Type" class="form-control">
+                                <option value="Wedding">Wedding</option>
+                                <option value="Corporate">Corporate</option>
+                                <option value="Social Event">Social Event</option>
+                                <option value="Consession">Consession</option>
+                            </select>
+                            <span asp-validation-for="Event.Type" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label >Client Name</label>
+                        <input type="text" id="completeTxt" oninput="AutoComplete()" controller="Event" action="AutoComplete" />
+                        <input type="hidden" id="hfitem" name="ClientId" />
+
+                    </div>
                
                 
-                <div class="mb-3">
-                    <div id="eventDate" class="input-append">
-                        <label asp-for="Event.EventStart.Date">Event Date</label>
-                        <input asp-for="Event.EventStart.Date" data-format="MM-dd-yyyy" type="date" />
-                        <span class="add-on">
-                            <i data-date-icon="icon-calendar">
-                            </i>
-                        </span>
+                    <div class="mb-3">
+                        <div id="eventDate" class="input-append">
+                            <label asp-for="Event.EventStart.Date">Event Date</label>
+                            <input asp-for="Event.EventStart.Date" data-format="MM-dd-yyyy" type="date" />
+                            <span class="add-on">
+                                <i data-date-icon="icon-calendar">
+                                </i>
+                            </span>
+                        </div>
                     </div>
-                </div>
-                <div class="mb-3">
-                    <div id="eventDate" class="input-append">
-                        <label asp-for="Event.EventStart.TimeOfDay">Start Time</label>
-                        <input asp-for="Event.EventStart.TimeOfDay" data-format="hh:mm aa" type="time" />
-                        <span class="add-on">
-                            <i data-time-icon="icon-time" >
-                            </i>
-                        </span>
+                    <div class="mb-3">
+                        <div id="eventDate" class="input-append">
+                            <label asp-for="Event.EventStart.TimeOfDay">Start Time</label>
+                            <input asp-for="Event.EventStart.TimeOfDay" data-format="hh:mm aa" type="time" />
+                            <span class="add-on">
+                                <i data-time-icon="icon-time" >
+                                </i>
+                            </span>
+                        </div>
                     </div>
-                </div>
-                <div class="mb-3">
-                    <div id="eventDate" class="input-append">
-                        <label asp-for="Event.EventEnd.TimeOfDay">End Time</label>
-                        <input asp-for="Event.EventEnd.TimeOfDay" data-format="hh:mm aa" type="time" />
-                        <span class="add-on">
-                            <i data-time-icon="icon-time">
-                            </i>
-                        </span>
+                    <div class="mb-3">
+                        <div id="eventDate" class="input-append">
+                            <label asp-for="Event.EventEnd.TimeOfDay">End Time</label>
+                            <input asp-for="Event.EventEnd.TimeOfDay" data-format="hh:mm aa" type="time" />
+                            <span class="add-on">
+                                <i data-time-icon="icon-time">
+                                </i>
+                            </span>
+                        </div>
                     </div>
-                </div>
                 
-                <div asp-validation-summary="All"></div>
-                <div class="mb-3">
-                    <label asp-for="Event.Location"></label>
-                    <input asp-for="Event.Location" class="form-control" />
-                    <span asp-validation-for="Event.Location" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="Event.Guests">Number of Guests</label>
-                    <input asp-for="Event.Guests" class="form-control" />
-                    <span asp-validation-for="Event.Guests" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <h1>Event Includes: </h1>
-                </div>
-                <div class="row pb-4">
-                    <div class="col">
-                        <div class="form-check">
-                            <input asp-for="Event.Food" class="form-check-input" type="checkbox" />
-                            <label asp-for="Event.Food" class="form-check-label"></label>
+                    <div asp-validation-summary="All"></div>
+                    <div class="mb-3">
+                        <label asp-for="Event.Location"></label>
+                        <input asp-for="Event.Location" class="form-control" />
+                        <span asp-validation-for="Event.Location" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Event.Guests">Number of Guests</label>
+                        <input asp-for="Event.Guests" class="form-control" />
+                        <span asp-validation-for="Event.Guests" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <h1>Event Includes: </h1>
+                    </div>
+                    <div class="row pb-4">
+                        <div class="col">
+                            <div class="form-check">
+                                <input asp-for="Event.Food" class="form-check-input" type="checkbox" />
+                                <label asp-for="Event.Food" class="form-check-label"></label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-check">
-                            <input asp-for="Event.Bar" class="form-check-input" type="checkbox" />
-                            <label asp-for="Event.Bar" class="form-check-label"></label>
+                        <div class="col">
+                            <div class="form-check">
+                                <input asp-for="Event.Bar" class="form-check-input" type="checkbox" />
+                                <label asp-for="Event.Bar" class="form-check-label"></label>
+                            </div>
                         </div>
+                        </div>
+                    <button type="submit" class="btn btn-primary" style="width:150px">Save</button>
+                    <!--navigating back to Event page-->
+                    <a asp-controller="Event" asp-action="Index" class="btn btn-secondary" style="width:150px">
+                        Back To List
+                    </a>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-8 pt-4">
+            
+
+                <!--table row headers-->
+                <table class="table table-bordered border-dark table-hover" style="border-collapse:collapse;">
+                    <thead style="display:table; width:calc(100% - 17px);">
+                    <tr style="display:table; width:100%; box-sizing:border-box;" class="table-primary">
+                        <th style="width:25%; word-break: break-all; padding: 5px;">Name</th>
+                        <th style="width:25%; word-break: break-all; padding: 5px;">Phone</th>
+                        <th style="width:25%; word-break: break-all; padding: 5px;">Position</th>
+                        <th style="width:25%; word-break: break-all; padding: 5px;">Availability</th>
+                        </tr>
+                    </thead>
+                    <!--table body and population info-->
+                   
+                    <tbody style="display:block; max-height:200px; overflow-y:scroll;">
+                        @foreach (var employee in Model.EmployeeList)
+                        {
+                            <tr  id="row_@employee.Id" class="table-light" style="display:table; width:100%; box-sizing:border-box" onclick="RowSelected(@employee.Id)">
+
+                            <td style="border-collapse:collapse; width:25%; word-break: break-all; padding: 5px; border-bottom: none;">@employee.Name</td>
+                            <td style="border-collapse:collapse; width:25%; word-break: break-all; padding: 5px; border-bottom: none;">@employee.Phone</td>
+                            <td style="border-collapse:collapse; width:25%; word-break: break-all; padding: 5px; border-bottom: none;">@employee.Role</td>
+                            <td style="border-collapse:collapse; width:25%; word-break: break-all; padding: 5px; border-bottom: none;">@employee.Availability</td>
+
+                                
+                            </tr>
+                        }
+                    </tbody>
+                   
+                </table>
+                <div class="row">
+                <div class="mb-3">
+                    <div class="col-md-4">
+            
+                <label asp-for="SelectedEmployee" style="display:flex"></label>
+                <input asp-for="SelectedEmployee" class="form-control" />
                     </div>
-                    </div>
-                <button type="submit" class="btn btn-primary" style="width:150px">Save</button>
-                <!--navigating back to Event page-->
-                <a asp-controller="Event" asp-action="Index" class="btn btn-secondary" style="width:150px">
-                    Back To List
-                </a>
+                    <div class="col-md-4">
+
+                        <div id="startTime" class="input-append">
+                            <label asp-for="StartTime.TimeOfDay" style="display:flex">Start Time</label>
+                <input asp-for="StartTime.TimeOfDay" data-format="hh:mm aa" type="time" />
+                <span class="add-on">
+                    <i data-time-icon="icon-time">
+                    </i>
+                </span>
+                        </div>
             </div>
-        </form>
+                    <div class="col-md-4">
+            <div id="endTime" class="input-append">
+                            <label asp-for="EndTime.TimeOfDay" style="display:flex">End Time</label>
+                <input asp-for="EndTime.TimeOfDay" data-format="hh:mm aa" type="time" />
+                <span class="add-on">
+                    <i data-time-icon="icon-time">
+                    </i>
+                </span>
+                        </div>
+            </div>
+            </div>
+            </div>
+        </div>
+        
     </div>
-    </div>
+    
+</div>
 
 

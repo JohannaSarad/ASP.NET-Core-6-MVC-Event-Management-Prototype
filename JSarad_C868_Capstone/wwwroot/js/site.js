@@ -3,6 +3,7 @@
 
 // Write your JavaScript code.
 
+//autoComplete user input text
 function AutoComplete() {
     
     var controller = document.getElementById("completeTxt").getAttribute("controller");
@@ -34,11 +35,16 @@ function AutoComplete() {
             });
         },
         select: function (e, i) {
-            $("#hfCustomer").val(i.item.val);
+            $("#hfitem").val(i.item.val);
         },
         minLength: 0
     }).focus(function () {
         $(this).autocomplete("search");
     });
 };
-        
+
+//hightlight selected table row
+function HighlightRow() {
+    
+    document.getElementById("#SelectedRow").style.backgroundColor= "yellow";
+}

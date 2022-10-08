@@ -39,6 +39,7 @@ namespace JSarad_C868_Capstone.Controllers
         public IActionResult Add()
         {
             EventViewModel viewModel = new EventViewModel();
+            viewModel.EmployeeList = _db.Employees; 
             return View(viewModel);
         }
 
