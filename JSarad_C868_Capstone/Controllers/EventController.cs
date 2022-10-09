@@ -9,6 +9,8 @@ namespace JSarad_C868_Capstone.Controllers
     {
         private readonly AppDbContext _db;
 
+        public EventViewModel ViewModel { get; set; }
+        
         public EventController(AppDbContext db)
         {
             _db = db;
@@ -17,8 +19,6 @@ namespace JSarad_C868_Capstone.Controllers
         //Get /Event
         public IActionResult Index()
         {
-            //EventListViewModel viewModel = new EventListViewModel();
-
             //IEnumerable<Event> eventList = _db.Events;
             //IEnumerable<Client> clientList = _db.Clients;
             var result = from e in _db.Events
@@ -38,9 +38,11 @@ namespace JSarad_C868_Capstone.Controllers
         //Get /Event/Add
         public IActionResult Add()
         {
-            EventViewModel viewModel = new EventViewModel();
-            viewModel.EmployeeList = _db.Employees; 
-            return View(viewModel);
+            ViewModel = new EventViewModel();
+            ViewModel.EmployeeList = _db.Employees.ToList();
+            //EventViewModel viewModel = new EventViewModel();
+            //viewModel.EmployeeList = _db.Employees; 
+            return View(ViewModel);
         }
 
 
@@ -130,6 +132,17 @@ namespace JSarad_C868_Capstone.Controllers
                            }).Take(5).ToList();
 
             return Json(clients);
+        }
+
+        [HttpPost]
+        public IActionResult EmployeeSelected(int id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            ViewModel.SelectedEmployee = _db.Employees.Find(id);
+            return View(ViewModel);
         }
     }
 }

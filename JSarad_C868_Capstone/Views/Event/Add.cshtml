@@ -101,26 +101,32 @@
             
 
                 <!--table row headers-->
+                
                 <table class="table table-bordered border-dark table-hover" style="border-collapse:collapse;">
                     <thead style="display:table; width:calc(100% - 17px);">
                     <tr style="display:table; width:100%; box-sizing:border-box;" class="table-primary">
-                        <th style="width:25%; word-break: break-all; padding: 5px;">Name</th>
-                        <th style="width:25%; word-break: break-all; padding: 5px;">Phone</th>
-                        <th style="width:25%; word-break: break-all; padding: 5px;">Position</th>
-                        <th style="width:25%; word-break: break-all; padding: 5px;">Availability</th>
+                        <th style="width:20%; word-break: break-all; padding: 5px;">Id</th>
+                        <th style="width:20%; word-break: break-all; padding: 5px;">Name</th>
+                        <th style="width:20%; word-break: break-all; padding: 5px;">Phone</th>
+                        <th style="width:20%; word-break: break-all; padding: 5px;">Position</th>
+                        <th style="width:20%; word-break: break-all; padding: 5px;">Availability</th>
                         </tr>
                     </thead>
                     <!--table body and population info-->
-                   
-                    <tbody style="display:block; max-height:200px; overflow-y:scroll;">
-                        @foreach (var employee in Model.EmployeeList)
+                    <tbody   style="display:block; max-height:200px; overflow-y:scroll;">
+                        
+                    @foreach (var employee in Model.EmployeeList)
                         {
-                            <tr  id="row_@employee.Id" class="table-light" style="display:table; width:100%; box-sizing:border-box" onclick="RowSelected(@employee.Id)">
+                        int index = Model.EmployeeList.IndexOf(employee);
 
-                            <td style="border-collapse:collapse; width:25%; word-break: break-all; padding: 5px; border-bottom: none;">@employee.Name</td>
-                            <td style="border-collapse:collapse; width:25%; word-break: break-all; padding: 5px; border-bottom: none;">@employee.Phone</td>
-                            <td style="border-collapse:collapse; width:25%; word-break: break-all; padding: 5px; border-bottom: none;">@employee.Role</td>
-                            <td style="border-collapse:collapse; width:25%; word-break: break-all; padding: 5px; border-bottom: none;">@employee.Availability</td>
+                       
+                            <tr id="rowIndex_@index" class="table-light selectable" style="display:table; width:100%; box-sizing:border-box" 
+                             controller="Event" Action="Selected" data-id="@employee.Id" data-index="@index">
+                                <td style="border-collapse:collapse; width:20%; word-break: break-all; padding: 5px; border-bottom: none;">@employee.Id</td>
+                                <td style="border-collapse:collapse; width:20%; word-break: break-all; padding: 5px; border-bottom: none;">@employee.Name</td>
+                                <td style="border-collapse:collapse; width:20%; word-break: break-all; padding: 5px; border-bottom: none;">@employee.Phone</td>
+                                <td style="border-collapse:collapse; width:20%; word-break: break-all; padding: 5px; border-bottom: none;">@employee.Role</td>
+                                <td style="border-collapse:collapse; width:20%; word-break: break-all; padding: 5px; border-bottom: none;">@employee.Availability</td>
 
                                 
                             </tr>

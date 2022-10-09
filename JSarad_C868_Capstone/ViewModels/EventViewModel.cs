@@ -10,7 +10,7 @@ namespace JSarad_C868_Capstone.ViewModels
         public Employee SelectedEmployee { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public IEnumerable<Employee> EmployeeList { get; set; }
+        public List<Employee> EmployeeList { get; set; }
 
     }
     

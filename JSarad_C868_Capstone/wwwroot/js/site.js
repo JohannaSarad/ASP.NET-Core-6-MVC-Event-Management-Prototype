@@ -44,7 +44,38 @@ function AutoComplete() {
 };
 
 //hightlight selected table row
-function HighlightRow() {
+
+
+//function RowSelected(e) {
+//    var controller = document.getElementById("selectable").getAttribute("controller");
+//    console.log(controller);
+//    var action = document.getElementById("selectable").getAttribute("action");
+//    console.log(action);
+//    var url = "/" + controller + "/" + action + "/";
+//    console.log(url);
+//    var row = document.getElementById("selectable").getAttribute("data-id");
+//    console.log(row);
+//    e.preventDefault();
+//    var target = e.target;
+//    console.log(target);
+//    var id = $(target).data('id');
+//    console.log(id);
+//}
+
+$((function () {
+    $(".selectable").on('click', (e) => {
+        e.preventDefault
+        var target = e.target.parentElement;
+        console.log(target);
+        var id = $(target).data('id');
+        console.log(id);
+        var index = $(target).data('index');
+        console.log(index);
+        var currentRow = document.getElementById("rowIndex_" + index);
+        console.log(currentRow);
+        currentRow.style.backgroundColor = "yellow";
+        e.target.style.backgroundColor = "yellow";
+        //currentRow.childNodes.forEach.backgroundColor = "yellow";
     
-    document.getElementById("#SelectedRow").style.backgroundColor= "yellow";
-}
+    });
+}()));

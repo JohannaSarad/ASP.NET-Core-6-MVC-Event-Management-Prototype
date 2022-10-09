@@ -50,9 +50,6 @@
                 $("#deleteModal").modal("hide");
                 $("#row_" + id).remove();
             }
-           
         });
     });
-
-
 }()));
