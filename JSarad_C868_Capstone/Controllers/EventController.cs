@@ -14,6 +14,7 @@ namespace JSarad_C868_Capstone.Controllers
         public EventController(AppDbContext db)
         {
             _db = db;
+            ViewModel = new EventViewModel();
         }
 
         //Get /Event
@@ -38,7 +39,7 @@ namespace JSarad_C868_Capstone.Controllers
         //Get /Event/Add
         public IActionResult Add()
         {
-            ViewModel = new EventViewModel();
+            //ViewModel = new EventViewModel();
             ViewModel.EmployeeList = _db.Employees.ToList();
             //EventViewModel viewModel = new EventViewModel();
             //viewModel.EmployeeList = _db.Employees; 
@@ -135,14 +136,11 @@ namespace JSarad_C868_Capstone.Controllers
         }
 
         [HttpPost]
-        public IActionResult EmployeeSelected(int id)
+        public JsonResult Selection(int id)
         {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
             ViewModel.SelectedEmployee = _db.Employees.Find(id);
-            return View(ViewModel);
+            return Json(ViewModel.SelectedEmployee.Name);
+            
         }
     }
 }

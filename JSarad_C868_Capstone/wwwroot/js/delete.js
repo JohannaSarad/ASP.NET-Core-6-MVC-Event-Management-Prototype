@@ -46,7 +46,7 @@
         $.ajax({
             type: "POST",
             url: pathToDelete,
-            success: function (data) {
+            success: function () {
                 $("#deleteModal").modal("hide");
                 $("#row_" + id).remove();
             }

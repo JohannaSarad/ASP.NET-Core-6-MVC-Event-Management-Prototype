@@ -45,37 +45,67 @@ function AutoComplete() {
 
 //hightlight selected table row
 
-
-//function RowSelected(e) {
-//    var controller = document.getElementById("selectable").getAttribute("controller");
-//    console.log(controller);
-//    var action = document.getElementById("selectable").getAttribute("action");
-//    console.log(action);
-//    var url = "/" + controller + "/" + action + "/";
-//    console.log(url);
-//    var row = document.getElementById("selectable").getAttribute("data-id");
-//    console.log(row);
-//    e.preventDefault();
-//    var target = e.target;
-//    console.log(target);
-//    var id = $(target).data('id');
-//    console.log(id);
-//}
-
 $((function () {
     $(".selectable").on('click', (e) => {
         e.preventDefault
-        var target = e.target.parentElement;
-        console.log(target);
-        var id = $(target).data('id');
+        var selectedRow = e.target.parentElement;
+        var id = $(selectedRow).data('id');
         console.log(id);
-        var index = $(target).data('index');
+        var index = $(selectedRow).data('index');
         console.log(index);
-        var currentRow = document.getElementById("rowIndex_" + index);
-        console.log(currentRow);
-        currentRow.style.backgroundColor = "yellow";
-        e.target.style.backgroundColor = "yellow";
-        //currentRow.childNodes.forEach.backgroundColor = "yellow";
-    
+        var controller = selectedRow.getAttribute("controller");
+        console.log(controller);
+        var action = selectedRow.getAttribute("action");
+        console.log(action);
+        var url = "/" + controller + "/" + action + "/" + id;
+        console.log(url);
+
+        //alternative formatting
+        //var id = selectedRow.getAttribute("data-id"); 
+        //var currentRow = document.getElementById("rowIndex_" + index);
+        //console.log(currentRow);
+        //first needs to check if a row has already been selected so I need to get the
+        //var parent = target.parentElement;
+        //console.log(parent);
+        
+        var trArray = selectedRow.parentElement.getElementsByTagName('tr');
+        for (var row = 0; row < trArray.length; row++) {
+            if (row == index)
+            {
+                tdArray = selectedRow.getElementsByTagName('td');
+                for (var cell = 0; cell < tdArray.length; cell++)
+                {
+                    tdArray[cell].style.backgroundColor = "yellow";
+                    //need to remove hover for these cells
+                }
+            }
+            else
+            {
+                tdArray = trArray[row].getElementsByTagName('td');
+                for (var cell = 0; cell < tdArray.length; cell++)
+                {
+                    tdArray[cell].style.backgroundColor = "#f8f9fa";
+                    //need to add hover back into these cells
+                   
+                }
+            }
+        }
+        $.ajax({
+            url: url,
+            type: "POST",
+            success: function (response) {
+                $("#selectedEmployee").val(response);
+            }
+        })
+            
+
     });
 }()));
+                
+        
+        
+    
+
+        
+
+        
