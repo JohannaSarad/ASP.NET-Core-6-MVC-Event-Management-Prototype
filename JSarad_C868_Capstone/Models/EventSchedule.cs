@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JSarad_C868_Capstone.Models
@@ -12,8 +13,9 @@ namespace JSarad_C868_Capstone.Models
         public int EventId { get; set; }
         [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
-
+        
         public DateTime StartDate { get; set; }
+        [BindProperty, DataType(DataType.Time), DisplayFormat(DataFormatString = "{HH:mm aa}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
 
     }

@@ -108,16 +108,16 @@ namespace JSarad_C868_Capstone.Migrations
             migrationBuilder.InsertData(
                 table: "Clients",
                 columns: new[] { "Id", "Address", "Email", "LastUpdate", "Name", "Phone" },
-                values: new object[] { 1, "123 Country Road", "eledford@email.com", new DateTime(2022, 10, 1, 9, 25, 47, 16, DateTimeKind.Local).AddTicks(6772), "Edwin Ledford", "6613332222" });
+                values: new object[] { 1, "123 Country Road", "eledford@email.com", new DateTime(2022, 10, 11, 17, 55, 19, 858, DateTimeKind.Local).AddTicks(3544), "Edwin Ledford", "6613332222" });
 
             migrationBuilder.InsertData(
                 table: "Employees",
                 columns: new[] { "Id", "Address", "Availability", "Email", "LastUpdate", "Name", "Phone", "Role" },
                 values: new object[,]
                 {
-                    { 1, "2414 Loma Linda Dr", "MTWRFSU", "jsarad2@wgu.edu", new DateTime(2022, 10, 1, 9, 25, 47, 16, DateTimeKind.Local).AddTicks(6813), "Johanna Sarad", "6614444763", "Bartender" },
-                    { 2, "345 Mullberry Way", "TRFSU", "rcrocker@email.com", new DateTime(2022, 10, 1, 9, 25, 47, 16, DateTimeKind.Local).AddTicks(6817), "Rebecca Crocker", "6613332211", "Server" },
-                    { 3, "765 Atlantic St", "MWF", "iward@email.com", new DateTime(2022, 10, 1, 9, 25, 47, 16, DateTimeKind.Local).AddTicks(6819), "Ian Ward", "8057778899", "Server" }
+                    { 1, "2414 Loma Linda Dr", "MTWRFSU", "jsarad2@wgu.edu", new DateTime(2022, 10, 11, 17, 55, 19, 858, DateTimeKind.Local).AddTicks(3585), "Johanna Sarad", "6614444763", "Bartender" },
+                    { 2, "345 Mullberry Way", "TRFSU", "rcrocker@email.com", new DateTime(2022, 10, 11, 17, 55, 19, 858, DateTimeKind.Local).AddTicks(3588), "Rebecca Crocker", "6613332211", "Server" },
+                    { 3, "765 Atlantic St", "MWF", "iward@email.com", new DateTime(2022, 10, 11, 17, 55, 19, 858, DateTimeKind.Local).AddTicks(3590), "Ian Ward", "8057778899", "Server" }
                 });
 
             migrationBuilder.InsertData(
@@ -133,7 +133,7 @@ namespace JSarad_C868_Capstone.Migrations
             migrationBuilder.InsertData(
                 table: "Events",
                 columns: new[] { "Id", "Bar", "ClientId", "EventEnd", "EventStart", "Food", "Guests", "LastUpdate", "Location", "Type" },
-                values: new object[] { 1, true, 1, new DateTime(2022, 11, 10, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 11, 10, 4, 30, 0, 0, DateTimeKind.Unspecified), true, 50, new DateTime(2022, 10, 1, 9, 25, 47, 16, DateTimeKind.Local).AddTicks(6829), "888 Corporate Way", "Corporate Event" });
+                values: new object[] { 1, true, 1, new DateTime(2022, 11, 10, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 11, 10, 4, 30, 0, 0, DateTimeKind.Unspecified), true, 50, new DateTime(2022, 10, 11, 17, 55, 19, 858, DateTimeKind.Local).AddTicks(3602), "888 Corporate Way", "Corporate Event" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

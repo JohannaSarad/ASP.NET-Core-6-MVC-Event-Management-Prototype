@@ -8,13 +8,12 @@ namespace JSarad_C868_Capstone.Controllers
     public class EventController : Controller
     {
         private readonly AppDbContext _db;
-
-        public EventViewModel ViewModel { get; set; }
-        
+        public Employee? SelectedEmployee { get; set; }
+        public List<EmployeeSchedule> tempSchedule { get; set; }
         public EventController(AppDbContext db)
         {
             _db = db;
-            ViewModel = new EventViewModel();
+           
         }
 
         //Get /Event
@@ -39,11 +38,15 @@ namespace JSarad_C868_Capstone.Controllers
         //Get /Event/Add
         public IActionResult Add()
         {
-            //ViewModel = new EventViewModel();
-            ViewModel.EmployeeList = _db.Employees.ToList();
-            //EventViewModel viewModel = new EventViewModel();
-            //viewModel.EmployeeList = _db.Employees; 
-            return View(ViewModel);
+            EventViewModel viewModel = new EventViewModel();
+            viewModel.Event = new Event();
+            viewModel.Client = new Client();
+            viewModel.SelectedEmployee = new Employee();
+            viewModel.EmployeeSchedule = new EmployeeSchedule();
+            viewModel.Schedules = new List<EmployeeSchedule>();
+            viewModel.EmployeeList = GetEmployees();
+            
+            return View(viewModel);
         }
 
 
@@ -51,10 +54,14 @@ namespace JSarad_C868_Capstone.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Add(EventViewModel viewModel)
         {
+            viewModel.EmployeeList = GetEmployees();
+            Console.WriteLine(viewModel.EmployeeList);
+            
             if (ModelState.IsValid)
             {
-                //adding an event to database
+                viewModel.Schedules = new List<EmployeeSchedule>();
                 _db.Events.Add(viewModel.Event);
+
 
                 _db.SaveChanges();
                 //redirecting to the main event page with list of events
@@ -107,7 +114,6 @@ namespace JSarad_C868_Capstone.Controllers
             }
         }
         [HttpPost]
-        //[ValidateAntiForgeryToken]
         public IActionResult DeletePOST(int? id)
         {
             var selectedEvent = _db.Events.Find(id);
@@ -119,6 +125,25 @@ namespace JSarad_C868_Capstone.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
 
+        }
+
+        [HttpPost]
+        public IActionResult ScheduleEmployee(EventViewModel viewModel)
+        {
+
+            if (viewModel.EmployeeSchedule != null)
+            {
+                if (viewModel.Schedules == null)
+                {
+                    viewModel.Schedules = new List<EmployeeSchedule>();
+                }
+                viewModel.Schedules.Add(viewModel.EmployeeSchedule);
+
+                //viewModel.EmployeeSchedule.EmployeeId = SelectedEmployee.Id;
+                //viewModel.EmployeeSchedule.Name = SelectedEmployee.Name;
+                //viewModel.Schedules.Add(viewModel.EmployeeSchedule);
+            }
+            return View("Add", viewModel);
         }
 
         [HttpPost]
@@ -138,8 +163,19 @@ namespace JSarad_C868_Capstone.Controllers
         [HttpPost]
         public JsonResult Selection(int id)
         {
-            ViewModel.SelectedEmployee = _db.Employees.Find(id);
-            return Json(ViewModel.SelectedEmployee.Name);
+            SelectedEmployee = _db.Employees.Find(id);
+            return Json(SelectedEmployee.Name);
+        }
+
+        public List<Employee> GetEmployees()
+        {
+            var employeeList = new List<Employee>();
+            if (_db.Employees.Any())
+            {
+                employeeList = _db.Employees.ToList();
+               
+            }
+            return employeeList.ToList();
             
         }
     }

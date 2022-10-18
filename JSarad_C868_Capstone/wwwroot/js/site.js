@@ -43,6 +43,7 @@ function AutoComplete() {
     });
 };
 
+
 //hightlight selected table row
 
 $((function () {
@@ -94,7 +95,8 @@ $((function () {
             url: url,
             type: "POST",
             success: function (response) {
-                $("#selectedEmployee").val(response);
+                $(".selectionResult").val(response);
+                $(".selectedId").val(id);
             }
         })
             
