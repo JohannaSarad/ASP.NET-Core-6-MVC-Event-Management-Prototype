@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using JSarad_C868_Capstone.Models;
 using JSarad_C868_Capstone.Data;
+using JSarad_C868_Capstone.ViewModels;
 
 namespace JSarad_C868_Capstone.Controllers
 {
     public class ClientController : Controller
     {
+        public Client SelectedClient { get; set; }
         private readonly AppDbContext _db;
 
         public ClientController(AppDbContext db)
@@ -17,8 +19,12 @@ namespace JSarad_C868_Capstone.Controllers
         //Get /Client
         public IActionResult Index()
         {
-            IEnumerable<Client> clientList = _db.Clients;
-            return View(clientList);
+            ClientListViewModel viewModel = new ClientListViewModel();
+            viewModel.ClientList = _db.Clients;
+            viewModel.SelectedId = 0;
+            viewModel.SelectedName = "";
+
+            return View(viewModel);
         }
 
         //Get /Client/Add
@@ -106,6 +112,14 @@ namespace JSarad_C868_Capstone.Controllers
             _db.Clients.Remove(selectedClient);
             _db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public JsonResult Selection(int id)
+        {
+            SelectedClient = _db.Clients.Find(id);
+
+            return Json(SelectedClient.Name);
+
         }
     }
 }

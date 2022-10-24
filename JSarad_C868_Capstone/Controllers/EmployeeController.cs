@@ -6,6 +6,7 @@ namespace JSarad_C868_Capstone.Controllers
 {
     public class EmployeeController : Controller
     {
+        public Employee? SelectedEmployee { get; set; }
         private readonly AppDbContext _db;
 
         public EmployeeController(AppDbContext db)
@@ -17,8 +18,12 @@ namespace JSarad_C868_Capstone.Controllers
         //Get /Employee
         public IActionResult Index()
         {
-            IEnumerable<Employee> employeeList = _db.Employees;
-            return View(employeeList);
+            EmployeeListViewModel viewModel = new EmployeeListViewModel();
+            viewModel.EmployeeList = _db.Employees;
+            viewModel.SelectedId = 0;
+            viewModel.SelectedName = "";
+            
+            return View(viewModel);
         }
 
         //Get /Employee/Add
@@ -201,6 +206,15 @@ namespace JSarad_C868_Capstone.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
             
+        }
+
+        [HttpPost]
+        public JsonResult Selection(int id)
+        {
+            SelectedEmployee = _db.Employees.Find(id);
+
+            return Json(SelectedEmployee.Name);
+
         }
     }
 }

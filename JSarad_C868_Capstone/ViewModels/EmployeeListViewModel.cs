@@ -2,10 +2,10 @@
 
 namespace JSarad_C868_Capstone.ViewModels
 {
-    public class EventListViewModel
+    public class EmployeeListViewModel
     {
         public int SelectedId { get; set; }
         public string SelectedName { get; set; }
-        public IEnumerable<EventListDetails>? EventList { get; set; }
+        public IEnumerable<Employee>? EmployeeList { get; set; }
     }
 }
