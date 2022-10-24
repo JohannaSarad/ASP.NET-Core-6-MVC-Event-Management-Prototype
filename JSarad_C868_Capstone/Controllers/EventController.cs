@@ -9,6 +9,7 @@ namespace JSarad_C868_Capstone.Controllers
     {
         private readonly AppDbContext _db;
         public Employee? SelectedEmployee { get; set; }
+        public Event? SelectedEvent { get; set; }
         public List<EmployeeSchedule> tempSchedule { get; set; }
         public EventController(AppDbContext db)
         {
@@ -19,20 +20,25 @@ namespace JSarad_C868_Capstone.Controllers
         //Get /Event
         public IActionResult Index()
         {
-            //IEnumerable<Event> eventList = _db.Events;
-            //IEnumerable<Client> clientList = _db.Clients;
+            
             var result = from e in _db.Events
                          join c in _db.Clients on e.ClientId equals c.Id
-                         select new EventListViewModel
+                         select new EventListDetails
                          {
-                             Id = e.Id,
+                             EventId = e.Id,
                              StartDate = e.EventStart,
                              EndDate = e.EventEnd,
                              Type = e.Type,
+                             ClientId = e.ClientId,
                              ContactName = c.Name,
                              Phone = c.Phone
-                         }; //.ToList();
-            return View(result);
+                         };//.ToList();
+            EventListViewModel viewModel = new EventListViewModel();
+            viewModel.EventList = result;
+            viewModel.SelectedId = 0;
+            viewModel.SelectedName = "";
+           
+            return View(viewModel);
         }
 
         //Get /Event/Add
@@ -163,8 +169,18 @@ namespace JSarad_C868_Capstone.Controllers
         [HttpPost]
         public JsonResult Selection(int id)
         {
+            SelectedEvent = _db.Events.Find(id);
+            
+                return Json(SelectedEvent.Type);
+            
+        }
+
+        public JsonResult EmployeeSelection(int id)
+        {
             SelectedEmployee = _db.Employees.Find(id);
-            return Json(SelectedEmployee.Name);
+            
+                return Json(SelectedEmployee.Name);
+            
         }
 
         public List<Employee> GetEmployees()

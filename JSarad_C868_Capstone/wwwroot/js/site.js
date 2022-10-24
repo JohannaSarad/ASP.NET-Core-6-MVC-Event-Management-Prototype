@@ -50,6 +50,7 @@ $((function () {
     $(".selectable").on('click', (e) => {
         e.preventDefault
         var selectedRow = e.target.parentElement;
+        console.log(selectedRow);
         var id = $(selectedRow).data('id');
         console.log(id);
         var index = $(selectedRow).data('index');
@@ -63,8 +64,8 @@ $((function () {
 
         //alternative formatting
         //var id = selectedRow.getAttribute("data-id"); 
-        //var currentRow = document.getElementById("rowIndex_" + index);
-        //console.log(currentRow);
+       
+        
         //first needs to check if a row has already been selected so I need to get the
         //var parent = target.parentElement;
         //console.log(parent);

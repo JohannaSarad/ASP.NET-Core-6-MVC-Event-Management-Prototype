@@ -101,41 +101,51 @@
             <form method="post">
   
         <div class="col-md-8 pt-4">
+                <div class="outer-wrapper">
+                    <div class="tc">
+                        <div class="table-wrapper">
             <!--table row headers-->
             <div class="container" style="height:30vh;">
-            <table class="table table-bordered border-dark table-hover" style="border-collapse:collapse; height:200px; table-layout:fixed;" id="singleRowSelect">
-                <thead style="display:table; width:calc(100% - 17px);">
-                    <tr style="display:table; width:100%; box-sizing:border-box;" class="table-primary">
-                        <th style="width:20%; word-break: break-all; padding: 5px;">Id</th>
-                        <th style="width:20%; word-break: break-all; padding: 5px;">Name</th>
-                        <th style="width:20%; word-break: break-all; padding: 5px;">Phone</th>
-                        <th style="width:20%; word-break: break-all; padding: 5px;">Position</th>
-                        <th style="width:20%; word-break: break-all; padding: 5px;">Availability</th>
+                    <table class="table table-bordered border-dark table-hover" >
+                        @* id="singleRowSelect" style="border-collapse:collapse; height:200px; table-layout:fixed;"*@
+                @*<thead style="display:table; width:calc(100% - 17px);">*@
+                        <thead>
+                   @* <tr style="display:table; width:100%; box-sizing:border-box;" class="table-primary">*@
+                            <tr>
+                        <th >Id</th>
+                        <th >Name</th>
+                        <th >Phone</th>
+                        <th >Position</th>
+                        <th >Availability</th>
+                               @* style="width:20%; word-break: break-all; padding: 5px;"*@
                     </tr>
                 </thead>
                 <!--table body and population info-->
-                <tbody style="display:block; overflow-y:scroll; border: 1px solid black;">
+                <tbody >
+                            @*style="display:block; overflow-y:scroll; border: 1px solid black;"*@
                      @if (Model.EmployeeList != null && Model.EmployeeList.Any())
                         {
                             foreach (var employee in Model.EmployeeList)
                             {
                                 int index = Model.EmployeeList.IndexOf(employee);
-                                <tr asp-for="SelectedEmployee" class="table-light selectable" style="display:table; width:100%; box-sizing:border-box" 
-                            controller="Event" Action="Selection" data-id="@employee.Id" data-index="@index">
-                                    <td  style="border-collapse:collapse; width:20%; word-break: break-all; padding: 5px; border-bottom: none;">@employee.Id</td>
+                                <tr asp-for="SelectedEmployee" class="table-light selectable"  
+                                    controller="Event" Action="Selection" data-id="@employee.Id" data-index="@index">
+                                       @* style="display:table; width:100%; box-sizing:border-box"*@
+                                    <td  >@employee.Id</td>
+                                        @*style="border-collapse:collapse; width:20%; word-break: break-all; padding: 5px; border-bottom: none;"*@
                                     <input type="hidden" asp-for="EmployeeList[index].Id"/>
-                                    <td style="border-collapse:collapse; width:20%; word-break: break-all; padding: 5px; border-bottom: none;">@employee.Name</td>
+                                    <td >@employee.Name</td>
                                     <input type="hidden" asp-for="EmployeeList[index].Name" />
-                                    <td style="border-collapse:collapse; width:20%; word-break: break-all; padding: 5px; border-bottom: none;">@employee.Phone</td>
+                                    <td>@employee.Phone</td>
                                     <input type="hidden" asp-for="EmployeeList[index].Phone" />
-                                    <td  style="border-collapse:collapse; width:20%; word-break: break-all; padding: 5px; border-bottom: none;">@employee.Role</td>
+                                    <td >@employee.Role</td>
                                     <input type="hidden" asp-for="EmployeeList[index].Role" />
-                                    <td style="border-collapse:collapse; width:20%; word-break: break-all; padding: 5px; border-bottom: none;">@employee.Availability</td>
+                                    <td >@employee.Availability</td>
 
                                     <input type="hidden" asp-for="EmployeeList[index].Availability" />
-                                    <td  style="display:none">@employee.Email</td>
+                                    <td  >@employee.Email</td>
                                     <input type="hidden" asp-for="EmployeeList[index].Email" />
-                                    <td style="display:none">@employee.Address</td>
+                                    <td >@employee.Address</td>
                                     <input type="hidden" asp-for="EmployeeList[index].Address" />
 
                                 </tr>
@@ -144,6 +154,9 @@
                     </tbody>
             </table>
             </div>
+            </div>
+                    </div>
+                </div>
             <div class="row mb-3">
                <div class="container" style="height:20vh;">
                     <div class="col">
