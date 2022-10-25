@@ -31,7 +31,8 @@
         e.preventDefault();
 
         target = e.target;
-        id = $(target).data('id');
+        //id = $(target).data('id');
+        id = $("#selectedId").val();
         controller = $(target).data('controller');
         action = $(target).data('action');
         
@@ -39,7 +40,7 @@
         pathToDelete = "/" + controller + "/" + action + "/" + id;
         $(".delete-modal-body").text(bodyMessage);
         $("#deleteModal").modal('show');
-        console.log(pathToDelete);
+        //console.log(pathToDelete);
     });
 
     $("#confirm-delete").on('click', () => {
@@ -49,6 +50,7 @@
             success: function () {
                 $("#deleteModal").modal("hide");
                 $("#row_" + id).remove();
+                $("#selectedId").val("");
             }
         });
     });

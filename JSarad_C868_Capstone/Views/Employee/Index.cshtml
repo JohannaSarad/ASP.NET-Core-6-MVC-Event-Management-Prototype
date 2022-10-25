@@ -1,7 +1,7 @@
 ﻿@model JSarad_C868_Capstone.ViewModels.EmployeeListViewModel
-@{
+@*@{
     ViewData["Title"] = "Index";
-}
+}*@
 
 <div class="container p3">
     <div class="row pt-4">
@@ -20,7 +20,7 @@
         </div>
     </div>
     <br /><br />
-
+    
     <!--table row headers-->
     <div class="outer-wrapper">
         <div class="tc">
@@ -44,7 +44,7 @@
                             @foreach (var employee in Model.EmployeeList)
                             {
                                 index++;
-                                <tr class="table-light selectable" controller="Employee" Action="Selection" data-id="@employee.Id" data-index="@index">
+                                <tr id="row_@employee.Id" class="table-light selectable" controller="Employee" Action="Selection" data-id="@employee.Id" data-index="@index">
                                    @* id="row_@employee.Id"*@
                                     <td>@employee.Name</td>
                                     <td>@employee.Phone</td>
@@ -62,33 +62,39 @@
                 </table>
             </div>
         </div>
-        <div class="buttons">
-            <div class="w-100 btn-group" role="group">
-                <!--go back to bootstrap icons and copy and paste pencil square icon-->
-                @*<input  class="form-control selectionResult" style="width:25%;" />*@
-                
-                <input asp-for="SelectedId" class="form-control selectedId"/>
-                @*type="hidden"*@
-                <a class="btn btn-primary mx-2" asp-controller="Employee" asp-action="Edit" asp-route-id="@Model.SelectedId">
-                    
-                    <i class="bi bi-pencil-square"></i> Edit
-                </a>
-
-                <!--button call to delete modal (js.delete.js)-->
-                <a class="btn btn-danger delete" id="#delete" data-id="@Model.SelectedId"
-                   data-controller="Employee" data-Action="DeletePOST"
-                   data-body-message="Are you sure you want to delete this employee?">
-                    <i class="bi bi-trash"></i> Delete
-                </a>
+        <form>
+            <input id="selectedId" class="form-control" />
+            <div class="buttons">
+                <div class="w-100 btn-group" >
+                    <a class="btn btn-primary mx-2  edit" id="#edit"
+                       data-controller="Employee" data-action="Edit">
+                        <i class="bi bi-pencil-square"></i> Edit
+                    </a>
+                   @* form-control*@
+                    <!--button call to delete modal (js.delete.js)-->
+                    <a class="btn btn-danger delete" id="#delete" 
+                        data-controller="Employee" data-Action="DeletePOST"
+                        data-body-message="Are you sure you want to delete this employee?">
+                        <i class="bi bi-trash"></i> Delete
+                        @*data-id="@Model.SelectedId"*@
+                    </a>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
-        
-                    
-                       
+@*@section Scripts
+    {
+    <script>
+        $('form input').change(function () {
+            $(this).closest('form').submit();
+        });
+    </script>
+}*@
 
 
 
 
-                       
+
+
+

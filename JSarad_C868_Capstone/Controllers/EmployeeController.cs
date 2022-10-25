@@ -20,9 +20,9 @@ namespace JSarad_C868_Capstone.Controllers
         {
             EmployeeListViewModel viewModel = new EmployeeListViewModel();
             viewModel.EmployeeList = _db.Employees;
-            viewModel.SelectedId = 0;
-            viewModel.SelectedName = "";
-            
+            viewModel.SelectedId = 25;
+            //viewModel.SelectedName = "";
+
             return View(viewModel);
         }
 
@@ -93,7 +93,8 @@ namespace JSarad_C868_Capstone.Controllers
         }
 
         //Get /Employee/Edit
-        public IActionResult Edit(int? id)
+        
+        public IActionResult Edit(int id)
         {
             if (id == null || id == 0)
             {
@@ -140,6 +141,7 @@ namespace JSarad_C868_Capstone.Controllers
                     viewModel.Sunday = true;
                 }
             }
+            return Ok();
             return View(viewModel);
         }
 
@@ -209,13 +211,18 @@ namespace JSarad_C868_Capstone.Controllers
         }
 
         [HttpPost]
-        public JsonResult Selection(int id)
+        public IActionResult Selection(int id)
         {
             SelectedEmployee = _db.Employees.Find(id);
-
-            return Json(SelectedEmployee.Name);
+            //if (SelectedEmployee != null)
+            //{
+                return Json(SelectedEmployee.Name);
+            //}
+            //return View("Index", id);
 
         }
+
+        
     }
 }
 

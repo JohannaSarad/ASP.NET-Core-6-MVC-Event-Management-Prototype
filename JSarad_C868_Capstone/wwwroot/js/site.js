@@ -97,11 +97,41 @@ $((function () {
             type: "POST",
             success: function (response) {
                 $(".selectionResult").val(response);
-                $(".selectedId").val(id);
+                $("#selectedId").val(id);
             }
         })
-            
+    });
+}()));
 
+$((function () {
+    $(".edit").on('click', (e) => {
+        e.preventDefault();
+        target = e.target;
+    
+        id = $("#selectedId").val();
+        console.log(id);
+        controller = $(target).data('controller');
+        action = $(target).data('action');
+
+        //var bodyMessage = $(target).data('body-message');
+        pathToEdit = "/" + controller + "/" + action + "/" + id;
+        //$(".delete-modal-body").text(bodyMessage);
+        //$("#deleteModal").modal('show');
+        //console.log(pathToDelete);
+    
+
+    /*$("#confirm-delete").on('click', () => {*/
+        $.ajax({
+            type: "Get",
+            url: pathToEdit,
+            /*data: data,*/
+            /*success : success*/
+            //success: function () {
+            //    $("#deleteModal").modal("hide");
+            //    $("#row_" + id).remove();
+            //    $("#selectedId").val("");
+            //}
+        });
     });
 }()));
                 
