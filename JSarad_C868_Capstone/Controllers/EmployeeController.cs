@@ -2,10 +2,13 @@
 using JSarad_C868_Capstone.Models;
 using Microsoft.AspNetCore.Mvc;
 using JSarad_C868_Capstone.ViewModels;
+using Microsoft.CodeAnalysis.Operations;
+
 namespace JSarad_C868_Capstone.Controllers
 {
     public class EmployeeController : Controller
     {
+        public IEnumerable<Employee> EmployeeList { get; set; }
         public Employee? SelectedEmployee { get; set; }
         private readonly AppDbContext _db;
 
@@ -16,25 +19,34 @@ namespace JSarad_C868_Capstone.Controllers
         }
 
         //Get /Employee
+        //public async Task<IActionResult> Index()
+        //{
+        //    var employeeList = await _db.Employees.ToList();
+        //    return View(await _db.Employees);
+        //}
         public IActionResult Index()
         {
-            EmployeeListViewModel viewModel = new EmployeeListViewModel();
-            viewModel.EmployeeList = _db.Employees;
-            viewModel.SelectedId = 25;
-            //viewModel.SelectedName = "";
 
-            return View(viewModel);
+            //EmployeeListViewModel viewModel = new EmployeeListViewModel();
+            //viewModel.EmployeeList = _db.Employees;
+            //viewModel.SelectedId = 0;
+            //viewModel.SelectedName = "";
+            
+            var employees = _db.Employees;
+           
+            return View(employees);
         }
 
         //Get /Employee/Add
+        [HttpGet]
         public IActionResult Add()
         {
             EmployeeViewModel viewModel = new EmployeeViewModel();
-            return View(viewModel);
+            return PartialView("_AddEmployeeModalPartial", viewModel); ;
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public IActionResult Add(EmployeeViewModel viewModel)
         {
             //added viewModel and daysToChar conversion for employee.Availability (May or may not work here)
@@ -74,7 +86,7 @@ namespace JSarad_C868_Capstone.Controllers
             }
 
             viewModel.Employee.Availability = daysToChars;
-            
+
             //further validation explained in ClientController
             //validation
             if (ModelState.IsValid)
@@ -84,12 +96,16 @@ namespace JSarad_C868_Capstone.Controllers
 
                 _db.SaveChanges();
                 //redirecting to the main employee page with list of employees
+                //int newEmployeeId = viewModel.Employee.Id;
+                //UpdateEmployees(newEmployeeId);
                 return RedirectToAction("Index");
+
             }
-            else
-            {
-                return View(viewModel);
-            }
+            //else
+            //{
+                return PartialView("_AddEmployeeModalPartial", viewModel);
+            //}
+            
         }
 
         //Get /Employee/Edit
@@ -141,8 +157,8 @@ namespace JSarad_C868_Capstone.Controllers
                     viewModel.Sunday = true;
                 }
             }
-            return Ok();
-            return View(viewModel);
+            //return Ok();
+            return View("_EditEmployeeModalPartial", viewModel);
         }
 
         [HttpPost]
@@ -222,7 +238,23 @@ namespace JSarad_C868_Capstone.Controllers
 
         }
 
-        
+        //public void UpdateEmployees(int? id)
+        //{
+           
+        //    if (EmployeeList == null)
+        //    {
+        //        EmployeeList = new List<Employee>();
+        //    }
+        //    if (id != null)
+        //    {
+        //        Employee employee = _db.Employees.Find(id);
+        //        EmployeeList.Append(employee);
+        //    }
+        //    else
+        //    {
+        //        EmployeeList = _db.Employees;
+        //    }
+        //}
     }
 }
 

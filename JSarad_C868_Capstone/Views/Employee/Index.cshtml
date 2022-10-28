@@ -1,8 +1,9 @@
-﻿@model JSarad_C868_Capstone.ViewModels.EmployeeListViewModel
+﻿@*@model JSarad_C868_Capstone.ViewModels.EmployeeListViewModel*@
+@model IEnumerable<Employee>
 @*@{
     ViewData["Title"] = "Index";
 }*@
-
+<div id="PlaceHolderHere"></div>
 <div class="container p3">
     <div class="row pt-4">
         <div class="col-6">
@@ -10,14 +11,19 @@
         </div>
         <div class="col-6 text-end">
             <!--add button-->
-            <a asp-controller="Employee" asp-action="Add" class="btn btn-primary">
+            @*<a asp-controller="Employee" asp-action="Add" class="btn btn-primary">
                 @*
                 selected plus icon from bootstrap icons copied and pasted
                 Note that the icon style was first added to _layout, &nbsp is a space
-                *@
+               
                 <i class="bi bi-plus-circle"></i> &nbsp; Add Employee
-            </a>
-        </div>
+            </a>*@
+
+            <!--button to add Employee modal -->
+            
+            <button type="button" class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#addEmployee" 
+                    data-url="@Url.Action("Add")">Add Employee</button>
+            </div>
     </div>
     <br /><br />
     
@@ -28,6 +34,7 @@
                 <table class="table table-bordered border-dark table-light table-hover" style="width:100%">
                     <thead>
                         <tr>
+                            <th> Id </th>
                             <th>Name</th>
                             <th>Phone</th>
                             <th>Email</th>
@@ -38,19 +45,27 @@
                     </thead>
                     <!--table body and population info-->
                     <tbody>
-                        @if (Model.EmployeeList != null)
-                        {
-                            int index = -1;
-                            @foreach (var employee in Model.EmployeeList)
+                        @*@if (Employee != null)
+                        {*@
+                            @{int index = -1;
+                            @foreach (var employee in Model)
                             {
                                 index++;
                                 <tr id="row_@employee.Id" class="table-light selectable" controller="Employee" Action="Selection" data-id="@employee.Id" data-index="@index">
                                    @* id="row_@employee.Id"*@
+                                    @*<input type="hidden" asp-for="@employee.Id">*@
+                                    <td>@employee.Id</td>
+                                    @*<input type="hidden" asp-for="@employee.Name">*@
                                     <td>@employee.Name</td>
+                                    @*<input type="hidden" asp-for="@employee.Phone">*@
                                     <td>@employee.Phone</td>
+                                    @*<input type="hidden" asp-for="@employee.Email">*@
                                     <td>@employee.Email</td>
+                                    @*<input type="hidden" asp-for="@employee.Address">*@
                                     <td>@employee.Address</td>
+                                    @*<input type="hidden" asp-for="@employee.Role">*@
                                     <td>@employee.Role</td>
+                                    @*<input type="hidden" asp-for="@employee.Availability">*@
                                     <td>@employee.Availability</td>
 
                                     <!--modify buttons (w-100 splits cell, change to 75 when icons are added)-->
@@ -83,14 +98,7 @@
         </form>
     </div>
 </div>
-@*@section Scripts
-    {
-    <script>
-        $('form input').change(function () {
-            $(this).closest('form').submit();
-        });
-    </script>
-}*@
+
 
 
 

@@ -1,4 +1,5 @@
 ﻿using JSarad_C868_Capstone.Models;
+using Microsoft.Build.Framework;
 
 namespace JSarad_C868_Capstone.ViewModels
 {
@@ -11,6 +12,7 @@ namespace JSarad_C868_Capstone.ViewModels
         public bool Friday { get; set; } = false;
         public bool Saturday { get; set; } = false;
         public bool Sunday { get; set; } = false;
+        [Required]
         public Employee Employee { get; set; } 
     }
 }

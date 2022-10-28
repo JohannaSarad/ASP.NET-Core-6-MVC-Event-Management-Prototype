@@ -1,0 +1,105 @@
+﻿@model JSarad_C868_Capstone.ViewModels.EmployeeViewModel
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<!-- Button trigger modal -->
+@*<button type="button" id="modify-employee" style="display:none" class="btn btn-primary" data-bs-toggle="modal" data-bs-target=".employeeModal">
+    Launch static backdrop modal
+</button>*@
+
+<!-- Modal -->
+<div class="modal fade employeeModal" id="modify-employee" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Employee</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <div class="form-group">
+                        <label asp-for="Employee.Role"></label>
+                        <select asp-for="Employee.Role" class="form-control">
+                            <option value="Bartender">Bartender</option>
+                            <option value="Server">Server</option>
+                        </select>
+                        <span asp-validation-for="Employee.Role" class="text-danger"></span>
+                    </div>
+                   
+                    <div asp-validation-summary="All"></div>
+                    <div class="mb-3">
+                        <label asp-for="Employee.Name"></label>
+                        <input asp-for="Employee.Name" class="form-control" />
+                        <span asp-validation-for="Employee.Name" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Employee.Phone"></label>
+                        <input asp-for="Employee.Phone" class="form-control" />
+                        <span asp-validation-for="Employee.Phone" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Employee.Email"></label>
+                        <input asp-for="Employee.Email" class="form-control" />
+                        <span asp-validation-for="Employee.Email" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Employee.Address"></label>
+                        <input asp-for="Employee.Address" class="form-control" />
+                        <span asp-validation-for="Employee.Address" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label>Availabiliy</label>
+                    </div>
+                    <div class="row pb-4">
+                        <div class="col">
+                            <div class="form-check">
+                                <input asp-for="Monday" class="form-check-input" type="checkbox" />
+                                <label asp-for="Monday" class="form-check-label"></label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input asp-for="Tuesday" class="form-check-input" type="checkbox" />
+                                <label asp-for="Tuesday" class="form-check-label"></label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input asp-for="Wednesday" class="form-check-input" type="checkbox" />
+                                <label asp-for="Wednesday" class="form-check-label"></label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input asp-for="Thursday" class="form-check-input" type="checkbox" />
+                                <label asp-for="Thursday" class="form-check-label"></label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input asp-for="Friday" class="form-check-input" type="checkbox" />
+                                <label asp-for="Friday" class="form-check-label"></label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input asp-for="Saturday" class="form-check-input" type="checkbox" />
+                                <label asp-for="Saturday" class="form-check-label"></label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input asp-for="Sunday" class="form-check-input" type="checkbox" />
+                                <label asp-for="Sunday" class="form-check-label"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-primary">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

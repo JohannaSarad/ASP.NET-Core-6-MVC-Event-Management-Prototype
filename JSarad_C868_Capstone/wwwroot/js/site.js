@@ -113,29 +113,86 @@ $((function () {
         controller = $(target).data('controller');
         action = $(target).data('action');
 
-        //var bodyMessage = $(target).data('body-message');
         pathToEdit = "/" + controller + "/" + action + "/" + id;
-        //$(".delete-modal-body").text(bodyMessage);
-        //$("#deleteModal").modal('show');
-        //console.log(pathToDelete);
-    
 
-    /*$("#confirm-delete").on('click', () => {*/
-        $.ajax({
-            type: "Get",
-            url: pathToEdit,
-            /*data: data,*/
-            /*success : success*/
-            //success: function () {
-            //    $("#deleteModal").modal("hide");
-            //    $("#row_" + id).remove();
-            //    $("#selectedId").val("");
-            //}
-        });
+        if (id == 0 || id == "") {
+            alert("Please Select a record to edit")
+        }
+
+        else
+        {
+            $.ajax({
+                type: "Get",
+                url: pathToEdit,
+            });
+        }
+        
     });
 }()));
                 
-        
+//$(function () {
+//    var placeholderElement = $('#modal-placeholder');
+//    $('button[data-toggle="ajax-modal"]').click(function (event) {
+//        var url = $(this).data('url');
+//        $.get(url).done(function (data) {
+//            placeholderElement.html(data);
+//            placeholderElement.find('.modal').modal('show');
+//        });
+//    });
+//});
+
+$(function () {
+    var PlaceHolderElement = $('#PlaceHolderHere');
+    $('button[data-bs-toggle="ajax-modal"]').click(function (event) {
+       /* event.preventDefault();*/
+        var url = $(this).data('url');
+        console.log(url)
+        $.get(url).done(function (data) {
+            PlaceHolderElement.html(data);
+            PlaceHolderElement.find('.modal').modal('show');
+
+        })
+    })
+    PlaceHolderElement.on('click', '[data-bs-save="modal"]', function (event) {
+        event.preventDefault();
+        var form = $(this).parents('.modal').find('form');
+        console.log(form);
+        var actionUrl = form.attr('action');
+        console.log(actionUrl);
+       /*var sendViewModel = JSON.serialize(form);*/
+        var sendViewModel = form.serialize();
+       /* var sendViewModel = JSON.stringify(serializedModel);*/
+        console.log(sendViewModel);
+        $.post(actionUrl, sendViewModel).done(function (data) {
+            PlaceHolderElement.find('.modal').modal('hide');
+            location.reload();
+
+        //    $.ajax({
+        //            type: 'POST',
+        //            url: actionUrl,
+        //            dataType: 'json',
+        //           /* contentType: 'application/json',*/
+        //            /* contentType: 'application/x-www-form-urlencoded; charset=UTF-8',*/
+
+        //            /* data: JSON.stringify(sendViewModel, Object()),*/
+        //            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+
+            /* stack overflow addition solution vv
+                     //contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                     //    data: sendViewModel,*/
+            //            
+           /* data: JSON.stringify(sendViewModel),*/
+        //          /*  data: sendViewModel, */
+        //            /*data: sendViewModel,*/
+        //            success: function (result) {
+        //                console.log('Data received: ');
+        //                console.log(result);
+            /*}*/
+
+            
+        })
+    })
+})
         
     
 

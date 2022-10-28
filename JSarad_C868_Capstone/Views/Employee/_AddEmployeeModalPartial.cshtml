@@ -1,0 +1,117 @@
+﻿@model JSarad_C868_Capstone.ViewModels.EmployeeViewModel
+
+@*@Html.AntiForgeryToken()*@
+<div class="modal modal-fade" id="addEmployee">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addEmpoyeeLabel">Add Employee</h4>
+                <button type=button class="close" data-bs-dismiss="modal">
+                    <span>x</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <form action="/Employee/Add/" method="Post">
+                   
+                    <div class="form-group">
+                        @*<input asp-for="Employee.Id" class="form-control" type="hidden" />*@
+                        @*<input asp-for="Employee.Availability" class="form-control"  type="hidden"/>*@
+                        <label asp-for="Employee.Role"></label>
+                        <select asp-for="Employee.Role" id="roleSelection" class="form-control z-index-2">
+                            <option value="none" selected disabled hidden>--Select Role--</option>
+                            <option value="Bartender">Bartender</option>
+                            <option value="Server">Server</option>
+                        </select>
+                        <span asp-validation-for="Employee.Role" class="text-danger"></span>
+                    </div>
+                    
+                    @*<div class="mb-3">*@
+                    <div class="form-group">
+                        <label asp-for="Employee.Name"></label>
+                        <input asp-for="Employee.Name" class="form-control" />
+                        <span asp-validation-for="Employee.Name" class="text-danger"></span>
+                    </div>
+                    
+                   @* <div class="mb-3">*@
+                    <div class="form-group">
+                        <label asp-for="Employee.Phone"></label>
+                        <input asp-for="Employee.Phone" class="form-control" />
+                        <span asp-validation-for="Employee.Phone" class="text-danger"></span>
+                    </div>
+                    
+                    @*<div class="mb-3">*@
+                    <div class="form-group">
+                        <label asp-for="Employee.Email"></label>
+                        <input asp-for="Employee.Email" class="form-control" />
+                        <span asp-validation-for="Employee.Email" class="text-danger"></span>
+                    </div>
+                    
+                    @*<div class="mb-3">*@
+                    <div class="form-group">
+                        <label asp-for="Employee.Address"></label>
+                        <input asp-for="Employee.Address" class="form-control" />
+                        <span asp-validation-for="Employee.Address" class="text-danger"></span>
+                    </div>
+                    
+                   @* <div class="mb-3">*@
+                    <div class="form-group">
+                        <label>Availabiliy</label>
+                    </div>
+                    
+                    <div class="row pb-4">
+                        <div class="col">
+                            <div class="form-check">
+                                <input asp-for="Monday" class="form-check-input" type="checkbox" />
+                                <label asp-for="Monday" class="form-check-label"></label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input asp-for="Tuesday" class="form-check-input" type="checkbox" />
+                                <label asp-for="Tuesday" class="form-check-label"></label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input asp-for="Wednesday" class="form-check-input" type="checkbox" />
+                                <label asp-for="Wednesday" class="form-check-label"></label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input asp-for="Thursday" class="form-check-input" type="checkbox" />
+                                <label asp-for="Thursday" class="form-check-label"></label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input asp-for="Friday" class="form-check-input" type="checkbox" />
+                                <label asp-for="Friday" class="form-check-label"></label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input asp-for="Saturday" class="form-check-input" type="checkbox" />
+                                <label asp-for="Saturday" class="form-check-label"></label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input asp-for="Sunday" class="form-check-input" type="checkbox" />
+                                <label asp-for="Sunday" class="form-check-label"></label>
+                            </div>
+                        </div>
+                       @* <span asp-validation-for="Employee.Availability" class="text-danger"></span>*@
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary" data-bs-save="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+   
