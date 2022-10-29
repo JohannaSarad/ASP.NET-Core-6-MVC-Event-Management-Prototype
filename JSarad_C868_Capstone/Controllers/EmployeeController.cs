@@ -56,6 +56,53 @@ namespace JSarad_C868_Capstone.Controllers
             //convert days to characters
 
             viewModel.Employee.Availability = DaysToChar(viewModel);
+            //string daysToChars = "";
+            //if (viewModel.Monday)
+            //{
+            //    daysToChars += "M";
+            //}
+            //if (viewModel.Tuesday)
+            //{
+            //    daysToChars += "T";
+            //}
+            //if (viewModel.Wednesday)
+            //{
+            //    daysToChars += "W";
+            //}
+            //if (viewModel.Thursday)
+            //{
+            //    daysToChars += "R";
+            //}
+            //if (viewModel.Friday)
+            //{
+            //    daysToChars += "F";
+            //}
+            //if (viewModel.Saturday)
+            //{
+            //    daysToChars += "S";
+            //}
+            //if (viewModel.Sunday)
+            //{
+            //    daysToChars += "U";
+            //}
+
+            //viewModel.Employee.Availability = daysToChars;
+
+            
+            if (ModelState.IsValid)
+            {
+                //adding an employee to database
+                _db.Employees.Add(viewModel.Employee);
+                _db.SaveChanges();
+                return Ok(true);
+            }
+            return PartialView("_AddEmployeeModalPartial", viewModel);
+           
+            
+        }
+
+        public string DaysToChar(EmployeeViewModel viewModel)
+        {
             string daysToChars = "";
             if (viewModel.Monday)
             {
@@ -86,22 +133,8 @@ namespace JSarad_C868_Capstone.Controllers
                 daysToChars += "U";
             }
 
-            viewModel.Employee.Availability = daysToChars;
-
-            //further validation explained in ClientController
-            //validation
-            if (ModelState.IsValid)
-            {
-                //adding an employee to database
-                _db.Employees.Add(viewModel.Employee);
-                _db.SaveChanges();
-                return Ok(true);
-            }
-            return PartialView("_AddEmployeeModalPartial", viewModel);
-           
-            
+            return daysToChars;
         }
-
         //Get /Employee/Edit
         
         public IActionResult Edit(int id)
