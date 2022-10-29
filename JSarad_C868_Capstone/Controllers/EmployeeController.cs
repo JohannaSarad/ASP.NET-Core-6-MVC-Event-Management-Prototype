@@ -36,7 +36,7 @@ namespace JSarad_C868_Capstone.Controllers
                 viewModel.Employee = _db.Employees.Find(id);
                 viewModel = CharsToDays(viewModel);
             }
-            return PartialView("_AddEmployeeModalPartial", viewModel); ;
+            return PartialView("_ModifyEmployeeModalPartial", viewModel); ;
         }
 
         [HttpPost]
@@ -53,13 +53,27 @@ namespace JSarad_C868_Capstone.Controllers
                 }
                 else
                 {
-                    
                     _db.Employees.Update(viewModel.Employee);
                     _db.SaveChanges();
                 }
                 return Ok(true);
             }
-            return PartialView("_AddEmployeeModalPartial", viewModel);
+            return PartialView("_ModifyEmployeeModalPartial", viewModel);
+        }
+
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public IActionResult DeletePOST(int? id)
+        {
+            var selectedEmployee = _db.Employees.Find(id);
+            if (selectedEmployee == null)
+            {
+                return NotFound();
+            }
+            _db.Employees.Remove(selectedEmployee);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+
         }
 
         public string DaysToChars(EmployeeViewModel viewModel)
@@ -134,21 +148,6 @@ namespace JSarad_C868_Capstone.Controllers
         }
         //Get /Employee/Edit
         
-        [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public IActionResult DeletePOST(int? id)
-        {
-            var selectedEmployee = _db.Employees.Find(id);
-            if (selectedEmployee == null)
-            {
-                return NotFound();
-            }
-            _db.Employees.Remove(selectedEmployee);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
-            
-        }
-
         [HttpPost]
         public IActionResult Selection(int id)
         {

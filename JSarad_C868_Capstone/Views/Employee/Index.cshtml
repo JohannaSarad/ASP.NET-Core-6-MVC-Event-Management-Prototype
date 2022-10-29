@@ -10,18 +10,8 @@
             <h2 class="text-primary">Employee Information</h2>
         </div>
         <div class="col-6 text-end">
-            <!--add button-->
-            @*<a asp-controller="Employee" asp-action="Add" class="btn btn-primary">
-                @*
-                selected plus icon from bootstrap icons copied and pasted
-                Note that the icon style was first added to _layout, &nbsp is a space
-               
-                <i class="bi bi-plus-circle"></i> &nbsp; Add Employee
-            </a>*@
-
             <!--button to add Employee modal -->
-            
-            <button type="button" class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#addEmployee" 
+            <button type="button" class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyEmployee" 
                      data-controller="Employee" data-action="Modify" data-modify-type="Add">Add Employee</button>
             @*data-url="@Url.Action("Add")"*@
             </div>
@@ -85,7 +75,7 @@
             <input id="selectedId" class="form-control" />
             <div class="buttons">
                 <div class="w-100 btn-group" >
-                    <button class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#addEmployee"
+                    <button class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyEmployee"
                     data-controller="Employee" data-action="Modify" data-modify-type="Edit">Edit</button>
                     @*<a class="btn btn-primary mx-2  edit" id="#edit"
                        data-controller="Employee" data-action="Edit">
