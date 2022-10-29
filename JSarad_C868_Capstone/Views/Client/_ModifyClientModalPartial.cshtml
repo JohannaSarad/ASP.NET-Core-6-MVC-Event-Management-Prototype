@@ -1,0 +1,55 @@
+﻿
+
+@model Client
+
+
+<div class="modal modal-fade" id="modifyClient">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addClientLabel">Add Client</h4>
+                <button type=button class="close" data-bs-dismiss="modal">
+                    <span>x</span>
+                </button>
+
+            </div>
+            <form action="Client/Modify" method="Post">
+                <div class="modal-body">
+
+
+                    <div class="form-group">
+                        <input asp-for="Id" class="form-control" />
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    @* <div class="mb-3">*@
+                    <div class="form-group">
+                        <label asp-for="Phone"></label>
+                        <input asp-for="Phone" class="form-control" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+
+                    @*<div class="mb-3">*@
+                    <div class="form-group">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    @*<div class="mb-3">*@
+                    <div class="form-group">
+                        <label asp-for="Address"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" data-bs-save="modal">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

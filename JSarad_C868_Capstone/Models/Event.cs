@@ -6,6 +6,7 @@ namespace JSarad_C868_Capstone.Models
     public class Event
     {
         [Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         public string Type { get; set; }

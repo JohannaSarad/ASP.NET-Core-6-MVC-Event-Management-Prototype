@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace JSarad_C868_Capstone.Controllers
 {
+    //FIX ME!!! deselect object after edit
     public class EmployeeController : Controller
     {
         //public IEnumerable<Employee> EmployeeList { get; set; }
