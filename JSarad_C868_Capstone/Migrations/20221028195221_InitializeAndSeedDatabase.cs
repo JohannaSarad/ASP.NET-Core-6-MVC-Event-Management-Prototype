@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace JSarad_C868_Capstone.Migrations
 {
-    public partial class InitializeAndSeedDatabse : Migration
+    public partial class InitializeAndSeedDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,8 +50,8 @@ namespace JSarad_C868_Capstone.Migrations
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Availability = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Availability = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastUpdate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -108,16 +108,16 @@ namespace JSarad_C868_Capstone.Migrations
             migrationBuilder.InsertData(
                 table: "Clients",
                 columns: new[] { "Id", "Address", "Email", "LastUpdate", "Name", "Phone" },
-                values: new object[] { 1, "123 Country Road", "eledford@email.com", new DateTime(2022, 10, 18, 14, 9, 58, 295, DateTimeKind.Local).AddTicks(3363), "Edwin Ledford", "6613332222" });
+                values: new object[] { 1, "123 Country Road", "eledford@email.com", new DateTime(2022, 10, 28, 12, 52, 21, 790, DateTimeKind.Local).AddTicks(5868), "Edwin Ledford", "6613332222" });
 
             migrationBuilder.InsertData(
                 table: "Employees",
                 columns: new[] { "Id", "Address", "Availability", "Email", "LastUpdate", "Name", "Phone", "Role" },
                 values: new object[,]
                 {
-                    { 1, "2414 Loma Linda Dr", "MTWRFSU", "jsarad2@wgu.edu", new DateTime(2022, 10, 18, 14, 9, 58, 295, DateTimeKind.Local).AddTicks(3403), "Johanna Sarad", "6614444763", "Bartender" },
-                    { 2, "345 Mullberry Way", "TRFSU", "rcrocker@email.com", new DateTime(2022, 10, 18, 14, 9, 58, 295, DateTimeKind.Local).AddTicks(3406), "Rebecca Crocker", "6613332211", "Server" },
-                    { 3, "765 Atlantic St", "MWF", "iward@email.com", new DateTime(2022, 10, 18, 14, 9, 58, 295, DateTimeKind.Local).AddTicks(3408), "Ian Ward", "8057778899", "Server" }
+                    { 1, "2414 Loma Linda Dr", "MTWRFSU", "jsarad2@wgu.edu", new DateTime(2022, 10, 28, 12, 52, 21, 790, DateTimeKind.Local).AddTicks(5911), "Johanna Sarad", "6614444763", "Bartender" },
+                    { 2, "345 Mullberry Way", "TRFSU", "rcrocker@email.com", new DateTime(2022, 10, 28, 12, 52, 21, 790, DateTimeKind.Local).AddTicks(5915), "Rebecca Crocker", "6613332211", "Server" },
+                    { 3, "765 Atlantic St", "MWF", "iward@email.com", new DateTime(2022, 10, 28, 12, 52, 21, 790, DateTimeKind.Local).AddTicks(5917), "Ian Ward", "8057778899", "Server" }
                 });
 
             migrationBuilder.InsertData(
@@ -133,7 +133,7 @@ namespace JSarad_C868_Capstone.Migrations
             migrationBuilder.InsertData(
                 table: "Events",
                 columns: new[] { "Id", "Bar", "ClientId", "EventEnd", "EventStart", "Food", "Guests", "LastUpdate", "Location", "Type" },
-                values: new object[] { 1, true, 1, new DateTime(2022, 11, 10, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 11, 10, 4, 30, 0, 0, DateTimeKind.Unspecified), true, 50, new DateTime(2022, 10, 18, 14, 9, 58, 295, DateTimeKind.Local).AddTicks(3419), "888 Corporate Way", "Corporate Event" });
+                values: new object[] { 1, true, 1, new DateTime(2022, 11, 10, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 11, 10, 4, 30, 0, 0, DateTimeKind.Unspecified), true, 50, new DateTime(2022, 10, 28, 12, 52, 21, 790, DateTimeKind.Local).AddTicks(5929), "888 Corporate Way", "Corporate Event" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

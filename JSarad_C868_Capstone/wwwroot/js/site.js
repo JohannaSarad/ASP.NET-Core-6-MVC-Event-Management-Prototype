@@ -142,57 +142,71 @@ $((function () {
 //});
 
 $(function () {
-    var PlaceHolderElement = $('#PlaceHolderHere');
+    var placeholderElement = $('#PlaceHolderHere');
     $('button[data-bs-toggle="ajax-modal"]').click(function (event) {
-       /* event.preventDefault();*/
+        /* event.preventDefault();*/
         var url = $(this).data('url');
         console.log(url)
         $.get(url).done(function (data) {
-            PlaceHolderElement.html(data);
-            PlaceHolderElement.find('.modal').modal('show');
+            placeholderElement.html(data);
+            placeholderElement.find('.modal').modal('show');
 
         })
     })
-    PlaceHolderElement.on('click', '[data-bs-save="modal"]', function (event) {
+    placeholderElement.on('click', '[data-bs-save="modal"]', function (event) {
         event.preventDefault();
         var form = $(this).parents('.modal').find('form');
         console.log(form);
         var actionUrl = form.attr('action');
         console.log(actionUrl);
-       /*var sendViewModel = JSON.serialize(form);*/
+        /*var sendViewModel = JSON.serialize(form);*/
         var sendViewModel = form.serialize();
-       /* var sendViewModel = JSON.stringify(serializedModel);*/
+        /* var sendViewModel = JSON.stringify(serializedModel);*/
         console.log(sendViewModel);
         $.post(actionUrl, sendViewModel).done(function (data) {
-            PlaceHolderElement.find('.modal').modal('hide');
-            location.reload();
+            
+            if (data === true) {
+                    placeholderElement.find('.modal').modal('hide');
+                location.reload();
+                return;
+            }
+            var newBody = $('.modal-body', data);
+            //var isValid = $('#IsValid').val();
+            //var something = isValid == 'True';
+            /*var isValid = newBody.find('[name="IsValid"]').val() == "true";*/
+            placeholderElement.find('.modal-body').replaceWith(newBody);
+            
+            /*var isValid = ('#IsValid').val();*/
+            /*location.reload();*/
+            
+            
+            
+            //    $.ajax({
+            //            type: 'POST',
+            //            url: actionUrl,
+            //            dataType: 'json',
+            //           /* contentType: 'application/json',*/
+            //            /* contentType: 'application/x-www-form-urlencoded; charset=UTF-8',*/
 
-        //    $.ajax({
-        //            type: 'POST',
-        //            url: actionUrl,
-        //            dataType: 'json',
-        //           /* contentType: 'application/json',*/
-        //            /* contentType: 'application/x-www-form-urlencoded; charset=UTF-8',*/
-
-        //            /* data: JSON.stringify(sendViewModel, Object()),*/
-        //            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            //            /* data: JSON.stringify(sendViewModel, Object()),*/
+            //            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 
             /* stack overflow addition solution vv
                      //contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                      //    data: sendViewModel,*/
             //            
-           /* data: JSON.stringify(sendViewModel),*/
-        //          /*  data: sendViewModel, */
-        //            /*data: sendViewModel,*/
-        //            success: function (result) {
-        //                console.log('Data received: ');
-        //                console.log(result);
+            /* data: JSON.stringify(sendViewModel),*/
+            //          /*  data: sendViewModel, */
+            //            /*data: sendViewModel,*/
+            //            success: function (result) {
+            //                console.log('Data received: ');
+            //                console.log(result);
             /*}*/
 
-            
-        })
-    })
-})
+
+        });
+    });
+});
         
     
 
