@@ -130,23 +130,39 @@ $((function () {
     });
 }()));
                 
-//$(function () {
-//    var placeholderElement = $('#modal-placeholder');
-//    $('button[data-toggle="ajax-modal"]').click(function (event) {
-//        var url = $(this).data('url');
-//        $.get(url).done(function (data) {
-//            placeholderElement.html(data);
-//            placeholderElement.find('.modal').modal('show');
-//        });
-//    });
-//});
 
 $(function () {
     var placeholderElement = $('#PlaceHolderHere');
-    $('button[data-bs-toggle="ajax-modal"]').click(function (event) {
+    var id;
+    var controller;
+    var action;
+    $('button[data-bs-toggle="ajax-modal"]').click(function (e) {
         /* event.preventDefault();*/
-        var url = $(this).data('url');
-        console.log(url)
+        target = e.target;
+        controller = $(target).data('controller');
+        console.log(controller);
+        action = $(target).data('action');
+        console.log(action);
+        var addOrEdit = $(target).data('modify-type');
+        //var addOrEdit = $(this).data('modify-type'); //new
+        console.log(addOrEdit);  //new
+        
+
+        if (addOrEdit == 'Edit')
+        {
+            id = $("#selectedId").val();
+            if (id == null || id == "") {
+                alert("Please Select a Record to Edit");
+                return;
+            }
+        }
+        else
+        {
+            id = 0;
+        }
+        
+        var url = "/" + controller + "/" + action + "/" + id
+        console.log(url);
         $.get(url).done(function (data) {
             placeholderElement.html(data);
             placeholderElement.find('.modal').modal('show');

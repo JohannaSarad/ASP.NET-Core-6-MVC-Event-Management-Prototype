@@ -11,12 +11,13 @@
                 </button>
 
             </div>
-            <form action="/Employee/Add/" method="Post">
+            <form action="Employee/Modify" method="Post">
+                @*action="/Employee/Add/"*@
             <div class="modal-body">
                 
-                    @*<input id="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />*@
+                    
                     <div class="form-group">
-                       @* <input asp-for="Employee.Id" class="form-control" type="hidden" />*@
+                        <input asp-for="Employee.Id" class="form-control"  />
                         @*<input asp-for="Employee.Availability" class="form-control"  type="hidden"/>*@
                         <label asp-for="Employee.Role"></label>
                         <select asp-for="Employee.Role" id="roleSelection" class="form-control z-index-2">

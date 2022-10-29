@@ -22,7 +22,8 @@
             <!--button to add Employee modal -->
             
             <button type="button" class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#addEmployee" 
-                    data-url="@Url.Action("Add")">Add Employee</button>
+                     data-controller="Employee" data-action="Modify" data-modify-type="Add">Add Employee</button>
+            @*data-url="@Url.Action("Add")"*@
             </div>
        @* <div class="modal fade" id="LoginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <partial name="_LoginModalPartial"
@@ -80,14 +81,16 @@
                 </table>
             </div>
         </div>
-        <form>
+        <!--<form>-->
             <input id="selectedId" class="form-control" />
             <div class="buttons">
                 <div class="w-100 btn-group" >
-                    <a class="btn btn-primary mx-2  edit" id="#edit"
+                    <button class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#addEmployee"
+                    data-controller="Employee" data-action="Modify" data-modify-type="Edit">Edit</button>
+                    @*<a class="btn btn-primary mx-2  edit" id="#edit"
                        data-controller="Employee" data-action="Edit">
                         <i class="bi bi-pencil-square"></i> Edit
-                    </a>
+                    </a>*@
                    @* form-control*@
                     <!--button call to delete modal (js.delete.js)-->
                     <a class="btn btn-danger delete" id="#delete" 
@@ -98,7 +101,7 @@
                     </a>
                 </div>
             </div>
-        </form>
+        <!--</form>-->
     </div>
 </div>
 
