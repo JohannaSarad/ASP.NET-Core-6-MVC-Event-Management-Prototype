@@ -1,5 +1,4 @@
-﻿@*@model JSarad_C868_Capstone.ViewModels.EmployeeListViewModel*@
-@model IEnumerable<Employee>
+﻿@model IEnumerable<Employee>
 @*@{
     ViewData["Title"] = "Index";
 }*@
@@ -13,7 +12,7 @@
             <!--button to add Employee modal -->
             <button type="button" class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyEmployee" 
                      data-controller="Employee" data-action="Modify" data-modify-type="Add">Add Employee</button>
-            @*data-url="@Url.Action("Add")"*@
+           
             </div>
        @* <div class="modal fade" id="LoginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <partial name="_LoginModalPartial"
@@ -41,6 +40,7 @@
                     <tbody>
                         @*@if (Employee != null)
                         {*@
+                            @*track index of IEnumerable*@
                             @{int index = -1;
                             @foreach (var employee in Model)
                             {
@@ -61,9 +61,6 @@
                                     <td>@employee.Role</td>
                                     @*<input type="hidden" asp-for="@employee.Availability">*@
                                     <td>@employee.Availability</td>
-
-                                    <!--modify buttons (w-100 splits cell, change to 75 when icons are added)-->
-
                                 </tr>
                             }
                         }
@@ -71,27 +68,22 @@
                 </table>
             </div>
         </div>
-        <!--<form>-->
-            <input id="selectedId" class="form-control" />
-            <div class="buttons">
-                <div class="w-100 btn-group" >
-                    <button class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyEmployee"
-                    data-controller="Employee" data-action="Modify" data-modify-type="Edit">Edit</button>
-                    @*<a class="btn btn-primary mx-2  edit" id="#edit"
-                       data-controller="Employee" data-action="Edit">
-                        <i class="bi bi-pencil-square"></i> Edit
-                    </a>*@
-                   @* form-control*@
-                    <!--button call to delete modal (js.delete.js)-->
-                    <a class="btn btn-danger delete" id="#delete" 
-                        data-controller="Employee" data-Action="DeletePOST"
-                        data-body-message="Are you sure you want to delete this employee?">
-                        <i class="bi bi-trash"></i> Delete
-                        @*data-id="@Model.SelectedId"*@
-                    </a>
-                </div>
+        @*hidden input field for selected employee (js call back)*@
+        <input id="selectedId" class="form-control" />
+        <div class="buttons">
+            <!--modify buttons (w-100 splits cell, FIXME !!! change to 75 when icons are added)-->
+            <div class="w-100 btn-group" >
+                <button class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyEmployee"
+                data-controller="Employee" data-action="Modify" data-modify-type="Edit">Edit</button>
+                    
+                <!--button call to delete modal (js.delete.js)-->
+                <a class="btn btn-danger delete" id="#delete" 
+                    data-controller="Employee" data-Action="DeletePOST"
+                    data-body-message="Are you sure you want to delete this employee?">
+                    <i class="bi bi-trash"></i> Delete
+                </a>
             </div>
-        <!--</form>-->
+        </div>
     </div>
 </div>
 
