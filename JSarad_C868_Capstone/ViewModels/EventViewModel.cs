@@ -1,15 +1,17 @@
 ﻿using JSarad_C868_Capstone.Data;
 using JSarad_C868_Capstone.Models;
 using Microsoft.AspNetCore.Mvc;
-
+using System.ComponentModel.DataAnnotations;
 
 namespace JSarad_C868_Capstone.ViewModels
 {
     public class EventViewModel 
     {
-        [BindProperty]
-        public Event? Event { get; set; }
-        [BindProperty]
-        public Client? Client { get; set; }
+       
+        public Event Event { get; set; }
+
+        //public Client Client { get; set; }
+        [Required]
+        public string ClientName { get; set; }
     }
 }

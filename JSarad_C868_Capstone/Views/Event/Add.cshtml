@@ -25,7 +25,8 @@
                     <div class="mb-3">
                         <label >Client Name</label>
                         <input type="text" id="completeTxt" oninput="AutoComplete()" class="completeText" controller="Event" action="AutoComplete" />
-                        <input type="hidden" id="hfitem" name="ClientId" />
+                        <input  id="hfitem" name="ClientId" />
+                       @* type="hidden"*@
                         
                     </div>
                
@@ -98,42 +99,42 @@
                 </div>
             </form>
         </div>
-            <form method="post">
+            @*<form method="post">
   
         <div class="col-md-8 pt-4">
                 <div class="outer-wrapper">
                     <div class="tc">
-                        <div class="table-wrapper">
+                        <div class="table-wrapper">*@
             <!--table row headers-->
-            <div class="container" style="height:30vh;">
-                    <table class="table table-bordered border-dark table-hover" >
+            @*<div class="container" style="height:30vh;">
+                    <table class="table table-bordered border-dark table-hover" >*@
                         @* id="singleRowSelect" style="border-collapse:collapse; height:200px; table-layout:fixed;"*@
                 @*<thead style="display:table; width:calc(100% - 17px);">*@
-                        <thead>
+                       @* <thead>*@
                    @* <tr style="display:table; width:100%; box-sizing:border-box;" class="table-primary">*@
-                            <tr>
+                        @*    <tr>
                         <th >Id</th>
                         <th >Name</th>
                         <th >Phone</th>
                         <th >Position</th>
-                        <th >Availability</th>
+                        <th >Availability</th>*@
                                @* style="width:20%; word-break: break-all; padding: 5px;"*@
-                    </tr>
-                </thead>
+                  @*  </tr>
+                </thead>*@
                 <!--table body and population info-->
-                <tbody >
+               @* <tbody >
                             @*style="display:block; overflow-y:scroll; border: 1px solid black;"*@
-                     @if (Model.EmployeeList != null && Model.EmployeeList.Any())
+                     @*@if (Model.EmployeeList != null && Model.EmployeeList.Any())
                         {
                             foreach (var employee in Model.EmployeeList)
-                            {
-                                int index = Model.EmployeeList.IndexOf(employee);
+                            {*@
+                                @*int index = Model.EmployeeList.IndexOf(employee);
                                 <tr asp-for="SelectedEmployee" class="table-light selectable"  
-                                    controller="Event" Action="Selection" data-id="@employee.Id" data-index="@index">
+                                    controller="Event" Action="Selection" data-id="@employee.Id" data-index="@index">*@
                                        @* style="display:table; width:100%; box-sizing:border-box"*@
-                                    <td  >@employee.Id</td>
+                                   @* <td  >@employee.Id</td>*@
                                         @*style="border-collapse:collapse; width:20%; word-break: break-all; padding: 5px; border-bottom: none;"*@
-                                    <input type="hidden" asp-for="EmployeeList[index].Id"/>
+                                   @* <input type="hidden" asp-for="EmployeeList[index].Id"/>
                                     <td >@employee.Name</td>
                                     <input type="hidden" asp-for="EmployeeList[index].Name" />
                                     <td>@employee.Phone</td>
@@ -141,23 +142,23 @@
                                     <td >@employee.Role</td>
                                     <input type="hidden" asp-for="EmployeeList[index].Role" />
                                     <td >@employee.Availability</td>
-
-                                    <input type="hidden" asp-for="EmployeeList[index].Availability" />
+*@
+                                    @*<input type="hidden" asp-for="EmployeeList[index].Availability" />
                                     <td  >@employee.Email</td>
                                     <input type="hidden" asp-for="EmployeeList[index].Email" />
                                     <td >@employee.Address</td>
                                     <input type="hidden" asp-for="EmployeeList[index].Address" />
 
-                                </tr>
-                            }
+                                </tr>*@
+                           @* }
                         }
                     </tbody>
-            </table>
-            </div>
+            </table>*@
+           @* </div>
             </div>
                     </div>
-                </div>
-            <div class="row mb-3">
+                </div>*@
+            @*<div class="row mb-3">
                <div class="container" style="height:20vh;">
                     <div class="col">
                         <label style="display:flex;">Employee Name</label>
@@ -184,14 +185,14 @@
                                     <i data-time-icon="icon-time"></i>
                                 </span>
                             </div>
-                    </div>
+                    </div>*@
                    @* <a asp-controller="Event" asp-action="ScheduleEmployee" type="submit" class="btn btn-primary" style="width:150px">Add To Schedule</a>*@
-                        <button type="submit" formaction="ScheduleEmployee" class="btn btn-primary" style="width:150px">Save</button>
-                        <input type="hidden" value="ScheduleEmployee" />
+                       @* <button type="submit" formaction="ScheduleEmployee" class="btn btn-primary" style="width:150px">Save</button>
+                        <input type="hidden" value="ScheduleEmployee" />*@
                     @*<a controller="Event" data-action="ScheduleEmployee" class="btn btn-secondary " style="width:150px">
                         Add To Schedule
                     </a>*@
-                   
+             @*      
                </div>
             </div>
             <div class="row mb-3">
@@ -205,14 +206,14 @@
                                 <th style="width:25%; word-break: break-all; padding: 5px;">End TIme</th>
                       
                             </tr>
-                        </thead>
+                        </thead>*@
                         <!--table body and population info-->
-                        <tbody style="display:block; height:200px; overflow-y:scroll; border: 1px solid black;">
-                            @if (Model.Schedules != null)
+                      @*  <tbody style="display:block; height:200px; overflow-y:scroll; border: 1px solid black;">*@
+                            @*@if (Model.Schedules != null)
                             {
                                 foreach (var schedule in Model.Schedules)
-                                {
-                                    int index = Model.Schedules.IndexOf(schedule);
+                                {*@
+                                    @*int index = Model.Schedules.IndexOf(schedule);
                                     <tr id="rowIndex_@index" class="table-light selectable" style="display:table; width:100%; box-sizing:border-box"
                                 controller="Event" Action="Selection" data-id="@schedule.EmployeeId" data-index="@index">
                                         <td style="border-collapse:collapse; border:none; width:33.33%; word-break: break-all; padding: 5px; border-bottom: none; display:none">@schedule.EmployeeId</td>
@@ -224,15 +225,15 @@
                                             <td style="border-collapse:collapse; border:none; width:33.33%; word-break: break-all; padding: 5px; border-bottom: none;" asp-format="time">@schedule.EndTime.TimeOfDay</td>
                                             <input type="hidden" asp-for="Schedules[index].EndTime"  />
 
-                                    </tr>
-                                }
+                                    </tr>*@
+                               @* }
                             }
                         </tbody>
-                    </table>
-                </div>
-            </div>
+                    </table>*@
+              @*  </div>
+            </div>*@
         </div>
-        </form>
+       @* </form>*@
     </div>
     
 </div>

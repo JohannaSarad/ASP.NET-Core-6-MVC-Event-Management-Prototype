@@ -17,11 +17,14 @@ namespace JSarad_C868_Capstone.Models
         public DateTime EventStart { get; set; }
         [Required]
         public DateTime EventEnd { get; set; }
+
         public bool Food { get; set; }
         public bool Bar { get; set; }
         public int Guests { get; set; }
+        public string? Notes { get; set; }
         [ForeignKey("Client")]
         public int ClientId { get; set; }
+
         public DateTime LastUpdate { get; set; } = DateTime.Now;
 
     }

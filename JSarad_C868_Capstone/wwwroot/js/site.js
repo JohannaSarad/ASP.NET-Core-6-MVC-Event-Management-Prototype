@@ -3,9 +3,9 @@
 function AutoComplete() {
     
     var controller = document.getElementById("completeTxt").getAttribute("controller");
-    console.log(controller);
+    /*console.log(controller);*/
     var action = document.getElementById("completeTxt").getAttribute("action");
-    console.log(action);
+    /*console.log(action);*/
     var url = "/" + controller + "/" + action + "/";
     console.log(url);
 
@@ -32,6 +32,9 @@ function AutoComplete() {
         },
         select: function (e, i) {
             $("#hfitem").val(i.item.val);
+            console.log(i.item.val);
+            console.log(i.item.id);
+            $("#autoId").val(i.item.id);
         },
         minLength: 0
     }).focus(function () {

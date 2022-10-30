@@ -10,18 +10,11 @@
         </div>
        
         <div class="col-6 text-end">
+            <!--button to modify modal "Add" -->
             <button type="button" class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyClient"
                     data-controller="Client" data-action="Modify" data-modify-type="Add">
                 Add Client
             </button>
-            <!--button to Modify Client modal "Add" -->
-            @*<a asp-controller="Client" asp-action="Add" class="btn btn-primary">
-                @*
-                selected plus icon from bootstrap icons copied and pasted
-                Note that the icon style was first added to _layout, &nbsp is a space
-                
-                <i class="bi bi-plus-circle"></i> &nbsp; Add Client
-              </a>*@
         </div>
     </div>
     <br /><br />
@@ -62,19 +55,17 @@
                 </table>
             </div>
         </div>
+        @*hidden input field for selected client (js call back)*@
         <input id="selectedId" class="form-control" />
         <div class="buttons">
         <!--modify buttons (w-100 splits cell, FIX ME!!! change to 75 when icons are added)-->
             <div class="w-100 btn-group" role="group">
-               @* <input asp-for="SelectedId" class="form-control selectedId" />*@
-                <!--go back to bootstrap icons and copy and paste pencil square icon-->
+                <!--FIX ME!!! go back to bootstrap icons and copy and paste pencil square icon-->
+                
+                <!--button call to modify modal 'Edit"-->
                 <button class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyClient"
                 data-controller="Client" data-action="Modify" data-modify-type="Edit">Edit</button>
                     
-               @* <a class="btn btn-primary mx-2" asp-controller="Client" asp-action="Edit" asp-route-id="@Model.SelectedId">
-                    <i class="bi bi-pencil-square"></i> Edit
-                </a>*@
-
                 <!--button call to delete modal (js.delete.js)-->
                 <a class="btn btn-danger delete" id="#delete" 
                    data-controller="Client" data-Action="DeletePOST"

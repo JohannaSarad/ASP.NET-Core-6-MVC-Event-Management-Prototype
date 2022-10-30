@@ -2,6 +2,8 @@
 @*@{
     ViewData["Title"] = "Index";
 }*@
+
+<!--placeholder for modify modal-->
 <div id="PlaceHolderHere"></div>
 <div class="container p3">
     <div class="row pt-4">
@@ -9,7 +11,7 @@
             <h2 class="text-primary">Employee Information</h2>
         </div>
         <div class="col-6 text-end">
-            <!--button to Modify Employee modal "Add"-->
+            <!--button to modify modal "Add"-->
             <button type="button" class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyEmployee" 
                      data-controller="Employee" data-action="Modify" data-modify-type="Add">
                      Add Employee
@@ -72,8 +74,11 @@
         @*hidden input field for selected employee (js call back)*@
         <input id="selectedId" class="form-control" />
         <div class="buttons">
-            <!--modify buttons (w-100 splits cell, FIXME !!! change to 75 when icons are added)-->
+            <!--modify buttons (w-100 splits cell, FIXME!!! change to 75 when icons are added)-->
             <div class="w-100 btn-group" >
+                <!--FIX ME!!! go back to bootstrap icons and copy and paste pencil square icon-->
+
+                <!--button call to modify modal 'Edit"-->
                 <button class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyEmployee"
                 data-controller="Employee" data-action="Modify" data-modify-type="Edit">Edit</button>
                     

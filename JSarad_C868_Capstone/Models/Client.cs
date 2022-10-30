@@ -17,7 +17,7 @@ namespace JSarad_C868_Capstone.Models
         public string Email { get; set; }
         [Required]
         public string Address { get; set; }
-        [Required]
+        
         public DateTime LastUpdate { get; set; } = DateTime.Now;
     }
 }

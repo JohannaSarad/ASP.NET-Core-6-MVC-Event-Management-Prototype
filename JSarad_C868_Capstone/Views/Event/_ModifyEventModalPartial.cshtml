@@ -1,0 +1,121 @@
+﻿@model JSarad_C868_Capstone.ViewModels.EventViewModel
+
+
+<div class="modal modal-fade" id="modifyEvent">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addEventLabel">Add Event</h4>
+                <button type=button class="close" data-bs-dismiss="modal">
+                    <span>x</span>
+                </button>
+            </div>
+            <form action="Event/Modify" method="Post">
+                <div class="modal-body">
+                    @*<div class="mb-3">*@
+                    <div class="row mb-3">
+                        <div class="col form-group">
+                            <div id="eventDate" class="input-append">
+                                <label asp-for="Event.EventStart.Date">Event Date</label>
+                                <input asp-for="Event.EventStart.Date" data-format="MM-dd-yyyy" type="date" />
+                                <span class="add-on">
+                                    <i data-date-icon="icon-calendar">
+                                    </i>
+                                </span>
+                            </div>
+                        </div>
+                            @*<div class="mb-3">*@
+                        <div class="col form-group">
+                            <div id="eventDate" class="input-append">
+                                <label asp-for="Event.EventStart.TimeOfDay">Start Time</label>
+                                <input asp-for="Event.EventStart.TimeOfDay" data-format="hh:mm aa" type="time" />
+                                <span class="add-on">
+                                    <i data-time-icon="icon-time">
+                                    </i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col form-group">
+                            <div id="eventDate" class="input-append">
+                                <label asp-for="Event.EventEnd.TimeOfDay">End Time : </label>
+                                <input asp-for="Event.EventEnd.TimeOfDay" data-format="hh:mm aa" type="time" />
+                                <span class="add-on">
+                                    <i data-date-icon="icon-calendar">
+                                    </i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input asp-for="Event.Id" class="form-control" />
+                                <label asp-for="Event.Type"></label>
+                                <select asp-for="Event.Type" class="form-control">
+                                    <option value="none" selected disabled hidden>--Select Event Type--</option>
+                                    <option value="Wedding">Wedding</option>
+                                   
+                                    <option value="Corporate">Corporate</option>
+                                    <option value="Social Event">Social Event</option>
+                                    <option value="Consession">Consession</option>
+                                </select>
+                                <span asp-validation-for="Event.Type" class="text-danger"></span>
+                            </div>
+                            @* <div class="mb-3">*@
+                            <div class="form-group">
+                                <label>Client Name</label>
+                                <input asp-for="ClientName" type="text" id="completeTxt" oninput="AutoComplete()" class="completeText form-control" controller="Event" action="AutoComplete" />
+                                <input type="hidden" id="hfitem" name="ClientId" />
+                                <input asp-for="Event.ClientId" id="autoId" />
+                                @* type="hidden"*@ 
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Event.Location"></label>
+                                <input asp-for="Event.Location" class="form-control" />
+                                <span asp-validation-for="Event.Location" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Event.Guests">Number of Guests</label>
+                                <input asp-for="Event.Guests" class="form-control" />
+                                <span asp-validation-for="Event.Guests" class="text-danger"></span>
+                            </div>
+                            <div class="row pb-4">
+                                <div class="col">
+                                    <div class="form-check">
+                                        <input asp-for="Event.Food" class="form-check-input" type="checkbox" />
+                                        <label asp-for="Event.Food" class="form-check-label"></label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-check">
+                                        <input asp-for="Event.Bar" class="form-check-input" type="checkbox" />
+                                        <label asp-for="Event.Bar" class="form-check-label"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                         <div class="col-6">
+                            <div class="form-group">
+                                <label asp-for="Event.Notes">Event Notes: </label>
+                                <textarea class="form-control" asp-for="Event.Notes" rows="6"></textarea>
+                            </div>
+                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" data-bs-save="modal">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+                   
+
+                    
+
+                    
+                    
+
