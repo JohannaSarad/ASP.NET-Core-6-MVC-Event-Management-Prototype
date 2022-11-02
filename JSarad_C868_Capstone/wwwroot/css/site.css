@@ -1,10 +1,12 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    background-color: #ecf0f1;
 }
 
 @media (min-width: 768px) {
   html {
     font-size: 16px;
+    
   }
 }
 
@@ -39,6 +41,7 @@ th {
     border-radius: 4px;
     height: 70vh;
     position: relative;
+    background-color: white;
     /*max-width: fit-content;*/
     /*max-height: fit-content;*/
 }
@@ -49,6 +52,7 @@ th {
     border-radius: 4px;
     height: 30vh;
     position: relative;
+    
 }
 
 .small-tc {
@@ -57,6 +61,7 @@ th {
     border-radius: 4px;
     height: 25vh;
     margin: 20px;
+    background-color:white;
 }
 .tc {
     border: 1px solid black;
@@ -64,7 +69,7 @@ th {
     border-radius: 4px;
     height: 55vh;
     margin: 20px;
-    
+    background-color: white;
 }
 .table-wrapper {
     max-height: 50vh;
@@ -82,4 +87,5 @@ th {
     bottom: 0;
     right: 0;
     padding: 20px;
+    
 }

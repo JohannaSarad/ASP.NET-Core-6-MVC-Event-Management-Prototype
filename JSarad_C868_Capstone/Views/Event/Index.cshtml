@@ -39,7 +39,7 @@
     <div class="outer-wrapper">
         <div class="tc">
             <div class="table-wrapper">
-                <table class="table table-bordered border-dark table-light table-hover" style="width:100%">
+                <table class="table table-bordered border-dark table-primary table-hover" style="width:100%">
                     <thead>
                         <tr>
                             <th>Event Id</th>
@@ -82,7 +82,7 @@
         <div class="buttons">
             @* <input asp-for="SelectedName" class="form-control selectionResult" />*@
             <!--modify buttons (w-100 splits cell, FIX ME!!! change to 75 when icons are added)-->
-            <div class="w-30 btn-group" role="group">
+            @*<div class="w-30 btn-group" role="group">*@
                 <!--button call to modify modal 'Edit"-->
                 <button class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyEvent"
                         data-controller="Event" data-action="Modify" data-modify-type="Edit">
@@ -118,7 +118,7 @@
                     <i class="bi bi-trash"></i> Delete
                 </a>*@
                @* data-id="@item.Id"*@
-            </div>
+           @* </div>*@
         </div>
     </div>
 </div>

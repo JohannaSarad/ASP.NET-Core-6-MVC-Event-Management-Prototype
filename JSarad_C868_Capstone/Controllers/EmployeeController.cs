@@ -11,7 +11,7 @@ namespace JSarad_C868_Capstone.Controllers
     public class EmployeeController : Controller
     {
         //public IEnumerable<Employee> EmployeeList { get; set; }
-        public Employee? SelectedEmployee { get; set; }
+        //public Employee? SelectedEmployee { get; set; }*/
         private readonly AppDbContext _db;
 
         public EmployeeController(AppDbContext db)
@@ -25,6 +25,7 @@ namespace JSarad_C868_Capstone.Controllers
             return View(employees);
         }
 
+        //search
         [HttpGet]
         public async Task<IActionResult> Index(string search)
         {
@@ -37,6 +38,7 @@ namespace JSarad_C868_Capstone.Controllers
             return View(await searchQuery.AsNoTracking().ToListAsync());
         }
 
+        //Get: /Employee/Modify/{id}
         [HttpGet]
         public IActionResult Modify(int id)
         {
@@ -53,6 +55,7 @@ namespace JSarad_C868_Capstone.Controllers
             return PartialView("_ModifyEmployeeModalPartial", viewModel); ;
         }
 
+        //POST: /Employee/Modify/{model}
         [HttpPost]
         public IActionResult Modify(EmployeeViewModel viewModel)
         {
@@ -75,6 +78,7 @@ namespace JSarad_C868_Capstone.Controllers
             return PartialView("_ModifyEmployeeModalPartial", viewModel);
         }
 
+        //POST: Delete
         [HttpPost]
         //[ValidateAntiForgeryToken]
         public IActionResult DeletePOST(int? id)
@@ -90,7 +94,17 @@ namespace JSarad_C868_Capstone.Controllers
 
         }
 
-        
+        [HttpPost]
+        public IActionResult Selection(int id)
+        {
+            var selectedEmployee = _db.Employees.Find(id);
+            //if (SelectedEmployee != null)
+            //{
+            return Json(selectedEmployee.Name);
+            //}
+            //return View("Index", id);
+
+        }
 
         public string DaysToChars(EmployeeViewModel viewModel)
         {
@@ -164,17 +178,7 @@ namespace JSarad_C868_Capstone.Controllers
         }
         //Get /Employee/Edit
         
-        [HttpPost]
-        public IActionResult Selection(int id)
-        {
-            SelectedEmployee = _db.Employees.Find(id);
-            //if (SelectedEmployee != null)
-            //{
-                return Json(SelectedEmployee.Name);
-            //}
-            //return View("Index", id);
-
-        }
+        
     }
 }
 //public IActionResult Edit(int id)

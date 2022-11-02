@@ -39,7 +39,7 @@
                     <div class="table-wrapper">
                         <!--table row headers-->
                        @* <div class="container" style="height:30vh;">*@
-                        <table class="table table-bordered border-dark table-light table-hover table-sm">
+                        <table class="table table-bordered border-dark table-primary table-hover table-sm">
                             @* id="singleRowSelect" style="border-collapse:collapse; height:200px; table-layout:fixed;"*@
                             <thead>
                                 <tr>
@@ -127,7 +127,7 @@
                     <div class="table-wrapper">
                         @*<div class="row mb-3">*@
                             @*<div class="container" style="height:30vh">*@
-                        <table class="table table-bordered border-dark table-hover table-sm">
+                        <table class="table table-bordered border-dark table-hover table-primary table-sm">
                             <thead >
                                 <tr >
                                             @* style="display:table; width:100%; box-sizing:border-box;" class="table-primary"*@
@@ -173,21 +173,16 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col text-end">
-                    <div class="col">
-                    <button type="submit" class="btn btn-primary" formaction="/Add" style="width:150px">Save</button>
-                    <input type="hidden" value="Add" />
-                    </div>
-                    <!--navigating back to Event page-->
-                    <div class="col">
-                    <a asp-controller="Event" asp-action="Index" class="btn btn-secondary" style="width:150px">
-                        Back To List
-                    </a>
-                    </div>
-                </div>
-
+            <div class="buttons">
+                <button type="submit" class="btn btn-primary" formaction="/Add" style="width:150px">Save</button>
+                <input type="hidden" value="Add" />
+                 <!--navigating back to Event page-->
+                   
+                <a asp-controller="Event" asp-action="Index" class="btn btn-secondary" style="width:150px">
+                    Back To List
+                </a>
             </div>
         </div>
     </div>
 </div>
+ 
