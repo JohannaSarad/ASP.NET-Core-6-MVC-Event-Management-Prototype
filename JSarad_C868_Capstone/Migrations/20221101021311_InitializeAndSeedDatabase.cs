@@ -88,13 +88,26 @@ namespace JSarad_C868_Capstone.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EventId = table.Column<int>(type: "int", nullable: false),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ScheduleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EventSchedules", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Schedules",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<int>(type: "int", nullable: false),
+                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Schedules", x => x.Id);
                 });
 
             migrationBuilder.InsertData(
@@ -109,32 +122,41 @@ namespace JSarad_C868_Capstone.Migrations
             migrationBuilder.InsertData(
                 table: "Clients",
                 columns: new[] { "Id", "Address", "Email", "LastUpdate", "Name", "Phone" },
-                values: new object[] { 1, "123 Country Road", "eledford@email.com", new DateTime(2022, 10, 29, 23, 26, 37, 95, DateTimeKind.Local).AddTicks(2117), "Edwin Ledford", "6613332222" });
+                values: new object[] { 1, "123 Country Road", "eledford@email.com", new DateTime(2022, 10, 31, 19, 13, 11, 178, DateTimeKind.Local).AddTicks(7535), "Edwin Ledford", "6613332222" });
 
             migrationBuilder.InsertData(
                 table: "Employees",
                 columns: new[] { "Id", "Address", "Availability", "Email", "LastUpdate", "Name", "Phone", "Role" },
                 values: new object[,]
                 {
-                    { 1, "2414 Loma Linda Dr", "MTWRFSU", "jsarad2@wgu.edu", new DateTime(2022, 10, 29, 23, 26, 37, 95, DateTimeKind.Local).AddTicks(2156), "Johanna Sarad", "6614444763", "Bartender" },
-                    { 2, "345 Mullberry Way", "TRFSU", "rcrocker@email.com", new DateTime(2022, 10, 29, 23, 26, 37, 95, DateTimeKind.Local).AddTicks(2159), "Rebecca Crocker", "6613332211", "Server" },
-                    { 3, "765 Atlantic St", "MWF", "iward@email.com", new DateTime(2022, 10, 29, 23, 26, 37, 95, DateTimeKind.Local).AddTicks(2161), "Ian Ward", "8057778899", "Server" }
+                    { 1, "2414 Loma Linda Dr", "MTWRFSU", "jsarad2@wgu.edu", new DateTime(2022, 10, 31, 19, 13, 11, 178, DateTimeKind.Local).AddTicks(7573), "Johanna Sarad", "6614444763", "Bartender" },
+                    { 2, "345 Mullberry Way", "TRFSU", "rcrocker@email.com", new DateTime(2022, 10, 31, 19, 13, 11, 178, DateTimeKind.Local).AddTicks(7577), "Rebecca Crocker", "6613332211", "Server" },
+                    { 3, "765 Atlantic St", "MWF", "iward@email.com", new DateTime(2022, 10, 31, 19, 13, 11, 178, DateTimeKind.Local).AddTicks(7579), "Ian Ward", "8057778899", "Server" }
                 });
 
             migrationBuilder.InsertData(
                 table: "EventSchedules",
-                columns: new[] { "Id", "EmployeeId", "EndDate", "EventId", "StartDate" },
+                columns: new[] { "Id", "EventId", "ScheduleId" },
                 values: new object[,]
                 {
-                    { 1, 1, null, 1, null },
-                    { 2, 2, null, 1, null },
-                    { 3, 3, null, 1, null }
+                    { 1, 1, 1 },
+                    { 2, 1, 2 },
+                    { 3, 1, 3 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Events",
                 columns: new[] { "Id", "Bar", "ClientId", "EventEnd", "EventStart", "Food", "Guests", "LastUpdate", "Location", "Notes", "Type" },
-                values: new object[] { 1, true, 1, new DateTime(2022, 11, 10, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 11, 10, 4, 30, 0, 0, DateTimeKind.Unspecified), true, 50, new DateTime(2022, 10, 29, 23, 26, 37, 95, DateTimeKind.Local).AddTicks(2175), "888 Corporate Way", null, "Corporate Event" });
+                values: new object[] { 1, true, 1, new DateTime(2022, 11, 10, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 11, 10, 4, 30, 0, 0, DateTimeKind.Unspecified), true, 50, new DateTime(2022, 10, 31, 19, 13, 11, 178, DateTimeKind.Local).AddTicks(7628), "888 Corporate Way", null, "Corporate Event" });
+
+            migrationBuilder.InsertData(
+                table: "Schedules",
+                columns: new[] { "Id", "EmployeeId", "EndTime", "StartTime" },
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(2022, 11, 10, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 11, 10, 4, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, 2, new DateTime(2022, 11, 10, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 11, 10, 4, 30, 0, 0, DateTimeKind.Unspecified) }
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -153,6 +175,9 @@ namespace JSarad_C868_Capstone.Migrations
 
             migrationBuilder.DropTable(
                 name: "EventSchedules");
+
+            migrationBuilder.DropTable(
+                name: "Schedules");
         }
     }
 }

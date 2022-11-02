@@ -49,20 +49,20 @@
                         {*@
                             @*track index of IEnumerable*@
                             @{int index = -1;
-                            @foreach (var item in Model)
+                                @foreach (var item in Model)
                             { 
                                 index++;
-                                <tr id="row_@item.EventId" class="table-light selectable" controller="Event" Action="Selection" data-id="@item.EventId" data-index="@index">
-                                    <td>@item.EventId</td>
-                                    <td>@item.Type </td>
-                                    <td>@item.StartDate.ToShortDateString()</td>
-                                    <td >@item.StartDate.ToShortTimeString()</td>
-                                    @*asp-format="{h:mm tt}"*@
-                                    <td>@item.EndDate.ToShortTimeString()</td>
-                                    <td>@item.ContactName</td>
-                                    <td>@item.Phone</td>
-                                </tr>
-                                @**@
+                                    <tr id="row_@item.EventId" class="table-light selectable" controller="Event" Action="Selection" data-id="@item.EventId" data-index="@index">
+                                        <td>@item.EventId</td>
+                                        <td>@item.Type </td>
+                                        <td>@item.StartDate.ToShortDateString()</td>
+                                        <td >@item.StartDate.ToShortTimeString()</td>
+                                        @*asp-format="{h:mm tt}"*@
+                                        <td>@item.EndDate.ToShortTimeString()</td>
+                                        <td>@item.ContactName</td>
+                                        <td>@item.Phone</td>
+                                    </tr>
+                                    @**@
                             }
                         }
                     </tbody>
@@ -86,6 +86,12 @@
                    data-controller="Event" data-Action="DeletePOST"
                    data-body-message="Are you sure you want to delete this event?">
                     <i class="bi bi-trash"></i> Delete
+                </a>
+
+                <!--button call to Event Schedule -->
+                <a class="btn btn-primary" id="eventSchedule"
+                   data-controller="Event" data-action="AddSchedule">
+                    <i class="bi bi-trash"></i> Details & Scheduling
                 </a>
             
                 @*<!--go back to bootstrap icons and copy and paste pencil square icon-->

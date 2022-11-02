@@ -17,7 +17,8 @@
                         <div class="col form-group">
                             <div id="eventDate" class="input-append">
                                 <label asp-for="Event.EventStart.Date">Event Date</label>
-                                <input asp-for="Event.EventStart.Date" data-format="MM-dd-yyyy" type="date" />
+                                <input asp-for="Event.EventStart.Date" id="datepicker" onchange="setDate(this.value)" data-format="MM-dd-yyyy" type="date" />
+                                
                                 <span class="add-on">
                                     <i data-date-icon="icon-calendar">
                                     </i>
@@ -28,7 +29,8 @@
                         <div class="col form-group">
                             <div id="eventDate" class="input-append">
                                 <label asp-for="Event.EventStart.TimeOfDay">Start Time</label>
-                                <input asp-for="Event.EventStart.TimeOfDay" data-format="hh:mm aa" type="time" />
+                                <input  asp-for="Event.EventStart.TimeOfDay"  type="time" />
+                           @*     data-format="hh:mm aa"*@
                                 <span class="add-on">
                                     <i data-time-icon="icon-time">
                                     </i>
@@ -112,10 +114,18 @@
     </div>
 </div>
 
-                   
+<script>
 
-                    
+   
+        onChange: function (event) {
+            $('#datepicker').val(event.currentTarget.val());
+        }
+    });
 
-                    
-                    
+</script>
+
+
+
+
+
 

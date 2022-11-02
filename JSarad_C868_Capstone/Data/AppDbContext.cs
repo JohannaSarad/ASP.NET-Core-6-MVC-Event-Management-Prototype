@@ -17,6 +17,7 @@ namespace JSarad_C868_Capstone.Data
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<EventSchedule> EventSchedules { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -89,25 +90,41 @@ namespace JSarad_C868_Capstone.Data
                     Bar = true,
                     Guests = 50,
                     ClientId = 1,
-                });
+                    Notes = ""
+                }); 
             builder.Entity<EventSchedule>().HasData(
                 new EventSchedule
                 {
                     Id = 1,
                     EventId = 1,
-                    EmployeeId = 1,
+                    ScheduleId = 1
                 },
                 new EventSchedule
                 {
                     Id = 2,
                     EventId = 1,
-                    EmployeeId = 2,
+                    ScheduleId = 2
                 },
                 new EventSchedule
                 {
                     Id = 3,
                     EventId = 1,
-                    EmployeeId = 3,
+                    ScheduleId = 3
+                });
+            builder.Entity<Schedule>().HasData(
+                new Schedule
+                {
+                    Id = 1,
+                    EmployeeId = 1,
+                    StartTime = new DateTime(2022, 11, 10, 4, 30, 00),
+                    EndTime = new DateTime(2022, 11, 10, 10, 00, 00)
+                },
+                new Schedule
+                {
+                    Id = 2,
+                    EmployeeId = 2,
+                    StartTime = new DateTime(2022, 11, 10, 4, 30, 00),
+                    EndTime = new DateTime(2022, 11, 10, 10, 00, 00)
                 });
         }
     }

@@ -43,6 +43,21 @@ th {
     /*max-height: fit-content;*/
 }
 
+.small-outer-wrapper {
+    border: 1px solid black;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.9);
+    border-radius: 4px;
+    height: 30vh;
+    position: relative;
+}
+
+.small-tc {
+    border: 1px solid black;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.9);
+    border-radius: 4px;
+    height: 25vh;
+    margin: 20px;
+}
 .tc {
     border: 1px solid black;
     box-shadow: 0px 0px 3px rgba(0,0,0,0.9);

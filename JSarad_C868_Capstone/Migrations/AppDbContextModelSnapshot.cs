@@ -94,7 +94,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Id = 1,
                             Address = "123 Country Road",
                             Email = "eledford@email.com",
-                            LastUpdate = new DateTime(2022, 10, 29, 23, 26, 37, 95, DateTimeKind.Local).AddTicks(2117),
+                            LastUpdate = new DateTime(2022, 10, 31, 19, 13, 11, 178, DateTimeKind.Local).AddTicks(7535),
                             Name = "Edwin Ledford",
                             Phone = "6613332222"
                         });
@@ -145,7 +145,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "2414 Loma Linda Dr",
                             Availability = "MTWRFSU",
                             Email = "jsarad2@wgu.edu",
-                            LastUpdate = new DateTime(2022, 10, 29, 23, 26, 37, 95, DateTimeKind.Local).AddTicks(2156),
+                            LastUpdate = new DateTime(2022, 10, 31, 19, 13, 11, 178, DateTimeKind.Local).AddTicks(7573),
                             Name = "Johanna Sarad",
                             Phone = "6614444763",
                             Role = "Bartender"
@@ -156,7 +156,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "345 Mullberry Way",
                             Availability = "TRFSU",
                             Email = "rcrocker@email.com",
-                            LastUpdate = new DateTime(2022, 10, 29, 23, 26, 37, 95, DateTimeKind.Local).AddTicks(2159),
+                            LastUpdate = new DateTime(2022, 10, 31, 19, 13, 11, 178, DateTimeKind.Local).AddTicks(7577),
                             Name = "Rebecca Crocker",
                             Phone = "6613332211",
                             Role = "Server"
@@ -167,7 +167,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "765 Atlantic St",
                             Availability = "MWF",
                             Email = "iward@email.com",
-                            LastUpdate = new DateTime(2022, 10, 29, 23, 26, 37, 95, DateTimeKind.Local).AddTicks(2161),
+                            LastUpdate = new DateTime(2022, 10, 31, 19, 13, 11, 178, DateTimeKind.Local).AddTicks(7579),
                             Name = "Ian Ward",
                             Phone = "8057778899",
                             Role = "Server"
@@ -228,7 +228,7 @@ namespace JSarad_C868_Capstone.Migrations
                             EventStart = new DateTime(2022, 11, 10, 4, 30, 0, 0, DateTimeKind.Unspecified),
                             Food = true,
                             Guests = 50,
-                            LastUpdate = new DateTime(2022, 10, 29, 23, 26, 37, 95, DateTimeKind.Local).AddTicks(2175),
+                            LastUpdate = new DateTime(2022, 10, 31, 19, 13, 11, 178, DateTimeKind.Local).AddTicks(7628),
                             Location = "888 Corporate Way",
                             Type = "Corporate Event"
                         });
@@ -242,17 +242,11 @@ namespace JSarad_C868_Capstone.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("EventId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("StartDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("ScheduleId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -262,20 +256,58 @@ namespace JSarad_C868_Capstone.Migrations
                         new
                         {
                             Id = 1,
+                            EventId = 1,
+                            ScheduleId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EventId = 1,
+                            ScheduleId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EventId = 1,
+                            ScheduleId = 3
+                        });
+                });
+
+            modelBuilder.Entity("JSarad_C868_Capstone.Models.Schedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Schedules");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
                             EmployeeId = 1,
-                            EventId = 1
+                            EndTime = new DateTime(2022, 11, 10, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new DateTime(2022, 11, 10, 4, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
                             EmployeeId = 2,
-                            EventId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            EmployeeId = 3,
-                            EventId = 1
+                            EndTime = new DateTime(2022, 11, 10, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new DateTime(2022, 11, 10, 4, 30, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 #pragma warning restore 612, 618

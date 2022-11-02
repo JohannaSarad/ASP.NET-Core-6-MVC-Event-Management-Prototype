@@ -3,9 +3,7 @@
 function AutoComplete() {
     
     var controller = document.getElementById("completeTxt").getAttribute("controller");
-    /*console.log(controller);*/
     var action = document.getElementById("completeTxt").getAttribute("action");
-    /*console.log(action);*/
     var url = "/" + controller + "/" + action + "/";
     console.log(url);
 
@@ -116,7 +114,7 @@ $(function () {
             id = 0;
         }
         
-        var url = "/" + controller + "/" + action + "/" + id
+        var url = "/" + controller + "/" + action + "/" + id;
         console.log(url);
         $.get(url).done(function (data) {
             placeholderElement.html(data);
@@ -141,8 +139,43 @@ $(function () {
         });
     });
 });
+
+$(function () {
+    $("#eventSchedule").on('click', (e) => {
+        e.preventDefault
+        target = e.target;
+        var id = $('#selectedId').val();
+        controller = $(target).data('controller');
+        action = $(target).data('action');
         
 
-        
+        if (id == 0 || id == null || id == "") {
+            alert("Please Select a Record to View");
+            return;
+        }
+        var url = "/" + controller + "/" + action + "/" + id;
+        window.location.replace(url);
+    });
+}());
+
+$(function () {
+    $("#scheduleEmployee").on('click', (e) => {
+        e.preventDefault
+        target = e.target;
+        var id = $('#selectedId').val();
+        controller = $(target).data('controller');
+        action = $(target).data('action');
+
+
+        if (id == 0 || id == null || id == "") {
+            alert("Please Select a Record to View");
+            return;
+        }
+        var url = "/" + controller + "/" + action + "/" + id;
+        window.location.replace(url);
+        //add date validation to controller and respond here with a modal or an alert
+    });
+}());
+
 
         

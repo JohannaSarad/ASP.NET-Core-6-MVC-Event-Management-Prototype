@@ -11,53 +11,13 @@ namespace JSarad_C868_Capstone.Controllers
         private readonly AppDbContext _db;
         public Employee? SelectedEmployee { get; set; }
         public Event? SelectedEvent { get; set; }
-        public List<EmployeeSchedule> tempSchedule { get; set; }
+        //public List<EmployeeSchedule> tempSchedule { get; set; }
         public EventController(AppDbContext db)
         {
             _db = db;
            
         }
 
-        //Get /Event
-        //public IActionResult Index()
-        //{
-            
-        //    var result = from e in _db.Events
-        //                 join c in _db.Clients on e.ClientId equals c.Id
-        //                 select new EventListDetails
-        //                 {
-        //                     EventId = e.Id,
-        //                     StartDate = e.EventStart,
-        //                     EndDate = e.EventEnd,
-        //                     Type = e.Type,
-        //                     ClientId = e.ClientId,
-        //                     ContactName = c.Name,
-        //                     Phone = c.Phone
-        //                 };//.ToList();
-        //    EventListViewModel viewModel = new EventListViewModel();
-        //    viewModel.EventList = result;
-        //    viewModel.SelectedId = 0;
-        //    viewModel.SelectedName = "";
-           
-        //    return View(viewModel);
-        //}
-
-        //public IActionResult Index()
-        //{
-        //    var events = from e in _db.Events
-        //                 join c in _db.Clients on e.ClientId equals c.Id
-        //                 select new EventListDetails
-        //                 {
-        //                     EventId = e.Id,
-        //                     StartDate = e.EventStart,
-        //                     EndDate = e.EventEnd,
-        //                     Type = e.Type,
-        //                     ClientId = e.ClientId,
-        //                     ContactName = c.Name,
-        //                     Phone = c.Phone
-        //                 };
-        //    return View(events);
-        //}
 
         public IActionResult Index()
         {
@@ -100,10 +60,10 @@ namespace JSarad_C868_Capstone.Controllers
         [HttpPost]
         public IActionResult Modify(EventViewModel viewModel)
         {
-
+            //viewModel.Event.EventStart = 
             //viewModel.Client = _db.Clients.Find(viewModel.Event.ClientId);
 
-            Console.WriteLine(ModelState);
+            //Console.WriteLine(ModelState);
             if (ModelState.IsValid)
             {
                 //viewModel.Event.ClientId = viewModel.Client.Id;
@@ -136,7 +96,30 @@ namespace JSarad_C868_Capstone.Controllers
             return RedirectToAction("Index");
 
         }
-        
+
+        [HttpGet]
+        public IActionResult AddSchedule(int id)
+        {
+            EventScheduleViewModel viewModel = new EventScheduleViewModel();
+            viewModel.Event = _db.Events.Find(id);
+            viewModel.Client = _db.Clients.Find(viewModel.Event.ClientId);
+            viewModel.EmployeeList = _db.Employees.ToList();
+            viewModel.Employee = new Employee();
+            viewModel.EmployeeSchedule = new ScheduleDisplayDetails();
+            viewModel.Schedules = (from es in _db.EventSchedules
+                                   join s in _db.Schedules on es.ScheduleId equals s.Id
+                                   join e in _db.Employees on s.EmployeeId equals e.Id
+                                   where es.EventId == viewModel.Event.Id
+                                   select new ScheduleDisplayDetails
+                                   {
+                                       EmployeeId = e.Id,
+                                       EmployeeName = e.Name,
+                                       StartTime = s.StartTime,
+                                       EndTime = s.EndTime
+                                   }).ToList();
+            return View(viewModel);
+        }
+
         [HttpPost]
         public JsonResult AutoComplete(string prefix)
         {
@@ -158,9 +141,9 @@ namespace JSarad_C868_Capstone.Controllers
         [HttpPost]
         public JsonResult Selection(int id)
         {
-            SelectedEvent = _db.Events.Find(id);
+            var selectedEvent = _db.Events.Find(id);
             
-                return Json(SelectedEvent.Type);
+                return Json(selectedEvent.Type);
             
         }
 
@@ -183,7 +166,11 @@ namespace JSarad_C868_Capstone.Controllers
             return employeeList.ToList();
             
         }
+
+        
     }
+
+    
 
     //public IActionResult Add()
     //{
