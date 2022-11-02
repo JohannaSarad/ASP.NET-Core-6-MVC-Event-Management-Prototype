@@ -2,6 +2,7 @@
 using JSarad_C868_Capstone.Models;
 using JSarad_C868_Capstone.Data;
 using JSarad_C868_Capstone.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace JSarad_C868_Capstone.Controllers
 {
@@ -20,6 +21,19 @@ namespace JSarad_C868_Capstone.Controllers
         {
             var clients = _db.Clients;
             return View(clients);
+        }
+
+        //Search
+        [HttpGet]
+        public async Task<IActionResult> Index(string search)
+        {
+            ViewData["GetClient"] = search;
+            var searchQuery = from c in _db.Clients select c;
+            if (!string.IsNullOrEmpty(search))
+            {
+                searchQuery = searchQuery.Where(c => c.Name.Contains(search) || c.Email.Contains(search));
+            }
+            return View(await searchQuery.AsNoTracking().ToListAsync());
         }
 
         //GET: Client/Modify/{id}

@@ -24,6 +24,13 @@
     <br /><br />
     
     <!--table row headers-->
+    <form method="get" asp-action="Index">
+        <p>
+            <input type="search" placeholder="Search Employee Name Or Email" value="@ViewData["GetEmployee"]" name="search" style="width:500px;"/>
+            <input type="submit" value="Search" class="btn btn-primary"/>
+            <a asp-action="Index">Get All Employees</a>
+        </p>
+    </form>
     <div class="outer-wrapper">
         <div class="tc">
             <div class="table-wrapper">
@@ -45,26 +52,26 @@
                         {*@
                             @*track index of IEnumerable*@
                             @{int index = -1;
-                            @foreach (var employee in Model)
+                                @foreach (var employee in Model)
                             {
                                 index++;
-                                <tr id="row_@employee.Id" class="table-light selectable" controller="Employee" Action="Selection" data-id="@employee.Id" data-index="@index">
-                                   @* id="row_@employee.Id"*@
-                                    @*<input type="hidden" asp-for="@employee.Id">*@
-                                    <td>@employee.Id</td>
-                                    @*<input type="hidden" asp-for="@employee.Name">*@
-                                    <td>@employee.Name</td>
-                                    @*<input type="hidden" asp-for="@employee.Phone">*@
-                                    <td>@employee.Phone</td>
-                                    @*<input type="hidden" asp-for="@employee.Email">*@
-                                    <td>@employee.Email</td>
-                                    @*<input type="hidden" asp-for="@employee.Address">*@
-                                    <td>@employee.Address</td>
-                                    @*<input type="hidden" asp-for="@employee.Role">*@
-                                    <td>@employee.Role</td>
-                                    @*<input type="hidden" asp-for="@employee.Availability">*@
-                                    <td>@employee.Availability</td>
-                                </tr>
+                                    <tr id="row_@employee.Id" class="table-light selectable" controller="Employee" Action="Selection" data-id="@employee.Id" data-index="@index">
+                                       @* id="row_@employee.Id"*@
+                                        @*<input type="hidden" asp-for="@employee.Id">*@
+                                        <td>@employee.Id</td>
+                                        @*<input type="hidden" asp-for="@employee.Name">*@
+                                        <td>@employee.Name</td>
+                                        @*<input type="hidden" asp-for="@employee.Phone">*@
+                                        <td>@employee.Phone</td>
+                                        @*<input type="hidden" asp-for="@employee.Email">*@
+                                        <td>@employee.Email</td>
+                                        @*<input type="hidden" asp-for="@employee.Address">*@
+                                        <td>@employee.Address</td>
+                                        @*<input type="hidden" asp-for="@employee.Role">*@
+                                        <td>@employee.Role</td>
+                                        @*<input type="hidden" asp-for="@employee.Availability">*@
+                                        <td>@employee.Availability</td>
+                                    </tr>
                             }
                         }
                     </tbody>

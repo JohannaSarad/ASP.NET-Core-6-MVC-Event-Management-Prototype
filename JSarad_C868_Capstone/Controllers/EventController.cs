@@ -38,6 +38,30 @@ namespace JSarad_C868_Capstone.Controllers
             return View(events);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Index(string search)
+        {
+            ViewData["GetEvent"] = search;
+            var searchQuery = from e in _db.Events
+                              join c in _db.Clients on e.ClientId equals c.Id
+                              select new EventListDetails
+                              {
+                                  EventId = e.Id,
+                                  StartDate = e.EventStart,
+                                  EndDate = e.EventEnd,
+                                  Type = e.Type,
+                                  ClientId = e.ClientId,
+                                  ContactName = c.Name,
+                                  Phone = c.Phone
+                              };
+            
+            if (!string.IsNullOrEmpty(search))
+            {
+                searchQuery = searchQuery.Where(e => e.Type.Contains(search));
+            }
+            return View(await searchQuery.AsNoTracking().ToListAsync());
+        }
+
         //Get: /Event/Modify/{id}
         [HttpGet]
         public IActionResult Modify(int id)

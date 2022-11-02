@@ -3,6 +3,7 @@ using JSarad_C868_Capstone.Models;
 using Microsoft.AspNetCore.Mvc;
 using JSarad_C868_Capstone.ViewModels;
 using Microsoft.CodeAnalysis.Operations;
+using Microsoft.EntityFrameworkCore;
 
 namespace JSarad_C868_Capstone.Controllers
 {
@@ -22,6 +23,18 @@ namespace JSarad_C868_Capstone.Controllers
         {
             var employees = _db.Employees;
             return View(employees);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Index(string search)
+        {
+            ViewData["GetEmployee"] = search;
+            var searchQuery = from e in _db.Employees select e;
+            if (!string.IsNullOrEmpty(search))
+            {
+                searchQuery = searchQuery.Where(e => e.Name.Contains(search) || e.Email.Contains(search));
+            }
+            return View(await searchQuery.AsNoTracking().ToListAsync());
         }
 
         [HttpGet]
@@ -76,6 +89,8 @@ namespace JSarad_C868_Capstone.Controllers
             return RedirectToAction("Index");
 
         }
+
+        
 
         public string DaysToChars(EmployeeViewModel viewModel)
         {

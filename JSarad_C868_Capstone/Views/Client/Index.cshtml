@@ -18,7 +18,15 @@
         </div>
     </div>
     <br /><br />
-    
+
+    <!--search bar-->
+    <form method="get" asp-action="Index">
+        <p>
+            <input type="search" placeholder="Search Client Name Or Email" value="@ViewData["GetCLient"]" name="search" style="width:500px;" />
+            <input type="submit" value="Search" class="btn btn-primary" />
+            <a asp-action="Index">Get All Clients</a>
+        </p>
+    </form>
     <!--table row headers-->
     <div class="outer-wrapper">
         <div class="tc">

@@ -27,6 +27,14 @@
     </div>
     <br /><br />
 
+    <!--search bar-->
+    <form method="get" asp-action="Index">
+        <p>
+            <input type="search" placeholder="Search Event By Type" value="@ViewData["GetEvent"]" name="search" style="width:500px;" />
+            <input type="submit" value="Search" class="btn btn-primary" />
+            <a asp-action="Index">Get All Events</a>
+        </p>
+    </form>
     <!--table row headers-->
     <div class="outer-wrapper">
         <div class="tc">

@@ -13,7 +13,7 @@
             <form action="Event/Modify" method="Post">
                 <div class="modal-body">
                     @*<div class="mb-3">*@
-                    <div class="row mb-3">
+                    @*<div class="row mb-3">
                         <div class="col form-group">
                             <div id="eventDate" class="input-append">
                                 <label asp-for="Event.EventStart.Date">Event Date</label>
@@ -24,7 +24,20 @@
                                     </i>
                                 </span>
                             </div>
-                        </div>
+                        </div>*@
+                        <div class="row form-group">
+                            <label asp-for="Event.EventStart.Date"> Event Date</label>
+                            <div class="col-sm-4">
+                                <div class="input-group date" id="datepicker">
+                                <input type="text" class="form-control-date"/>
+                                <span class="input-group-append">
+                                    <span class="input-group-text bg-white d-block">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    </span>
+                                </div>
+                            </div>
+                           
                             @*<div class="mb-3">*@
                         <div class="col form-group">
                             <div id="eventDate" class="input-append">
@@ -114,13 +127,19 @@
     </div>
 </div>
 
-<script>
+<script type="text/javascript">
+    $(function(){
+        $('#datepicker').datepicker();
+        //onChange: function (event) {
+        //    $('#datepicker').val(event.currentTarget.val());
+        //}
+    })
 
    
-        onChange: function (event) {
-            $('#datepicker').val(event.currentTarget.val());
-        }
-    });
+    //    onChange: function (event) {
+    //        $('#datepicker').val(event.currentTarget.val());
+    //    }
+    //});
 
 </script>
 
