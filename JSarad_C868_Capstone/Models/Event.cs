@@ -12,10 +12,10 @@ namespace JSarad_C868_Capstone.Models
         public string Type { get; set; }
         [Required]
         public string Location { get; set; }
-        [Required]
+        //[Required]
         //[Display(Name = "Start Date")]
         public DateTime EventStart { get; set; }
-        [Required]
+        //[Required]
         public DateTime EventEnd { get; set; }
 
         public bool Food { get; set; }
@@ -26,6 +26,8 @@ namespace JSarad_C868_Capstone.Models
         public int ClientId { get; set; }
 
         public DateTime LastUpdate { get; set; } = DateTime.Now;
-
+        //string 
+        //string sql = "Insert into Capstone (EventName, EventType, StartDate, EndDate) Values ('{EventName}', '{EventType}', 
+        
     }
 }

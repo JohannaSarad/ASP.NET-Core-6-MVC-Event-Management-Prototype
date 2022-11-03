@@ -94,13 +94,29 @@ namespace JSarad_C868_Capstone.Controllers
 
         }
 
+        public IActionResult EmployeeSchedule(int? id)
+        {
+            EmployeeScheduleViewModel viewModel= new EmployeeScheduleViewModel();
+            viewModel.Employee = _db.Employees.Find(id);
+            viewModel.Schedule = (from s in _db.Schedules
+                                  where s.Id == id
+                                  select new Schedule
+                                  {
+                                      Id = s.Id,
+                                      EmployeeId = s.EmployeeId,
+                                      StartTime = s.StartTime,
+                                      EndTime = s.EndTime,
+                                  }).ToList();
+            return View(viewModel);
+        }
+
         [HttpPost]
         public IActionResult Selection(int id)
         {
             var selectedEmployee = _db.Employees.Find(id);
-            //if (SelectedEmployee != null)
+            //if (selectedEmployee != null)
             //{
-            return Json(selectedEmployee.Name);
+                return Json(selectedEmployee.Name);
             //}
             //return View("Index", id);
 

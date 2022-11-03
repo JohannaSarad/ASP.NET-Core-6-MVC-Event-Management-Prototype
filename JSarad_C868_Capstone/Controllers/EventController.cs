@@ -3,6 +3,7 @@ using JSarad_C868_Capstone.Models;
 using JSarad_C868_Capstone.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.Xml;
 
 namespace JSarad_C868_Capstone.Controllers
 {
@@ -93,6 +94,7 @@ namespace JSarad_C868_Capstone.Controllers
                 //viewModel.Event.ClientId = viewModel.Client.Id;
                 if (viewModel.Event.Id == 0)
                 {
+                    Console.WriteLine(viewModel);
                     _db.Events.Add(viewModel.Event);
                     _db.SaveChanges();
                 }
@@ -145,6 +147,21 @@ namespace JSarad_C868_Capstone.Controllers
         }
 
         [HttpPost]
+        public IActionResult ScheduleEmployee(EventScheduleViewModel viewModel)
+        {
+            if (viewModel.Schedules == null)
+                {
+                    viewModel.Schedules = new List<ScheduleDisplayDetails>();
+                }
+                viewModel.EmployeeSchedule.EmployeeId = SelectedEmployee.Id;
+                viewModel.EmployeeSchedule.EmployeeName = SelectedEmployee.Name;
+                viewModel.Schedules.Add(viewModel.EmployeeSchedule);
+                viewModel.Schedules.Add(viewModel.EmployeeSchedule);
+
+            return View("Add", viewModel);
+        }
+
+        [HttpPost]
         public JsonResult AutoComplete(string prefix)
         {
             var clients =  (from client in _db.Clients
@@ -154,9 +171,6 @@ namespace JSarad_C868_Capstone.Controllers
                                label = client.Name,
                                val = client.Name,
                                id = client.Id,
-                               //address = client.Address,
-                               //phone = client.Phone,
-                               //email = client.Email
                            }).Take(5).ToList();
 
             return Json(clients);
@@ -194,102 +208,12 @@ namespace JSarad_C868_Capstone.Controllers
         
     }
 
+}
     
 
-    //public IActionResult Add()
-    //{
-    //    EventViewModel viewModel = new EventViewModel();
-    //    viewModel.Event = new Event();
-    //    viewModel.Client = new Client();
-    //    viewModel.SelectedEmployee = new Employee();
-    //    viewModel.EmployeeSchedule = new EmployeeSchedule();
-    //    viewModel.Schedules = new List<EmployeeSchedule>();
-    //    viewModel.EmployeeList = GetEmployees();
-
-    //    return View(viewModel);
-    //}
+    
 
 
-    //[HttpPost]
-    //[ValidateAntiForgeryToken]
-    //public IActionResult Add(EventViewModel viewModel)
-    //{
-    //    viewModel.EmployeeList = GetEmployees();
-    //    Console.WriteLine(viewModel.EmployeeList);
+    
 
-    //    if (ModelState.IsValid)
-    //    {
-    //        viewModel.Schedules = new List<EmployeeSchedule>();
-    //        _db.Events.Add(viewModel.Event);
-
-
-    //        _db.SaveChanges();
-    //        //redirecting to the main event page with list of events
-    //        return RedirectToAction("Index");
-    //    }
-    //    else
-    //    {
-    //        return View(viewModel);
-    //    }
-    //}
-
-    ////Get /Employee/Edit
-    //public IActionResult Edit(int? id)
-    //{
-    //    if (id == null || id == 0)
-    //    {
-    //        return NotFound();
-    //    }
-    //    var selectedEvent = _db.Events.Find(id);
-
-    //    //check if selectedEmployee is null
-    //    if (selectedEvent == null)
-    //    {
-    //        return NotFound();
-    //    }
-
-    //    EventViewModel viewModel = new EventViewModel();
-    //    viewModel.Event = selectedEvent;
-
-    //    return View(viewModel);
-
-    //}
-
-    //[HttpPost]
-    //[ValidateAntiForgeryToken]
-    //public IActionResult Edit(EventViewModel viewModel)
-    //{
-    //    //viewModel.Employee.Availability = daysToChars;
-    //    //validation
-    //    if (ModelState.IsValid)
-    //    {
-    //        //updatng a employee in the database
-    //        _db.Events.Update(viewModel.Event);
-    //        _db.SaveChanges();
-    //        return RedirectToAction("Index");
-    //    }
-    //    else
-    //    {
-    //        return View(viewModel);
-    //    }
-    //}
-
-    //[HttpPost]
-    //public IActionResult ScheduleEmployee(EventViewModel viewModel)
-    //{
-
-    //    if (viewModel.EmployeeSchedule != null)
-    //    {
-    //        if (viewModel.Schedules == null)
-    //        {
-    //            viewModel.Schedules = new List<EmployeeSchedule>();
-    //        }
-    //        viewModel.Schedules.Add(viewModel.EmployeeSchedule);
-
-    //        //viewModel.EmployeeSchedule.EmployeeId = SelectedEmployee.Id;
-    //        //viewModel.EmployeeSchedule.Name = SelectedEmployee.Name;
-    //        //viewModel.Schedules.Add(viewModel.EmployeeSchedule);
-    //    }
-    //    return View("Add", viewModel);
-    //}
-}
+   

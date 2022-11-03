@@ -1,5 +1,5 @@
 ﻿
-//autoComplete user input text
+//autoComplete user input text for client name
 function AutoComplete() {
     
     var controller = document.getElementById("completeTxt").getAttribute("controller");
@@ -59,7 +59,7 @@ $((function () {
                 tdArray = selectedRow.getElementsByTagName('td');
                 for (var cell = 0; cell < tdArray.length; cell++)
                 {
-                    tdArray[cell].style.backgroundColor = "yellow";
+                    tdArray[cell].style.backgroundColor = "#71EEDD";
                     //FIX ME!!! need to remove hover for these cells
                 }
             }
@@ -95,6 +95,7 @@ $(function () {
     var controller;
     var action;
 
+    //onclick from index to open modal
     $('button[data-bs-toggle="ajax-modal"]').click(function (e) {
         target = e.target;
         controller = $(target).data('controller');
@@ -122,26 +123,35 @@ $(function () {
         })
     })
 
+    //onclick to save modal form information
     placeholderElement.on('click', '[data-bs-save="modal"]', function (event) {
+        alert("Test");
         event.preventDefault();
         var form = $(this).parents('.modal').find('form');
         var actionUrl = form.attr('action');
         var sendViewModel = form.serialize();
-       
+        //alert(form.Event.EventStart.Date);
+        alert(sendViewModel);
+
         $.post(actionUrl, sendViewModel).done(function (data) {
             if (data === true) {
                 placeholderElement.find('.modal').modal('hide');
                 location.reload();
                 return;
             }
+            data = data.replace("1/1/0001 12:00:00", $('#sdate').val());
+            //alert(data);
             var newBody = $('.modal-body', data);
+            //
+
             placeholderElement.find('.modal-body').replaceWith(newBody);
         });
     });
 });
 
+//gets id from view and posts to open details&scheduling for events and employees on button click
 $(function () {
-    $("#eventSchedule").on('click', (e) => {
+    $("#details").on('click', (e) => {
         e.preventDefault
         target = e.target;
         var id = $('#selectedId').val();
@@ -158,24 +168,7 @@ $(function () {
     });
 }());
 
-$(function () {
-    $("#scheduleEmployee").on('click', (e) => {
-        e.preventDefault
-        target = e.target;
-        var id = $('#selectedId').val();
-        controller = $(target).data('controller');
-        action = $(target).data('action');
 
-
-        if (id == 0 || id == null || id == "") {
-            alert("Please Select a Record to View");
-            return;
-        }
-        var url = "/" + controller + "/" + action + "/" + id;
-        window.location.replace(url);
-        //add date validation to controller and respond here with a modal or an alert
-    });
-}());
 
 
         

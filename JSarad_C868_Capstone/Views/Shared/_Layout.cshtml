@@ -15,9 +15,13 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/JSarad_C868_Capstone.styles.css" asp-append-version="true" />
     
-    
+<script>
+    function loaddoc() { document.getElementById("Login").style.display = ''; }
+</script>
 </head>
-<body>
+<body onload="loaddoc()">
+   @* style="background-color: gray"*@
+    <div id="Login" style="display:none;z-index:5;position:absolute;left:200px;top:200px;"></div>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">

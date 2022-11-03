@@ -64,6 +64,10 @@ namespace JSarad_C868_Capstone.Controllers
             {
                 if (client.Id == 0)
                 {
+                    //Uodate your event date entity
+                    //Event ev = new Event();
+                    //ev.EventStart = 
+
                     _db.Clients.Add(client);
                     _db.SaveChanges();
                 }
@@ -101,85 +105,3 @@ namespace JSarad_C868_Capstone.Controllers
     }
 }
 
-//Get /Client
-//public IActionResult Index()
-//{
-//    ClientListViewModel viewModel = new ClientListViewModel();
-//    viewModel.ClientList = _db.Clients;
-//    viewModel.SelectedId = 0;
-//    viewModel.SelectedName = "";
-
-//    return View(viewModel);
-//}
-//public IActionResult Add()
-//{
-//    return View();
-//}
-
-//[HttpPost]
-//[ValidateAntiForgeryToken]
-//public IActionResult Add(Client client)
-//{
-//    //adding custom validation to all 
-//    //if (client.Name == client.Address)
-//    //{
-//    //    ModelState.AddModelError("CustomError", "The Client Name exactly match the client email");
-//    //}
-//    //applying custom validation only to the name field
-//    //if (client.Name == "smurf")
-//    //{
-//    //    ModelState.AddModelError("name", "Name cannot be smurf");
-//    //}
-
-//    //validation
-//    if (ModelState.IsValid)
-//    {
-//        //adding a client to database
-//        _db.Clients.Add(client);
-
-//        _db.SaveChanges();
-//        //redirecting to the main client page with list of clients
-//        return RedirectToAction("Index");
-//        /*if you need to redirect to an action in a different controller you can do so with 
-//         *return RedirectToAction("ActionName", "ControllerName")*/
-//    }
-//    else
-//    {
-//        return View(client);
-//    }
-//}
-
-////Get /Client/Edit
-//public IActionResult Edit(int? id)
-//{
-//    if (id == null || id == 0)
-//    {
-//        return NotFound();
-//    }
-//    var selectedClient = _db.Clients.Find(id);
-
-//    //check if selectedClient is null
-//    if (selectedClient == null)
-//    {
-//        return NotFound();
-//    }
-//    return View(selectedClient);
-//}
-
-//[HttpPost]
-//[ValidateAntiForgeryToken]
-//public IActionResult Edit(Client client)
-//{
-//    //validation
-//    if (ModelState.IsValid)
-//    {
-//        //updatng a category in the database
-//        _db.Clients.Update(client);
-//        _db.SaveChanges();
-//        return RedirectToAction("Index");
-//    }
-//    else
-//    {
-//        return View(client);
-//    }
-//}

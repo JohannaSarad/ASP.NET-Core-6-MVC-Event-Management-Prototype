@@ -85,6 +85,7 @@ namespace JSarad_C868_Capstone.Data
                     Type = "Corporate Event",
                     Location = "888 Corporate Way",
                     EventStart = new DateTime(2022, 11, 10, 4, 30, 00),
+                    //EventStart = new DateTime("2022/11/11"),
                     EventEnd = new DateTime(2022, 11, 10, 10, 00, 00),
                     Food = true,
                     Bar = true,

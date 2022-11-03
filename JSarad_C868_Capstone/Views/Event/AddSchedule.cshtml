@@ -2,6 +2,7 @@
 
 
 <div class="container" style="height:100vh">
+   
     <div class="row">
        @* <div class="col-md-4">*@
         <div class="row pb-2">
@@ -13,7 +14,7 @@
     <br /><br />
     <div class="row">
         <div class="col md-4">
-            <div class="border p-2 mt-4">
+            <div class="border border-dark p-2 mt-4">
                 <div class="mb-3">
                     <p> @($"Event Start: {Model.Event.EventStart.ToLongDateString}")</p>
                     <p> @($"Start Time: {Model.Event.EventStart.ToShortTimeString}")</p>
@@ -82,7 +83,7 @@
                 </div>
             </div>
             <div class="row pt-2 pb-2">
-                
+               
                @* <div class="container" style="height:10vh;">*@
                     <div class="col-3 form-group">
                         <label>Employee Name</label>
@@ -111,16 +112,17 @@
                     </div>
                     @*<div class="row"></div>*@
                 <div class="col-5 form-group pt-3 text-end">
-                    @*<a asp-controller="Event" asp-action="ScheduleEmployee" type="submit" class="btn btn-primary" style="width:150px">Add To Schedule</a>
-                    <button type="submit" formaction="ScheduleEmployee" class="btn btn-primary" style="width:150px">Save</button>
-                    <input type="hidden" value="ScheduleEmployee" />*@
-                    <a data-controller="Event" data-action="ScheduleEmployee" id="scheduleEmployee" class="btn btn-primary"> 
+                    @*<a asp-controller="Event" asp-action="ScheduleEmployee" type="submit" class="btn btn-primary" style="width:150px">Add To Schedule</a>*@
+                    <button type="submit" formaction="ScheduleEmployee" class="btn btn-primary" style="width:150px">Add To Schedule</button>
+                    <input type="hidden" value="ScheduleEmployee" />
+                    @*<a data-controller="Event" data-action="ScheduleEmployee" id="scheduleEmployee" class="btn btn-primary"> 
                         Add To Schedule
-                    </a>
+                    </a>*@
                 </div>
                 @*style="width:150px"*@
 
                @* </div>*@
+              
             </div>
             <div class="small-outer-wrapper">
                 <div class="small-tc">
@@ -135,6 +137,7 @@
                                     <th>Employee Name</th>
                                     <th>Start Time</th>
                                     <th>End TIme</th>
+                                    <th></th>
                                             @* style="width:25%; word-break: break-all; padding: 5px;"*@
                                 </tr>
                             </thead>
@@ -158,11 +161,11 @@
                                             <input type="hidden" asp-for="Schedules[index].StartTime"  />
                                             <td  asp-format="time">@schedule.EndTime.TimeOfDay</td>
                                             <input type="hidden" asp-for="Schedules[index].EndTime"  />
-                                            <td class="w-75 btn-group" role="group">
-                                                <a asp-controller="Client" asp-action="Edit" asp-route-id="@schedule.EmployeeId"
-                                           class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit</a>
-                                                <a asp-controller="Client" asp-action="Delete" asp-route-id="@schedule.EmployeeId"
-                                           class="btn btn-danger mx-2"> <i class="bi bi-trash"></i> Delete</a>
+                                            <td class="w-100 btn-group" role="group">
+                                                <a asp-controller="Client" asp-action="Edit" asp-route-id="@schedule.EmployeeId" style="text-decoration:none"> 
+                                                    <i class="bi bi-pencil-square"></i> &emsp; Edit &emsp;</a>  @*class="btn btn-primary mx-2"*@
+                                                <a asp-controller="Client" asp-action="Delete" asp-route-id="@schedule.EmployeeId" style="text-decoration:none">
+                                                    <i class="bi bi-trash"></i> Delete</a> @*class="btn btn-danger mx-2"*@
                                             </td>
                                            @* style="border-collapse:collapse; border:none; width:33.33%; word-break: break-all; padding: 5px; border-bottom: none; display:none"*@
                                         </tr>
@@ -184,5 +187,6 @@
             </div>
         </div>
     </div>
+   
 </div>
  
