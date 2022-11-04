@@ -3,8 +3,9 @@
     public class EventListDetails
     {
         public int EventId { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime EventDate { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
         public string Type { get; set; }
         public int ClientId { get; set; }
         public string ContactName { get; set; }

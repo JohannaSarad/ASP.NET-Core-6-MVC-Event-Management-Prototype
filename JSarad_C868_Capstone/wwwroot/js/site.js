@@ -125,12 +125,18 @@ $(function () {
 
     //onclick to save modal form information
     placeholderElement.on('click', '[data-bs-save="modal"]', function (event) {
-        alert("Test");
+        /*alert("Test");*/
         event.preventDefault();
+        $('#start').val($('#datepicker').val() + " " + $('#startTime').val());
+        $('#end').val($('#datepicker').val() + " " + $('#endTime').val());
         var form = $(this).parents('.modal').find('form');
         var actionUrl = form.attr('action');
         var sendViewModel = form.serialize();
+        //alert($('#datepicker').val() + " " + $('#startTime').val());
+        //alert($('#datepicker').val() + " " + $('#endTime').val());
+       /* alert(form.Event.EventDate.Date + " " + form.Event.StartTime.TimeOfDay);*/
         //alert(form.Event.EventStart.Date);
+        
         alert(sendViewModel);
 
         $.post(actionUrl, sendViewModel).done(function (data) {
@@ -139,11 +145,10 @@ $(function () {
                 location.reload();
                 return;
             }
-            data = data.replace("1/1/0001 12:00:00", $('#sdate').val());
+            /*data = data.replace("1/1/0001 12:00:00", $('#sdate').val());*/
             //alert(data);
             var newBody = $('.modal-body', data);
             //
-
             placeholderElement.find('.modal-body').replaceWith(newBody);
         });
     });

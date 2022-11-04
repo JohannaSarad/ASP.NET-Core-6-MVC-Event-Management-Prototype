@@ -16,9 +16,9 @@
         <div class="col md-4">
             <div class="border border-dark p-2 mt-4">
                 <div class="mb-3">
-                    <p> @($"Event Start: {Model.Event.EventStart.ToLongDateString}")</p>
-                    <p> @($"Start Time: {Model.Event.EventStart.ToShortTimeString}")</p>
-                    <p> @($"Start Time: {Model.Event.EventEnd.ToShortTimeString}")</p>
+                    <p> @($"Event Start: {Model.Event.EventDate.ToLongDateString}")</p>
+                    <p> @($"Start Time: {Model.Event.StartTime.ToShortTimeString}")</p>
+                    <p> @($"Start Time: {Model.Event.EndTime.ToShortTimeString}")</p>
                     <p> @($"Event Type: {Model.Event.Type}")</p>
                     <p> @($"Location: {Model.Event.Location}")</p>
                     <p> @($"Number of Guests {Model.Event.Guests}")</p>

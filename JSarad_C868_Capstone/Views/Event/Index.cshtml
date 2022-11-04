@@ -63,10 +63,10 @@
                                     <tr id="row_@item.EventId" class="table-light selectable" controller="Event" Action="Selection" data-id="@item.EventId" data-index="@index">
                                         <td>@item.EventId</td>
                                         <td>@item.Type </td>
-                                        <td>@item.StartDate.ToShortDateString()</td>
-                                        <td >@item.StartDate.ToShortTimeString()</td>
+                                        <td>@item.EventDate.ToShortDateString()</td>
+                                        <td >@item.StartTime.ToShortTimeString()</td>
                                         @*asp-format="{h:mm tt}"*@
-                                        <td>@item.EndDate.ToShortTimeString()</td>
+                                        <td>@item.EndTime.ToShortTimeString()</td>
                                         <td>@item.ContactName</td>
                                         <td>@item.Phone</td>
                                     </tr>

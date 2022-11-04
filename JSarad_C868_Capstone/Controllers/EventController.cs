@@ -27,8 +27,9 @@ namespace JSarad_C868_Capstone.Controllers
                          select new EventListDetails
                          {
                              EventId = e.Id,
-                             StartDate = e.EventStart,
-                             EndDate = e.EventEnd,
+                             EventDate = e.EventDate,
+                             StartTime = e.StartTime,
+                             EndTime = e.EndTime,
                              Type = e.Type,
                              ClientId = e.ClientId,
                              ContactName = c.Name,
@@ -48,8 +49,9 @@ namespace JSarad_C868_Capstone.Controllers
                               select new EventListDetails
                               {
                                   EventId = e.Id,
-                                  StartDate = e.EventStart,
-                                  EndDate = e.EventEnd,
+                                  EventDate = e.EventDate,
+                                  StartTime = e.StartTime,
+                                  EndTime = e.EndTime,
                                   Type = e.Type,
                                   ClientId = e.ClientId,
                                   ContactName = c.Name,
