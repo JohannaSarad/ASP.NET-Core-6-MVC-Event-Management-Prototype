@@ -90,29 +90,28 @@ namespace JSarad_C868_Capstone.Controllers
             //viewModel.Client = _db.Clients.Find(viewModel.Event.ClientId);
 
             //Console.WriteLine(ModelState);
-            if (viewModel.Event.StartTime > viewModel.Event.EndTime)
+            if (viewModel.Event.StartTime < viewModel.Event.EndTime)
             {
-                ModelState.AddModelError("viewModel.Event.EndTime", "Start Time must be before End Time");
-            }
-            
-
                 if (ModelState.IsValid)
-            {
-                //viewModel.Event.ClientId = viewModel.Client.Id;
-                if (viewModel.Event.Id == 0)
                 {
-                    Console.WriteLine(viewModel);
-                    _db.Events.Add(viewModel.Event);
-                    _db.SaveChanges();
+                    //viewModel.Event.ClientId = viewModel.Client.Id;
+                    if (viewModel.Event.Id == 0)
+                    {
+                        Console.WriteLine(viewModel);
+                        _db.Events.Add(viewModel.Event);
+                        _db.SaveChanges();
+                    }
+                    else
+                    {
+
+                        _db.Events.Update(viewModel.Event);
+                        _db.SaveChanges();
+                    }
+                    return Ok(true);
                 }
-                else
-                {
-                    
-                    _db.Events.Update(viewModel.Event);
-                    _db.SaveChanges();
-                }
-                return Ok(true);
             }
+            ModelState.AddModelError("Event.EndTime", "* Start Time must be before End Time");
+            
             return PartialView("_ModifyEventModalPartial", viewModel);
         }
 

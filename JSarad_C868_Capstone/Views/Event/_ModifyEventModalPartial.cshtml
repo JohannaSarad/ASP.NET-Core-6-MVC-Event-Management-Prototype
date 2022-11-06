@@ -12,6 +12,9 @@
             </div>
             <form action="Event/Modify" method="Post" runat="server" autocomplete="off">
                 <div class="modal-body">
+                    <div class="row">
+                        <span asp-validation-for="Event.EndTime" class="text-danger"></span>
+                    </div>
                     <div class="row mb-3">
                         <div class="col form-group">
                             <div>
@@ -27,7 +30,7 @@
                         <div class="col form-group">
                             <div >
                                 <label >Start Time : </label>
-                                <input asp-for="Event.StartTime" data-format="hh:mm aa" type="time" id="startTime" />
+                                <input asp-for="Event.StartTime" type="time" id="startTime" />
                                 <input asp-for="Event.StartTime" type="hidden" id="start" />
                                 <span class="add-on">
                                     <i data-time-icon="icon-time">
@@ -39,19 +42,18 @@
                         <div class="col form-group">
                             <div >
                                 <label>End Time : </label>
-                                <input asp-for="Event.EndTime"  type="time" id="endTime" />
+                                <input asp-for="Event.EndTime" type="time" id="endTime" /> 
                                 <input asp-for="Event.EndTime" type="hidden" id="end" />
                                 <span class="add-on">
                                     <i data-date-icon="icon-calendar">
                                     </i>
-                                    <span asp-validation-for="Event.EndTime" class="text-danger"></span>
                                 </span>
-                               
+
                             </div>
                         </div>
                     </div>
-
                     
+                   
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
