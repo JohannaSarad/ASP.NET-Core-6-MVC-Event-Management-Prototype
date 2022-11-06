@@ -27,7 +27,6 @@ namespace JSarad_C868_Capstone.Controllers
                          select new EventListDetails
                          {
                              EventId = e.Id,
-                             EventDate = e.EventDate,
                              StartTime = e.StartTime,
                              EndTime = e.EndTime,
                              Type = e.Type,
@@ -49,7 +48,6 @@ namespace JSarad_C868_Capstone.Controllers
                               select new EventListDetails
                               {
                                   EventId = e.Id,
-                                  EventDate = e.EventDate,
                                   StartTime = e.StartTime,
                                   EndTime = e.EndTime,
                                   Type = e.Type,
@@ -73,7 +71,8 @@ namespace JSarad_C868_Capstone.Controllers
             if (id == 0)
             {
                 viewModel.Event = new Event();
-                
+                viewModel.Event.StartTime = DateTime.Parse(DateTime.Now.ToString("MM/dd/yyyy hh:mm tt"));
+                viewModel.Event.EndTime = DateTime.Parse(DateTime.Now.ToString("MM/dd/yyyy hh:mm tt"));
             }
             else
             {
@@ -91,7 +90,13 @@ namespace JSarad_C868_Capstone.Controllers
             //viewModel.Client = _db.Clients.Find(viewModel.Event.ClientId);
 
             //Console.WriteLine(ModelState);
-            if (ModelState.IsValid)
+            if (viewModel.Event.StartTime > viewModel.Event.EndTime)
+            {
+                ModelState.AddModelError("viewModel.Event.EndTime", "Start Time must be before End Time");
+            }
+            
+
+                if (ModelState.IsValid)
             {
                 //viewModel.Event.ClientId = viewModel.Client.Id;
                 if (viewModel.Event.Id == 0)
@@ -207,7 +212,18 @@ namespace JSarad_C868_Capstone.Controllers
             
         }
 
-        
+        [AcceptVerbs("Get", "Post")]
+        public JsonResult IsStartTimeFirst(DateTime StartTime, DateTime EndTime)
+        {
+
+            if (StartTime > EndTime)
+            {
+                return Json(data: false);
+            }
+            return Json(data: true);
+        }
+
+
     }
 
 }

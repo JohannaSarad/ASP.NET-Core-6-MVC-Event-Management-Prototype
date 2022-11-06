@@ -12,71 +12,46 @@
             </div>
             <form action="Event/Modify" method="Post" runat="server" autocomplete="off">
                 <div class="modal-body">
-                    @*<div class="mb-3">*@
                     <div class="row mb-3">
                         <div class="col form-group">
-                            <div >
-                               @* id="datepicker" class="input-append"*@
-                                <label asp-for="Event.EventDate.Date">Event Date</label>
-                                <input asp-for="Event.EventDate.Date" id="datepicker" data-format="yyyy-mm-dd hh:mm aa " type="date" />
-                                <input type="hidden" id="sdate" />
-                             @*   id="datepicker"*@
+                            <div>
+                                <label >Event Date</label>
+                                <input asp-for="Event.StartTime.Date" id="datepicker" type="date"  />
                                 <span class="add-on">
                                     <i data-date-icon="icon-calendar">
                                     </i>
                                 </span>
                             </div>
                         </div>
-                        @*<div class="row form-group">
-                            <label asp-for="Event.EventDate"> Event Date</label>
-                            <div class="col-sm-4">
-                                <div class="input-group date" id="datepicker">
-                                <input asp-for="Event.EventDate.Date" id="sdate" type="text" class="form-control-date"/>
-                                <span class="input-group-append">
-                                    <span class="input-group-text bg-white d-block">
-                                        <i class="fa fa-calendar"></i>
-                                    </span>
-                                    </span>
-                                </div>
-                            </div>
-                           @* <input asp-for="Event.EventDate.Date" class="form-control" type="date" data-val="true" 
-                            data-val-required="The Date field is required" id="Date" value="" />*@
-
-                       @* <label asp-for="Event.StartTime"> Event Date</label>
-                            <input asp-for="Event.StartTime" class="form-control" type="time" data-val="true" 
-                            data-val-required="The Date field is required" id="Time" value="" />
-                        <label asp-for="Event.EndTime"> Event Date</label>
-                            <input asp-for="Event.EndTime" class="form-control" type="time" data-val="true"
-                               data-val-required="The Date field is required" id="Time" value="" />*@
-
-
                            
-                            @*<div class="mb-3">*@
                         <div class="col form-group">
                             <div >
-                                @*id="timePicker1" class="input-append"*@
-                                <label >Start Time</label>
-                                <input asp-for="Event.StartTime.TimeOfDay" data-format="hh:mm aa" type="time" id="startTime" />
-                                <input asp-for="Event.StartTime" type=" hidden" id="start" />
-                                       @*asp-for="Event.StartTime.TimeOfDay"*@
+                                <label >Start Time : </label>
+                                <input asp-for="Event.StartTime" data-format="hh:mm aa" type="time" id="startTime" />
+                                <input asp-for="Event.StartTime" type="hidden" id="start" />
                                 <span class="add-on">
                                     <i data-time-icon="icon-time">
                                     </i>
                                 </span>
                             </div>
                         </div>
+                        
                         <div class="col form-group">
                             <div >
-                                <label >End Time : </label>
-                                <input asp-for="Event.EndTime.TimeOfDay" data-format="hh:mm aa" type="time" id="endTime" />
+                                <label>End Time : </label>
+                                <input asp-for="Event.EndTime"  type="time" id="endTime" />
                                 <input asp-for="Event.EndTime" type="hidden" id="end" />
                                 <span class="add-on">
                                     <i data-date-icon="icon-calendar">
                                     </i>
+                                    <span asp-validation-for="Event.EndTime" class="text-danger"></span>
                                 </span>
+                               
                             </div>
                         </div>
-                        </div>
+                    </div>
+
+                    
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
@@ -97,7 +72,8 @@
                                 <label>Client Name</label>
                                 <input asp-for="ClientName" type="text" id="completeTxt" oninput="AutoComplete()" class="completeText form-control" controller="Event" action="AutoComplete" />
                                 <input type="hidden" id="hfitem" name="ClientId" />
-                                <input asp-for="Event.ClientId" id="autoId" />
+                                <input type="hidden" asp-for="Event.ClientId" id="autoId" />
+                                <span asp-validation-for="ClientName" class="text-danger"></span>
                                 @* type="hidden"*@ 
                             </div>
                             <div class="form-group">
@@ -142,37 +118,14 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    //$('#datepicker').change(function (e) {
-    //    //var val = $(this).val();
-        //$('#datepicker').val(val);
-    //    $('#datepicker').val(e.currentTarget.val());
-    //});
-    //$('#timepicker1').change(function () {
-    //    var val = $(this).val();
-    //    $('#data').text(val);
-    //});
-    //$('#timepicker2').change(function () {
-    //    var val = $(this).val();
-    //    $('#data').text(val);
-    //});
-</script>
-
-@*//$(function(){
-    //    $('#datepicker').datetimepicker(
-    //        format: 'YYYY-MM-DD'});
-    //    //onChange: function (event) {
-    //    //    $('#datepicker').val(event.currentTarget.val());
-    //    //}
-    //});
-
-   
-    //    onChange: function (event) {
-    //        $('#datepicker').val(event.currentTarget.val());
-    //    }
-    //});
-*@
+                              
+ @section Scripts{
+    
+         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+}                             
+                  
+  
 
 
 

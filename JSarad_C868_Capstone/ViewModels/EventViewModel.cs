@@ -8,6 +8,7 @@ namespace JSarad_C868_Capstone.ViewModels
     public class EventViewModel 
     {
         public Event Event { get; set; }
+        [Required]
         public string ClientName { get; set; }
     }
 }

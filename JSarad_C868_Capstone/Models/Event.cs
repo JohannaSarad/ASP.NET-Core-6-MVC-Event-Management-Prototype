@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using JSarad_C868_Capstone.Controllers;
 
 namespace JSarad_C868_Capstone.Models
 {
@@ -14,12 +15,11 @@ namespace JSarad_C868_Capstone.Models
         [Required]
         public string Location { get; set; }
 
-        //[DisplayFormat(DataFormatString = "{yyyy-MM-dd hh:mm aa}", ApplyFormatInEditMode = true)]
-        //[DataType(DataType.Date)]
-        public DateTime EventDate { get; set; }
-        //[BindProperty, DataType(DataType.Time)]
+        //[Required]
+        //[Remote("IsStartTimeFirst", "Event", AdditionalFields="EndTime", ErrorMessage ="Start Time must be before End Time")]
+
         public DateTime StartTime { get; set; }
-        //[BindProperty, DataType(DataType.Time)]
+       
         public DateTime EndTime { get; set; }
 
         public bool Food { get; set; }
