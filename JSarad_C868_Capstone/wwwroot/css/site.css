@@ -33,17 +33,12 @@ th {
 }
 
 .outer-wrapper {
-    /*margin: 10px;*/
-    /*margin-left: 20px;
-    margin-right: 20px;*/
     border: 1px solid black;
     box-shadow: 0px 0px 3px rgba(0,0,0,0.9);
     border-radius: 4px;
     height: 70vh;
     position: relative;
     background-color: white;
-    /*max-width: fit-content;*/
-    /*max-height: fit-content;*/
 }
 
 .small-outer-wrapper {
@@ -53,6 +48,16 @@ th {
     height: 30vh;
     position: relative;
     
+}
+
+
+.note-wrapper {
+    border: 1px solid black;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.9);
+    border-radius: 4px;
+    height: 10vh;
+    position: relative;
+    overflow-y: scroll;
 }
 
 .small-tc {

@@ -1,12 +1,14 @@
 ﻿using JSarad_C868_Capstone.Data;
 using JSarad_C868_Capstone.Models;
 using JSarad_C868_Capstone.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography.Xml;
 
 namespace JSarad_C868_Capstone.Controllers
 {
+    [Authorize]
     public class EventController : Controller
     {
         private readonly AppDbContext _db;
@@ -86,10 +88,6 @@ namespace JSarad_C868_Capstone.Controllers
         [HttpPost]
         public IActionResult Modify(EventViewModel viewModel)
         {
-            //viewModel.Event.EventStart = 
-            //viewModel.Client = _db.Clients.Find(viewModel.Event.ClientId);
-
-            //Console.WriteLine(ModelState);
             if (viewModel.Event.StartTime < viewModel.Event.EndTime)
             {
                 if (ModelState.IsValid)
@@ -152,6 +150,7 @@ namespace JSarad_C868_Capstone.Controllers
             return View(viewModel);
         }
 
+        
         [HttpPost]
         public IActionResult ScheduleEmployee(EventScheduleViewModel viewModel)
         {

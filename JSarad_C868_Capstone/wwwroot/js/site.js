@@ -1,4 +1,10 @@
-﻿
+﻿function LogIn()
+{
+    var placeholderElement = $('#PlaceHolderHere');
+}
+
+
+
 //autoComplete user input text for client name
 function AutoComplete() {
     
@@ -91,6 +97,7 @@ $((function () {
   alerts if object is not selected, closes modal and reloads list on serverside validation success)*/
 $(function () {
     var placeholderElement = $('#PlaceHolderHere');
+    console.log(placeholderElement);
     var id;
     var controller;
     var action;
@@ -137,7 +144,7 @@ $(function () {
        /* alert(form.Event.EventDate.Date + " " + form.Event.StartTime.TimeOfDay);*/
         //alert(form.Event.EventStart.Date);
         
-        alert(sendViewModel);
+        /*alert(sendViewModel);*/
 
         $.post(actionUrl, sendViewModel).done(function (data) {
             if (data === true) {
@@ -145,10 +152,9 @@ $(function () {
                 location.reload();
                 return;
             }
-            /*data = data.replace("1/1/0001 12:00:00", $('#sdate').val());*/
-            //alert(data);
+            
             var newBody = $('.modal-body', data);
-            //
+            
             placeholderElement.find('.modal-body').replaceWith(newBody);
         });
     });
@@ -162,7 +168,7 @@ $(function () {
         var id = $('#selectedId').val();
         controller = $(target).data('controller');
         action = $(target).data('action');
-        
+        var form = $(this).parents('.modal').find('form');
 
         if (id == 0 || id == null || id == "") {
             alert("Please Select a Record to View");
@@ -173,7 +179,21 @@ $(function () {
     });
 }());
 
+//checks input for AddSchedule
+$(function () {
+    $("#addSchedule").on('click', (e) => {
+        e.preventDefault
+        target = e.target;
+        var id = $('#selectedId').val();
+        controller = $(target).data('controller');
+        action = $(target).data('action');
 
+        if (id == 0 || id == null || id == "") {
+            alert("Please Select an Employee for this Schedule");
+            return;
+        }
+    })
+})
 
 
         

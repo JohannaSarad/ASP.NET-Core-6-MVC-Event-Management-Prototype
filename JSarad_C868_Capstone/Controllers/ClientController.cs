@@ -3,11 +3,14 @@ using JSarad_C868_Capstone.Models;
 using JSarad_C868_Capstone.Data;
 using JSarad_C868_Capstone.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JSarad_C868_Capstone.Controllers
 {
+    [Authorize]
     public class ClientController : Controller
     {
+        
         public Client SelectedClient { get; set; }
         private readonly AppDbContext _db;
 

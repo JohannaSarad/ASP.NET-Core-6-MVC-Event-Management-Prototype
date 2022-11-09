@@ -2,7 +2,7 @@
 
 namespace JSarad_C868_Capstone.Models
 {
-    public class Administrator
+    public class User
     {
         [Key]
         public int Id { get; set; }

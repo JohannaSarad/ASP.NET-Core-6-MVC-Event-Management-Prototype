@@ -1,17 +1,33 @@
 using JSarad_C868_Capstone.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
+using Microsoft.AspNetCore.Authentication.Cookies;  // cookie new
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 //inject connection
+
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
-//adding new initializer to dependency injection
-//builder.Services.AddTransient<DbInitializer>();
+
+builder.Services.AddAuthentication("CookieAuth").AddCookie("CookieAuth", options =>
+{
+    options.Cookie.Name = "CookieAuth";
+    options.LoginPath = "/Login/Index";
+});
+//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+//            .AddCookie(options =>
+//            {
+//                options.LoginPath = "/Home/Login";
+//                //options.Cookie.Name = ".AspNetCore.Cookies";
+//                //options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+//                //options.SlidingExpiration = true;  //don't know what all this is yet
+
+//            }); //new
+
 
 var app = builder.Build();
 
@@ -41,10 +57,12 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication(); //cookie new
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Event}/{action=Index}/{id?}");
+    pattern: "{controller=Login}/{action=Index}/{id?}");  //cookie change
+//pattern: "{controller=Event}/{action=Index}/{id?}");  //cookie new
 
 app.Run();

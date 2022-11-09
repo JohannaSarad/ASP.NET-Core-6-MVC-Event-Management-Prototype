@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using JSarad_C868_Capstone.ViewModels;
 using Microsoft.CodeAnalysis.Operations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JSarad_C868_Capstone.Controllers
 {
     //FIX ME!!! deselect object after edit
+    [Authorize]
     public class EmployeeController : Controller
     {
         //public IEnumerable<Employee> EmployeeList { get; set; }

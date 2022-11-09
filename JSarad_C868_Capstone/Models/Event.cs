@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using JSarad_C868_Capstone.Controllers;
+
 
 namespace JSarad_C868_Capstone.Models
 {
@@ -26,6 +26,7 @@ namespace JSarad_C868_Capstone.Models
         public bool Bar { get; set; }
         public int Guests { get; set; }
         public string? Notes { get; set; }
+
         [ForeignKey("Client")]
         public int ClientId { get; set; }
 

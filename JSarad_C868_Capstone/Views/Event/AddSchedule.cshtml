@@ -7,29 +7,32 @@
        @* <div class="col-md-4">*@
         <div class="row pb-2">
             <h2 class="text-primary">Event Details & Scheduling</h2>
-            <hr />
         </div>
        @* </div>*@
     </div>
     <br /><br />
     <div class="row">
         <div class="col md-4">
-            <div class="border border-dark p-2 mt-4">
-                <div class="mb-3">
-                    <p> @($"Event Start: {Model.Event.StartTime.ToLongDateString}")</p>
-                    <p> @($"Start Time: {Model.Event.StartTime.ToShortTimeString}")</p>
-                    <p> @($"Start Time: {Model.Event.EndTime.ToShortTimeString}")</p>
-                    <p> @($"Event Type: {Model.Event.Type}")</p>
-                    <p> @($"Location: {Model.Event.Location}")</p>
-                    <p> @($"Number of Guests {Model.Event.Guests}")</p>
-                    <p> Event Includes: create a way to put food and or bar here</p>
-                    <p> Contact Information:</p>
-                    <p> @($"Contact Name {Model.Client.Name}")</p>
-                    <p> @($"Contact Phone {Model.Client.Phone}")</p>
-                    <p> @($"Contact Email {Model.Client.Email}")</p>
-                    <p> Notes: </p>
-                    <div class="border p-2 mt-4" style="height:20vh">
-                        <p> @($"{Model.Event.Notes}")</p>
+            <div class="outer-wrapper">
+                <div class="container p-2 style="height:55vh>
+                    <div class="mb-3">
+                        <h4> Event Details </h4>
+                        <hr />
+                        <p><b> Event Date: </b> @($"{Model.Event.StartTime.ToLongDateString()}")</p>
+                        <p><b> Event Time: </b> @($"{Model.Event.StartTime.ToShortTimeString()}") - @($"{Model.Event.EndTime.ToShortTimeString()}")</p>
+                        @*<p><b> End Time: </b> </p>*@
+                        <p><b> Type: </b> @($"{Model.Event.Type}")</p>
+                        <p><b> Location: </b> @($"{Model.Event.Location}")</p>
+                        <p><b> Number of Guests: </b> @($" {Model.Event.Guests}")</p>
+                        <p><b> Event Includes: </b>create a way to put food and or bar here</p>
+                        <h4><b> Contact Information: </b></h4>
+                        <p> @($"Contact Name {Model.Client.Name}")</p>
+                        <p> @($"Contact Phone {Model.Client.Phone}")</p>
+                        <p> @($"Contact Email {Model.Client.Email}")</p>
+                        <p> Notes: </p>
+                        <div class="note-wrapper">
+                            <p> @($"{Model.Event.Notes}")</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -82,14 +85,20 @@
                     </div>
                 </div>
             </div>
+            <form method="post">
             <div class="row pt-2 pb-2">
-               
+
+                    <input asp-for="Client.Id" type="hidden" class="empoyeeId"/> 
+                    <input asp-for="Event.Id" type="hidden" class="eventId"/> 
+                    <input asp-for="EmployeeSchedule.EmployeeId" class="selectedId" type="hidden" />
+
+                    <input asp-for="EmployeeSchedule.EmployeeId" class="selectedId" type="hidden" />
                @* <div class="container" style="height:10vh;">*@
                     <div class="col-3 form-group">
                         <label>Employee Name</label>
                     <input asp-for="EmployeeSchedule.EmployeeName" class="selectionResult" style="display:flex" readonly />
                    @* form-control*@
-                        <input asp-for="EmployeeSchedule.EmployeeId" class="selectedId" type="hidden" />
+                        
 
                     </div>
                     <div class="col-2 form-group">
@@ -104,7 +113,7 @@
                     <div class="col-2 form-group">
                         <div class="input-append">
                             <label asp-for="EmployeeSchedule.EndTime" style="display:flex">End Time</label>
-                            <input asp-for="EmployeeSchedule.EndTime"  type="time" />
+                            <input asp-for="EmployeeSchedule.EndTime" type="time" />
                             <span class="add-on">
                                 <i data-time-icon="icon-time"></i>
                             </span>
@@ -112,9 +121,10 @@
                     </div>
                     @*<div class="row"></div>*@
                 <div class="col-5 form-group pt-3 text-end">
-                    @*<a asp-controller="Event" asp-action="ScheduleEmployee" type="submit" class="btn btn-primary" style="width:150px">Add To Schedule</a>*@
-                    <button type="submit" formaction="ScheduleEmployee" class="btn btn-primary" style="width:150px">Add To Schedule</button>
-                    <input type="hidden" value="ScheduleEmployee" />
+                    
+                    <button  data-controller="Event" data-action="ScheduleEmployee" class="btn btn-primary addSchedule" style="width:150px">Add To Schedule</button>
+                   @* <input type="hidden" value="ScheduleEmployee" />*@
+                        @*<a asp-controller="Event" asp-action="ScheduleEmployee" type="submit" class="btn btn-primary" style="width:150px">Add To Schedule</a>*@
                     @*<a data-controller="Event" data-action="ScheduleEmployee" id="scheduleEmployee" class="btn btn-primary"> 
                         Add To Schedule
                     </a>*@
@@ -185,6 +195,7 @@
                     Back To List
                 </a>
             </div>
+            </form>
         </div>
     </div>
    

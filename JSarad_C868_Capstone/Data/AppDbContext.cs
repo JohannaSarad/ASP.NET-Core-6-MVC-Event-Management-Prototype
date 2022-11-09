@@ -12,7 +12,7 @@ namespace JSarad_C868_Capstone.Data
         }
 
         //create category table with the name of categories
-        public DbSet<Administrator> Administrators { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Event> Events { get; set; }
@@ -22,14 +22,14 @@ namespace JSarad_C868_Capstone.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Administrator>().HasData(
-                new Administrator
+            builder.Entity<User>().HasData(
+                new User
                 {
                     Id = 1,
                     Username = "Admin",
                     Password = "Test"
                 },
-                new Administrator
+                new User
                 {
                     Id = 2,
                     Username = "Planner",

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JSarad_C868_Capstone.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221104024730_initialize")]
-    partial class initialize
+    [Migration("20221107193717_initializeAndSeedDatabase")]
+    partial class initializeAndSeedDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,41 +23,6 @@ namespace JSarad_C868_Capstone.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("JSarad_C868_Capstone.Models.Administrator", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Administrators");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Password = "Test",
-                            Username = "Admin"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Password = "password",
-                            Username = "Planner"
-                        });
-                });
 
             modelBuilder.Entity("JSarad_C868_Capstone.Models.Client", b =>
                 {
@@ -96,7 +61,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Id = 1,
                             Address = "123 Country Road",
                             Email = "eledford@email.com",
-                            LastUpdate = new DateTime(2022, 11, 3, 19, 47, 30, 327, DateTimeKind.Local).AddTicks(8240),
+                            LastUpdate = new DateTime(2022, 11, 7, 11, 37, 17, 454, DateTimeKind.Local).AddTicks(3066),
                             Name = "Edwin Ledford",
                             Phone = "6613332222"
                         });
@@ -147,7 +112,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "2414 Loma Linda Dr",
                             Availability = "MTWRFSU",
                             Email = "jsarad2@wgu.edu",
-                            LastUpdate = new DateTime(2022, 11, 3, 19, 47, 30, 327, DateTimeKind.Local).AddTicks(8279),
+                            LastUpdate = new DateTime(2022, 11, 7, 11, 37, 17, 454, DateTimeKind.Local).AddTicks(3105),
                             Name = "Johanna Sarad",
                             Phone = "6614444763",
                             Role = "Bartender"
@@ -158,7 +123,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "345 Mullberry Way",
                             Availability = "TRFSU",
                             Email = "rcrocker@email.com",
-                            LastUpdate = new DateTime(2022, 11, 3, 19, 47, 30, 327, DateTimeKind.Local).AddTicks(8282),
+                            LastUpdate = new DateTime(2022, 11, 7, 11, 37, 17, 454, DateTimeKind.Local).AddTicks(3109),
                             Name = "Rebecca Crocker",
                             Phone = "6613332211",
                             Role = "Server"
@@ -169,7 +134,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "765 Atlantic St",
                             Availability = "MWF",
                             Email = "iward@email.com",
-                            LastUpdate = new DateTime(2022, 11, 3, 19, 47, 30, 327, DateTimeKind.Local).AddTicks(8284),
+                            LastUpdate = new DateTime(2022, 11, 7, 11, 37, 17, 454, DateTimeKind.Local).AddTicks(3111),
                             Name = "Ian Ward",
                             Phone = "8057778899",
                             Role = "Server"
@@ -229,7 +194,7 @@ namespace JSarad_C868_Capstone.Migrations
                             EndTime = new DateTime(2022, 11, 10, 20, 0, 0, 0, DateTimeKind.Unspecified),
                             Food = true,
                             Guests = 50,
-                            LastUpdate = new DateTime(2022, 11, 3, 19, 47, 30, 327, DateTimeKind.Local).AddTicks(8294),
+                            LastUpdate = new DateTime(2022, 11, 7, 11, 37, 17, 454, DateTimeKind.Local).AddTicks(3123),
                             Location = "888 Corporate Way",
                             Notes = "",
                             StartTime = new DateTime(2022, 11, 10, 16, 0, 0, 0, DateTimeKind.Unspecified),
@@ -311,6 +276,41 @@ namespace JSarad_C868_Capstone.Migrations
                             EmployeeId = 2,
                             EndTime = new DateTime(2022, 11, 10, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             StartTime = new DateTime(2022, 11, 10, 4, 30, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
+            modelBuilder.Entity("JSarad_C868_Capstone.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Password = "Test",
+                            Username = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Password = "password",
+                            Username = "Planner"
                         });
                 });
 #pragma warning restore 612, 618
