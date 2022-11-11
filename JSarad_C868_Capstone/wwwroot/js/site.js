@@ -1,7 +1,7 @@
-﻿function LogIn()
-{
-    var placeholderElement = $('#PlaceHolderHere');
-}
+﻿//function LogIn()
+//{
+//    var placeholderElement = $('#PlaceHolderHere');
+//}
 
 
 
@@ -92,7 +92,9 @@ $((function () {
     });
 }()));
         
-/*Modify Object Function (replaces index placeholder with popup modal, checks if object is new or update,
+//Modify Object Function
+
+/*replaces index placeholder with popup modal, checks if object is new or update,
   calls for serverside validation on save, runs loop to repopulate modal on serverside validation fail, 
   alerts if object is not selected, closes modal and reloads list on serverside validation success)*/
 $(function () {
@@ -175,7 +177,10 @@ $(function () {
             return;
         }
         var url = "/" + controller + "/" + action + "/" + id;
-        window.location.replace(url);
+       /* window.location.replace(url);*/
+        /*location.assign(url);*/
+        window.location.href = url;
+        
     });
 }());
 
@@ -184,16 +189,42 @@ $(function () {
     $("#addSchedule").on('click', (e) => {
         e.preventDefault
         target = e.target;
-        var id = $('#selectedId').val();
+        /*var id = $('#selectedId').val();*/
+        console.log(id);
+        /*var start = $('#start').val();*/
+        console.log(start);
+        var end = $('#end').val();
+        console.log(end);
         controller = $(target).data('controller');
         action = $(target).data('action');
+        var obj = {};
+        obj.id = $('#selectedId').val();
+        obj.start = $('#start').val();
+        obj.end = $('#end').val();
 
         if (id == 0 || id == null || id == "") {
             alert("Please Select an Employee for this Schedule");
             return;
         }
+        var url = "/" + controller + "/" + action + "/" + id;
+        //$.post(url, Json.Stringify(obj)).done(function (data) {
+        //    if (data === true) {
+        //        return
+        //    }
+        //});
+
+        $.ajax({
+            type: 'POST',
+            url: url
+            /*data: { "employeeId": id, "start": start, "end": end}*/
+            //dataType: 'json',
+            //success: AjaxSucceeded,
+            //error: AjaxFailed
+        });
     })
 })
 
-
+//$(function () {
+//    $("#hardSetValues").on('click')
+//}
         

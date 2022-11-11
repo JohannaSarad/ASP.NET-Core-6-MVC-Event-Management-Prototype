@@ -7,9 +7,10 @@ namespace JSarad_C868_Capstone.ViewModels
 
         public Event Event { get; set; }
         public Client Client { get; set; }
-        public Employee Employee { get; set; }
+        //public Employee Employee { get; set; }
         public List<Employee> EmployeeList { get; set; }
         public ScheduleDisplayDetails EmployeeSchedule { get; set; }
         public List<ScheduleDisplayDetails> Schedules { get; set; }
+        public string Includes { get; set; }
     }
 }

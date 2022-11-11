@@ -12,8 +12,8 @@ namespace JSarad_C868_Capstone.Controllers
     public class EventController : Controller
     {
         private readonly AppDbContext _db;
-        public Employee? SelectedEmployee { get; set; }
-        public Event? SelectedEvent { get; set; }
+        //public Employee? SelectedEmployee { get; set; }
+        //public Event? SelectedEvent { get; set; }
         //public List<EmployeeSchedule> tempSchedule { get; set; }
         public EventController(AppDbContext db)
         {
@@ -21,7 +21,8 @@ namespace JSarad_C868_Capstone.Controllers
            
         }
 
-
+        // /Event
+        //Returns Event List View
         public IActionResult Index()
         {
             var events = from e in _db.Events
@@ -41,6 +42,7 @@ namespace JSarad_C868_Capstone.Controllers
             return View(events);
         }
 
+        //Event Table Search (returns Events by type)
         [HttpGet]
         public async Task<IActionResult> Index(string search)
         {
@@ -66,6 +68,7 @@ namespace JSarad_C868_Capstone.Controllers
         }
 
         //Get: /Event/Modify/{id}
+
         [HttpGet]
         public IActionResult Modify(int id)
         {
@@ -85,6 +88,9 @@ namespace JSarad_C868_Capstone.Controllers
             return PartialView("_ModifyEventModalPartial", viewModel); ;
         }
 
+        //Post: /Event/Modify/{id}
+        /*adds and edits and event. Code behind for ~Views/Event/_ModifyEventModalPartial.
+          Called from site.js Modify Object Function*/
         [HttpPost]
         public IActionResult Modify(EventViewModel viewModel)
         {
@@ -109,7 +115,7 @@ namespace JSarad_C868_Capstone.Controllers
                 }
             }
             ModelState.AddModelError("Event.EndTime", "* Start Time must be before End Time");
-            
+
             return PartialView("_ModifyEventModalPartial", viewModel);
         }
 
@@ -131,11 +137,20 @@ namespace JSarad_C868_Capstone.Controllers
         public IActionResult AddSchedule(int id)
         {
             EventScheduleViewModel viewModel = new EventScheduleViewModel();
+            
             viewModel.Event = _db.Events.Find(id);
             viewModel.Client = _db.Clients.Find(viewModel.Event.ClientId);
-            viewModel.EmployeeList = _db.Employees.ToList();
-            viewModel.Employee = new Employee();
             viewModel.EmployeeSchedule = new ScheduleDisplayDetails();
+            viewModel.EmployeeSchedule.StartTime = viewModel.Event.StartTime;
+            viewModel.EmployeeSchedule.EndTime = viewModel.Event.EndTime;
+            viewModel.EmployeeList = _db.Employees.ToList();
+            //viewModel.Employee = new Employee();
+            viewModel.Includes = Included(viewModel.Event);
+            
+            
+
+
+            //viewModel.EmployeeSchedule = new Schedule();
             viewModel.Schedules = (from es in _db.EventSchedules
                                    join s in _db.Schedules on es.ScheduleId equals s.Id
                                    join e in _db.Employees on s.EmployeeId equals e.Id
@@ -150,21 +165,70 @@ namespace JSarad_C868_Capstone.Controllers
             return View(viewModel);
         }
 
-        
+
+
+
         [HttpPost]
         public IActionResult ScheduleEmployee(EventScheduleViewModel viewModel)
         {
-            if (viewModel.Schedules == null)
+            var schedules = _db.Schedules;
+            Employee employee = _db.Employees.Find(viewModel.EmployeeSchedule.EmployeeId);
+            DateTime start = viewModel.EmployeeSchedule.StartTime;
+            DateTime end = viewModel.EmployeeSchedule.EndTime;
+            ModelState.Clear();
+            bool valid = true;
+            if (viewModel.EmployeeSchedule.EmployeeId == 0)
+            {
+                ViewData["Error"] = "Please Select an employee for this Schedule";
+                valid = false;
+            }
+            //validate employee availability for event
+            else if ((viewModel.Event.StartTime.DayOfWeek == DayOfWeek.Monday && !employee.Availability.Contains("M"))
+                || (viewModel.Event.StartTime.DayOfWeek == DayOfWeek.Tuesday && !employee.Availability.Contains("T"))
+                || (viewModel.Event.StartTime.DayOfWeek == DayOfWeek.Wednesday && !employee.Availability.Contains("W"))
+                || (viewModel.Event.StartTime.DayOfWeek == DayOfWeek.Thursday && !employee.Availability.Contains("R"))
+                || (viewModel.Event.StartTime.DayOfWeek == DayOfWeek.Friday && !employee.Availability.Contains("F"))
+                || (viewModel.Event.StartTime.DayOfWeek == DayOfWeek.Saturday && !employee.Availability.Contains("S"))
+                || (viewModel.Event.StartTime.DayOfWeek == DayOfWeek.Sunday && !employee.Availability.Contains("U")))
+            {
+                ViewData["Error"] = ($"{employee.Name}'s availability is not open for the event on {viewModel.Event.StartTime.ToLongDateString()}");
+                valid = false;
+            }
+            foreach (var schedule in schedules)
+            {
+                // validate employee does not have an overlapping schedule
+                if ((schedule.StartTime < start && schedule.EndTime > start) || 
+                    (schedule.StartTime > start && schedule.EndTime < end) ||
+                    (schedule.StartTime < end && schedule.EndTime > end) ||
+                    (schedule.StartTime == start) || (schedule.StartTime == end) ||
+                    (schedule.EndTime == start) || (schedule.EndTime == end))
                 {
-                    viewModel.Schedules = new List<ScheduleDisplayDetails>();
+                    ViewData["Error"] = ($"{employee.Name} is already working (give events a name) on  {viewModel.Event.StartTime.ToLongDateString()}" +
+                        $"from {schedule.StartTime.ToShortTimeString()} to {schedule.EndTime.ToShortTimeString()}");
+                    valid = false;
                 }
-                viewModel.EmployeeSchedule.EmployeeId = SelectedEmployee.Id;
-                viewModel.EmployeeSchedule.EmployeeName = SelectedEmployee.Name;
-                viewModel.Schedules.Add(viewModel.EmployeeSchedule);
-                viewModel.Schedules.Add(viewModel.EmployeeSchedule);
+            }
 
-            return View("Add", viewModel);
+            ScheduleDisplayDetails employeeSchedule = new ScheduleDisplayDetails()
+            {
+                EmployeeId = viewModel.EmployeeSchedule.EmployeeId,
+                EmployeeName= viewModel.EmployeeSchedule.EmployeeName,
+                StartTime = viewModel.EmployeeSchedule.StartTime,
+                EndTime = viewModel.EmployeeSchedule.EndTime
+            };
+
+            if (valid)
+            {
+                viewModel.Schedules.Add(employeeSchedule);
+            }
+            
+            return View("AddSchedule", viewModel);
         }
+            
+            
+
+            
+             
 
         [HttpPost]
         public JsonResult AutoComplete(string prefix)
@@ -192,34 +256,54 @@ namespace JSarad_C868_Capstone.Controllers
 
         public JsonResult EmployeeSelection(int id)
         {
-            SelectedEmployee = _db.Employees.Find(id);
-            
-                return Json(SelectedEmployee.Name);
-            
+            var selectedEmployee = _db.Employees.Find(id);
+
+            return Json(selectedEmployee.Name);
+
         }
 
-        public List<Employee> GetEmployees()
+        //concats string for displaying included services in Event
+        public string Included(Event modelEvent)
         {
-            var employeeList = new List<Employee>();
-            if (_db.Employees.Any())
+            string includes = "";
+            if (modelEvent.Food == true)
             {
-                employeeList = _db.Employees.ToList();
+                includes = "Food";
+                if (modelEvent.Bar == true)
+                {
+                    includes += " & Bar";
+                }
+            }
+            else if (modelEvent.Bar == true)
+            {
+                includes = "Bar";
+            }
+            return includes;
+
+        }
+
+        //public List<Employee> GetEmployees()
+        //{
+        //    var employeeList = new List<Employee>();
+        //    if (_db.Employees.Any())
+        //    {
+        //        employeeList = _db.Employees.ToList();
                
-            }
-            return employeeList.ToList();
+        //    }
+        //    return employeeList.ToList();
             
-        }
+        //}
 
-        [AcceptVerbs("Get", "Post")]
-        public JsonResult IsStartTimeFirst(DateTime StartTime, DateTime EndTime)
-        {
+    //    [AcceptVerbs("Get", "Post")]
+    //    public JsonResult IsStartTimeFirst(DateTime StartTime, DateTime EndTime)
+    //    {
 
-            if (StartTime > EndTime)
-            {
-                return Json(data: false);
-            }
-            return Json(data: true);
-        }
+    //        if (StartTime > EndTime)
+    //        {
+    //            return Json(data: false);
+    //        }
+    //        return Json(data: true);
+    //    }
 
 
     }

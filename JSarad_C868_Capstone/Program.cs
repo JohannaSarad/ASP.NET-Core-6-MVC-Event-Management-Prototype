@@ -17,6 +17,9 @@ builder.Services.AddAuthentication("CookieAuth").AddCookie("CookieAuth", options
 {
     options.Cookie.Name = "CookieAuth";
     options.LoginPath = "/Login/Index";
+    //options.Cookie.SameSite = SameSiteMode.None;
+    //options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.Always;
+    //options.
 });
 //builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 //            .AddCookie(options =>
