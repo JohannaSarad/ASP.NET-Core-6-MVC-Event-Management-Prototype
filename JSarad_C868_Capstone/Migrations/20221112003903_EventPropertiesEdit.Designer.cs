@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JSarad_C868_Capstone.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221107193717_initializeAndSeedDatabase")]
-    partial class initializeAndSeedDatabase
+    [Migration("20221112003903_EventPropertiesEdit")]
+    partial class EventPropertiesEdit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,7 +61,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Id = 1,
                             Address = "123 Country Road",
                             Email = "eledford@email.com",
-                            LastUpdate = new DateTime(2022, 11, 7, 11, 37, 17, 454, DateTimeKind.Local).AddTicks(3066),
+                            LastUpdate = new DateTime(2022, 11, 11, 16, 39, 3, 691, DateTimeKind.Local).AddTicks(688),
                             Name = "Edwin Ledford",
                             Phone = "6613332222"
                         });
@@ -112,7 +112,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "2414 Loma Linda Dr",
                             Availability = "MTWRFSU",
                             Email = "jsarad2@wgu.edu",
-                            LastUpdate = new DateTime(2022, 11, 7, 11, 37, 17, 454, DateTimeKind.Local).AddTicks(3105),
+                            LastUpdate = new DateTime(2022, 11, 11, 16, 39, 3, 691, DateTimeKind.Local).AddTicks(728),
                             Name = "Johanna Sarad",
                             Phone = "6614444763",
                             Role = "Bartender"
@@ -123,7 +123,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "345 Mullberry Way",
                             Availability = "TRFSU",
                             Email = "rcrocker@email.com",
-                            LastUpdate = new DateTime(2022, 11, 7, 11, 37, 17, 454, DateTimeKind.Local).AddTicks(3109),
+                            LastUpdate = new DateTime(2022, 11, 11, 16, 39, 3, 691, DateTimeKind.Local).AddTicks(732),
                             Name = "Rebecca Crocker",
                             Phone = "6613332211",
                             Role = "Server"
@@ -134,7 +134,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "765 Atlantic St",
                             Availability = "MWF",
                             Email = "iward@email.com",
-                            LastUpdate = new DateTime(2022, 11, 7, 11, 37, 17, 454, DateTimeKind.Local).AddTicks(3111),
+                            LastUpdate = new DateTime(2022, 11, 11, 16, 39, 3, 691, DateTimeKind.Local).AddTicks(733),
                             Name = "Ian Ward",
                             Phone = "8057778899",
                             Role = "Server"
@@ -155,8 +155,21 @@ namespace JSarad_C868_Capstone.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EventDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EventName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Food")
                         .HasColumnType("bit");
@@ -191,10 +204,14 @@ namespace JSarad_C868_Capstone.Migrations
                             Id = 1,
                             Bar = true,
                             ClientId = 1,
+                            CreatedBy = 1,
+                            CreatedOn = new DateTime(2022, 10, 21, 16, 30, 0, 0, DateTimeKind.Unspecified),
                             EndTime = new DateTime(2022, 11, 10, 20, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventDate = new DateTime(2022, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventName = "Ledford LLC. Luncheon",
                             Food = true,
                             Guests = 50,
-                            LastUpdate = new DateTime(2022, 11, 7, 11, 37, 17, 454, DateTimeKind.Local).AddTicks(3123),
+                            LastUpdate = new DateTime(2022, 11, 11, 16, 39, 3, 691, DateTimeKind.Local).AddTicks(744),
                             Location = "888 Corporate Way",
                             Notes = "",
                             StartTime = new DateTime(2022, 11, 10, 16, 0, 0, 0, DateTimeKind.Unspecified),

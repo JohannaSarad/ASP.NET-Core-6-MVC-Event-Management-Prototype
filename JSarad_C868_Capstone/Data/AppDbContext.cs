@@ -82,14 +82,18 @@ namespace JSarad_C868_Capstone.Data
                 new Event
                 {
                     Id = 1,
+                    EventName = "Ledford LLC. Luncheon",
                     Type = "Corporate Event",
                     Location = "888 Corporate Way",
+                    EventDate = new DateTime(2022, 11, 10, 16, 00, 00),
                     StartTime = new DateTime(2022, 11, 10, 16, 00, 00),
                     EndTime = new DateTime(2022, 11, 10, 20, 00, 00),
                     Food = true,
                     Bar = true,
                     Guests = 50,
                     ClientId = 1,
+                    CreatedBy = 1,
+                    CreatedOn = new DateTime(2022, 10, 21, 16, 30, 00),
                     Notes = ""
                 }); 
             builder.Entity<EventSchedule>().HasData(

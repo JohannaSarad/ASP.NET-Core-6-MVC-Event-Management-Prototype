@@ -134,14 +134,36 @@ $(function () {
 
     //onclick to save modal form information
     placeholderElement.on('click', '[data-bs-save="modal"]', function (event) {
-        /*alert("Test");*/
+        
         event.preventDefault();
-        $('#start').val($('#datepicker').val() + " " + $('#startTime').val());
-        $('#end').val($('#datepicker').val() + " " + $('#endTime').val());
+        /*sections formatting datetimes are only used for  _ModifyEventModalPartial*/
+
+        //store user selected date without time and times without date from datepicker (for _ModifyEventModalPartial)
+        //var returnDate = $('#datepicker').val();
+        //var returnStart = $('#startTime').val();
+        //var returnEnd = $('#endTime').val()
+
+        //append date to times store as values for hidden fields so they will pass validation on send (for _ModifyEventModalPartial)
+        //$('#date').val($('#datepicker').val() + " " + $('#startTime').val());
+        //$('#start').val($('#datepicker').val() + " " + $('#startTime').val());
+        //$('#end').val($('#datepicker').val() + " " + $('#endTime').val());
+
+        //remove fields passing only time and only date so form will pass validation (for _ModifyEventModalPartial)
+        //$('#datepicker').remove();
+        //$('#startTime').remove();
+        //$('#endTime').remove();
+
+        //get form and form action and serialize (for Employee, Client, and Event _Modify""ModalPartials)
         var form = $(this).parents('.modal').find('form');
         var actionUrl = form.attr('action');
         var sendViewModel = form.serialize();
-        //alert($('#datepicker').val() + " " + $('#startTime').val());
+
+        //recreate date and time fields with only date and times (returns to new body if validation fails for _ModifyModalPartial)
+        /*$('#datepicker').val('#date');*/
+        ////$('#startTime').val(returnStart);
+        ////$('#endTime').val(returnEnd);
+        alert(sendViewModel);
+        
         //alert($('#datepicker').val() + " " + $('#endTime').val());
        /* alert(form.Event.EventDate.Date + " " + form.Event.StartTime.TimeOfDay);*/
         //alert(form.Event.EventStart.Date);
@@ -154,8 +176,9 @@ $(function () {
                 location.reload();
                 return;
             }
-            
+
             var newBody = $('.modal-body', data);
+            alert(newBody);
             
             placeholderElement.find('.modal-body').replaceWith(newBody);
         });
@@ -185,44 +208,44 @@ $(function () {
 }());
 
 //checks input for AddSchedule
-$(function () {
-    $("#addSchedule").on('click', (e) => {
-        e.preventDefault
-        target = e.target;
-        /*var id = $('#selectedId').val();*/
-        console.log(id);
-        /*var start = $('#start').val();*/
-        console.log(start);
-        var end = $('#end').val();
-        console.log(end);
-        controller = $(target).data('controller');
-        action = $(target).data('action');
-        var obj = {};
-        obj.id = $('#selectedId').val();
-        obj.start = $('#start').val();
-        obj.end = $('#end').val();
+//$(function () {
+//    $("#addSchedule").on('click', (e) => {
+//        e.preventDefault
+//        target = e.target;
+//        /*var id = $('#selectedId').val();*/
+//        console.log(id);
+//        /*var start = $('#start').val();*/
+//        console.log(start);
+//        var end = $('#end').val();
+//        console.log(end);
+//        controller = $(target).data('controller');
+//        action = $(target).data('action');
+//        var obj = {};
+//        obj.id = $('#selectedId').val();
+//        obj.start = $('#start').val();
+//        obj.end = $('#end').val();
 
-        if (id == 0 || id == null || id == "") {
-            alert("Please Select an Employee for this Schedule");
-            return;
-        }
-        var url = "/" + controller + "/" + action + "/" + id;
-        //$.post(url, Json.Stringify(obj)).done(function (data) {
-        //    if (data === true) {
-        //        return
-        //    }
-        //});
+//        if (id == 0 || id == null || id == "") {
+//            alert("Please Select an Employee for this Schedule");
+//            return;
+//        }
+//        var url = "/" + controller + "/" + action + "/" + id;
+//        //$.post(url, Json.Stringify(obj)).done(function (data) {
+//        //    if (data === true) {
+//        //        return
+//        //    }
+//        //});
 
-        $.ajax({
-            type: 'POST',
-            url: url
-            /*data: { "employeeId": id, "start": start, "end": end}*/
-            //dataType: 'json',
-            //success: AjaxSucceeded,
-            //error: AjaxFailed
-        });
-    })
-})
+//        $.ajax({
+//            type: 'POST',
+//            url: url
+//            /*data: { "employeeId": id, "start": start, "end": end}*/
+//            //dataType: 'json',
+//            //success: AjaxSucceeded,
+//            //error: AjaxFailed
+//        });
+//    })
+//})
 
 //$(function () {
 //    $("#hardSetValues").on('click')

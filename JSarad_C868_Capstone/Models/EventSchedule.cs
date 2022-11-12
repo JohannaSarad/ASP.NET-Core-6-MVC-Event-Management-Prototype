@@ -13,8 +13,5 @@ namespace JSarad_C868_Capstone.Models
         public int EventId { get; set; }
         [ForeignKey("Schedule")]
         public int ScheduleId { get; set; }
-        //public DateTime? StartDate { get; set; }
-        //public DateTime? EndDate { get; set; }
-
     }
 }

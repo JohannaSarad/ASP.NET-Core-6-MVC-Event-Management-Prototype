@@ -11,23 +11,16 @@
             <h2 class="text-primary">Event Information</h2>
         </div>
         <div class="col-6 text-end">
-            <!--button to modify modal "Add"-->
+            <!--button to modify modal "Add" (js.ModifyObject)-->
             <button type="button" class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyEvent"
                     data-controller="Event" data-action="Modify" data-modify-type="Add">
                     Add Event
             </button>
-            @*<a asp-controller="Event" asp-action="Add" class="btn btn-primary">
-                @*
-                selected plus icon from bootstrap icons copied and pasted
-                Note that the icon style was first added to _layout, &nbsp is a space
-                
-                <i class="bi bi-plus-circle"></i> &nbsp; Add Event
-            </a>*@
         </div>
     </div>
     <br /><br />
 
-    <!--search bar-->
+    <!--search bar (Controllers/Event/Index(string search)-->
     <form method="get" asp-action="Index">
         <p>
             <input type="search" placeholder="Search Event By Type" value="@ViewData["GetEvent"]" name="search" style="width:500px;" />
@@ -43,6 +36,7 @@
                     <thead>
                         <tr>
                             <th>Event Id</th>
+                            <th>Event Name</th>
                             <th>Event Type</th>
                             <th>Event Date</th>
                             <th>Start Time</th>
@@ -51,26 +45,25 @@
                             <th>Contact Phone</th>
                         </tr>
                     </thead>
-                    <!--table body and population info-->
+                    <!--table body and population info for Event (Controllers/Event/Index)-->
                     <tbody>
-                       @* @if (Model != null)
-                        {*@
-                            @*track index of IEnumerable*@
-                            @{int index = -1;
-                                @foreach (var item in Model)
+                       
+                        @*track index of IEnumerable*@
+                        @{int index = -1;
+                            @foreach (var item in Model)
                             { 
                                 index++;
-                                    <tr id="row_@item.EventId" class="table-light selectable" controller="Event" Action="Selection" data-id="@item.EventId" data-index="@index">
-                                        <td>@item.EventId</td>
-                                        <td>@item.Type </td>
-                                        <td>@item.StartTime.ToShortDateString()</td>
-                                        <td>@item.StartTime.ToShortTimeString()</td>
-                                        @*asp-format="{h:mm tt}"*@
-                                        <td>@item.EndTime.ToShortTimeString()</td>
-                                        <td>@item.ContactName</td>
-                                        <td>@item.Phone</td>
-                                    </tr>
-                                   
+                                <tr id="row_@item.EventId" class="table-light selectable" controller="Event" Action="Selection" 
+                                    data-id="@item.EventId" data-index="@index">
+                                    <td>@item.EventId</td>
+                                    <td>@item.EventName</td>
+                                    <td>@item.Type </td>
+                                    <td>@item.EventDate.ToShortDateString()</td>
+                                    <td>@item.StartTime.ToShortTimeString()</td>
+                                    <td>@item.EndTime.ToShortTimeString()</td>
+                                    <td>@item.ContactName</td>
+                                    <td>@item.Phone</td>
+                                </tr>
                             }
                         }
                     </tbody>
@@ -80,10 +73,7 @@
         @*hidden input field for selected employee (js call back)*@
         <input id="selectedId" class="form-control" />
         <div class="buttons">
-            @* <input asp-for="SelectedName" class="form-control selectionResult" />*@
-            <!--modify buttons (w-100 splits cell, FIX ME!!! change to 75 when icons are added)-->
-            @*<div class="w-30 btn-group" role="group">*@
-                <!--button call to modify modal 'Edit"-->
+                <!--button call to modify modal "Edit" (js.ModifyObject) -->
                 <button class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyEvent"
                         data-controller="Event" data-action="Modify" data-modify-type="Edit">
                         Edit
@@ -96,29 +86,11 @@
                     <i class="bi bi-trash"></i> Delete
                 </a>
 
-                <!--button call to Event Schedule -->
+                <!--button call to Add Event employee Schedule Controllers/Event/AddSchedule-->
                 <a class="btn btn-primary" id="details"
                    data-controller="Event" data-action="AddSchedule">
                     <i class="bi bi-trash"></i> Details & Scheduling
                 </a>
-            
-                @*<!--go back to bootstrap icons and copy and paste pencil square icon-->
-                <a class="btn btn-primary mx-2" asp-controller="Event" asp-action="Details" >
-                    <i class="bi bi-pencil-square"></i> Details
-                </a>*@
-                @*asp-route-id="@item.Id"*@
-                @*<a class="btn btn-primary mx-2" asp-controller="Event" asp-action="Edit" >
-                    <i class="bi bi-pencil-square"></i> Edit
-                </a>*@
-                @*asp-route-id="@item.Id"*@
-                <!--button call to delete modal (js.delete.js)-->
-                @*<a class="btn btn-danger delete" id="#delete" 
-                   data-controller="Event" data-Action="DeletePOST"
-                   data-body-message="Are you sure you want to delete this event?">
-                    <i class="bi bi-trash"></i> Delete
-                </a>*@
-               @* data-id="@item.Id"*@
-           @* </div>*@
         </div>
     </div>
 </div>

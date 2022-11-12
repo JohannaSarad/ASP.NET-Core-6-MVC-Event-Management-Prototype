@@ -23,6 +23,29 @@
        @* </div>*@
     </div>
     <br /><br />
+
+    <!--Modal for viewdata Errors-->
+    @if (ViewData["Error"] != null)
+    {
+        <div class="modal fade errorModal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Error</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+                    <h1> @ViewData["Error"].ToString() </h1>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+
     @*<div class="outer-wrapper">*@
         <form method="post">
             <div class="row">
@@ -32,6 +55,7 @@
                             <div class="mb-3">
                                 <h4> Event Details </h4>
                                 <hr />
+                                
                             <input asp-for="Event.Id" type="hidden" class="eventId" />
                             <input asp-for="Client.Id" type="hidden" class="clientId" />
                                 <p><b> Event Date: </b> @($"{Model.Event.StartTime.ToLongDateString()}")</p>
@@ -211,10 +235,11 @@
                 </div>
             </div>
         </form>
-        @if (ViewData["Error"] != null) {
+       @* @if (ViewData["Error"] != null) {
             <script type="text/javascript" >
                 window.onload = function () {
-                    alert("@ViewData["Error"]");
+                    $('.errorModal').modal('show')
+                    @*alert("@ViewData["Error"]");
                 }
             </script>
         }

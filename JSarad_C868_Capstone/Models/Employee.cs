@@ -6,7 +6,7 @@ namespace JSarad_C868_Capstone.Models
     public class Employee
     {
         [Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
        
