@@ -47,10 +47,6 @@
                         </li>
                        
                     </ul>
-                   @* <form class="d-flex">
-                        <input class="form-control me-sm-2" type="text" placeholder="Search">
-                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                    </form>*@
                     <div class="text-end">
                         <partial name="_LoginStatusPartial" />
                     </div>
@@ -61,6 +57,44 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+
+            <!--Error Dialog-->
+            <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">Warning</h4>
+                        </div>
+                        <div class="modal-body" id="errorModalBody"> </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="confirm">Ok</button>
+                            @*<button type="submit" class="btn btn-danger" id="confirm-delete">Delete</button>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*<!--Approval Dialog-->
+            <div class="modal fade" id="approvalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">Requires Approval</h4>
+                        </div>
+                        <div class="modal-body" id="approvalModalBody"> </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="confirm">Ok</button>
+                            @*<button type="submit" class="btn btn-danger" id="confirm-delete">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
             @RenderBody()
         </main>
     </div>
@@ -84,14 +118,6 @@
 </body>
 </html>
 
-<!--jQuery UI for datetimepicker-->
-@* <link href="~/lib/jquery-ui-1.13.2.custom/jquery-ui.min.css" rel="stylesheet" />*@
-@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha512-f0tzWhCwVFS3WeYaofoLWkTP62ObhewQ1EZn65oSYDZUg1+CyywGKkWzm8BxaJj5HGKI72PnMH9jYyIFz+GH7g==" crossorigin="anonymous" referrerpolicy="no-referrer" />*@
-<!--font awesome for datetimepicker-->
-@* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />*@
-<!--bootstrap datetimepicker-->
-@* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />*@
 
+@* <link href="~/lib/jquery-ui-1.13.2.custom/jquery-ui.min.css" rel="stylesheet" />*@
 @* <script src="~/lib/jquery-ui-1.13.2.custom/jquery-ui.min.js"></script>*@
-@* <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>*@
-@*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>*@

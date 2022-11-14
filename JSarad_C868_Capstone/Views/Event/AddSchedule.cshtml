@@ -1,16 +1,5 @@
 ﻿@model JSarad_C868_Capstone.ViewModels.EventScheduleViewModel
-@*<head>
-    <script type="text/javascript">
-        @if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
-        {
-            <text>
-            $(document).ready(function() {
-                alert('@ViewData.ModelState["Error"].Errors.First().ErrorMessage');
-            });
-            </text>
-        }
-    </script>
-</head>*@
+
 
 <div class="container" style="height:100vh">
     
@@ -24,28 +13,7 @@
     </div>
     <br /><br />
 
-    <!--Modal for viewdata Errors-->
-    @if (ViewData["Error"] != null)
-    {
-        <div class="modal fade errorModal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Error</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-                    <h1> @ViewData["Error"].ToString() </h1>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Ok</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    }
-
+    <div id="PlaceHolderHere"></div>
     @*<div class="outer-wrapper">*@
         <form method="post">
             <div class="row">
@@ -130,7 +98,7 @@
            
          
                     <div class="row pt-2 pb-2">
-                        <input asp-for="EmployeeSchedule.EmployeeId" id="selectedId" type="hidden" /> @*name="employeeId"*@
+                    <input asp-for="EmployeeSchedule.EmployeeId" id="selectedId" /> @*name="employeeId"*@ @*type="hidden"*@
                         @* <div class="container" style="height:10vh;">*@
                         <div class="col-3 form-group">
                             <label>Employee Name</label>
@@ -163,8 +131,6 @@
                             <button class="btn btn-primary" formaction="/Event/ScheduleEmployee/" style="width:150px">Add To Schedule</button> @*id="addSchedule" data-controller="Event" data-action="ScheduleEmployee"*@ 
                            
                         </div>
-                        
-
                     </div>
            
            
@@ -220,30 +186,47 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                    <button class="btn btn-primary" formaction="/Event/CheckOT/"  style="width:150px">Check Overtime</button> @*formaction="/AddSchedule"*@
+                    </div>
                         
-                        <div class="buttons">
-                            <button class="btn btn-primary" data-controller="Event" data-action="AddSchedule" id="addSchedule" style="width:150px">Save</button> @*formaction="/AddSchedule"*@
-                            <input type="hidden" value="Add" />
+                        @*<div class="buttons">
+                            *@
                              <!--navigating back to Event page-->
                    
-                            <a asp-controller="Event" asp-action="Index" class="btn btn-secondary" style="width:150px">
+                            @*<a asp-controller="Event" asp-action="Index" class="btn btn-secondary" style="width:150px">
                                 Back To List
-                            </a>
+                            </a>*@
                           @*</div>*@
            
-                        </div>
+                       @* </div>*@
                 </div>
             </div>
         </form>
-       @* @if (ViewData["Error"] != null) {
-            <script type="text/javascript" >
-                window.onload = function () {
-                    $('.errorModal').modal('show')
-                    @*alert("@ViewData["Error"]");
-                }
-            </script>
-        }
-   @* </div>*@
-   
 </div>
+@section Scripts {
+    <script type="text/javascript">
+        function openErrorModal(strMessage) {
+            var errorDiv = document.getElementById("errorModalBody");
+            errorDiv.innerHTML = strMessage;
+            $('#errorModal').modal('show');
+
+        }
+
+        //function openApprovalModal(strMessage) {
+        //    var approvalDiv = document.getElementById("approvalModalBody");
+        //    approvalDiv.innerHTML = strMessage;
+        //    $('#approvalModal').modal('show');
+
+        //}
+
+        $(document).ready(function () {
+            var msg = "@TempData["Error"]";
+            if (msg)
+                openErrorModal(msg);
+           
+        });
+
+    </script>
+ }
  

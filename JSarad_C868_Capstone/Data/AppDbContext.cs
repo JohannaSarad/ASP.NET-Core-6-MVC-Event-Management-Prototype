@@ -83,7 +83,7 @@ namespace JSarad_C868_Capstone.Data
                 {
                     Id = 1,
                     EventName = "Ledford LLC. Luncheon",
-                    Type = "Corporate Event",
+                    Type = "Corporate",
                     Location = "888 Corporate Way",
                     EventDate = new DateTime(2022, 11, 10, 16, 00, 00),
                     StartTime = new DateTime(2022, 11, 10, 16, 00, 00),

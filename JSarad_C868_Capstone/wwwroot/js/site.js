@@ -100,20 +100,28 @@ $((function () {
 $(function () {
     var placeholderElement = $('#PlaceHolderHere');
     console.log(placeholderElement);
+    
     var id;
     var controller;
     var action;
 
+    var targetModal; 
+
     //onclick from index to open modal
     $('button[data-bs-toggle="ajax-modal"]').click(function (e) {
         target = e.target;
+        
         controller = $(target).data('controller');
         action = $(target).data('action');
+        //targetModal = $(target).data('target');
+        //alert(targetModal);
+        
         var addOrEdit = $(target).data('modify-type');
         
         if (addOrEdit == 'Edit')
         {
             id = $("#selectedId").val();
+            /*document.querySelector('#eventDateEditNotice').innerHTML = "event notice";*/
             if (id == null || id == "") {
                 alert("Please Select a Record to Edit");
                 return;
@@ -127,10 +135,26 @@ $(function () {
         var url = "/" + controller + "/" + action + "/" + id;
         console.log(url);
         $.get(url).done(function (data) {
+            alert(data);
+
             placeholderElement.html(data);
             placeholderElement.find('.modal').modal('show');
-        })
+        });
+
+        //$('targetModal').on('show.bs.modal', function (event) {
+        //    $(this).find('#eventDateEditNotice').text("event notice")
+        //});
+
+        //$('.modal').on('show.bs.modal', function (event) {
+        //    if (addOrEdit == 'Edit') {
+        //        $(this).find('h4.modal-title').text("Edit Modal");
+        //        $(this).find('p#eventDateEditNotice').text("Edit Notice")
+        //    }
+
+        //});
     })
+
+    
 
     //onclick to save modal form information
     placeholderElement.on('click', '[data-bs-save="modal"]', function (event) {

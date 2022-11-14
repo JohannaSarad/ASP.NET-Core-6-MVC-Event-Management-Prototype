@@ -1,14 +1,18 @@
 ﻿@model JSarad_C868_Capstone.ViewModels.EventViewModel
 
 
-<div class="modal modal-fade" id="modifyEvent">
+<div class="modal modal-fade modifyModal" id="modifyEvent">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="addEventLabel">Add Event</h4>
+                <h4 class="modal-title" id="modifyLabel">Add Event</h4>
                 <button type=button class="close" data-bs-dismiss="modal">
                     <span>x</span>
                 </button>
+            </div>
+            <div class="row">
+                <p class="text text-danger" id="eventDateEditNotice"> </p>
+               
             </div>
             <form action="Event/Modify" method="Post" runat="server" autocomplete="off">
                 <div class="modal-body">

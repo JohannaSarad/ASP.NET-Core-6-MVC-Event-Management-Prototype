@@ -3,15 +3,17 @@
     ViewData["Title"] = "Index";
 }*@
 
-<!--placeholder for modify modal-->
+<!--placeholder for _ModifyEventModalPartial-->
 <div id="PlaceHolderHere"></div>
+
+
 <div class="container p3">
     <div class="row pt-4">
         <div class="col-6">
             <h2 class="text-primary">Event Information</h2>
         </div>
         <div class="col-6 text-end">
-            <!--button to modify modal "Add" (js.ModifyObject)-->
+            <!--button to _ModifyEventModalPartial "Add" (js.ModifyObject)-->
             <button type="button" class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyEvent"
                     data-controller="Event" data-action="Modify" data-modify-type="Add">
                     Add Event
@@ -97,3 +99,19 @@
 @*@section scripts{
     <partial name="_ValidationScriptsPartial" />
 }*@
+
+@*@section Scripts {
+    <script type="text/javascript">
+        function openErrorModal(strMessage) {
+            var errorDiv = document.getElementById("errorModalBody");
+            erroDiv.InnerHTML = strMessage;
+            $('#errorModal').modal('show');
+
+        }
+        $(document.).ready(function () {
+            var msg = "@ViewData["Error"]";
+            if (msg) 
+                openErrorModal(msg);
+        }
+    </script>*@
+}

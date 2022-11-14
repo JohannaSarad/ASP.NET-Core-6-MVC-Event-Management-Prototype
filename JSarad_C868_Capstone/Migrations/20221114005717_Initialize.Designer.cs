@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JSarad_C868_Capstone.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221112003903_EventPropertiesEdit")]
-    partial class EventPropertiesEdit
+    [Migration("20221114005717_Initialize")]
+    partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,7 +61,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Id = 1,
                             Address = "123 Country Road",
                             Email = "eledford@email.com",
-                            LastUpdate = new DateTime(2022, 11, 11, 16, 39, 3, 691, DateTimeKind.Local).AddTicks(688),
+                            LastUpdate = new DateTime(2022, 11, 13, 16, 57, 17, 709, DateTimeKind.Local).AddTicks(250),
                             Name = "Edwin Ledford",
                             Phone = "6613332222"
                         });
@@ -112,7 +112,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "2414 Loma Linda Dr",
                             Availability = "MTWRFSU",
                             Email = "jsarad2@wgu.edu",
-                            LastUpdate = new DateTime(2022, 11, 11, 16, 39, 3, 691, DateTimeKind.Local).AddTicks(728),
+                            LastUpdate = new DateTime(2022, 11, 13, 16, 57, 17, 709, DateTimeKind.Local).AddTicks(284),
                             Name = "Johanna Sarad",
                             Phone = "6614444763",
                             Role = "Bartender"
@@ -123,7 +123,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "345 Mullberry Way",
                             Availability = "TRFSU",
                             Email = "rcrocker@email.com",
-                            LastUpdate = new DateTime(2022, 11, 11, 16, 39, 3, 691, DateTimeKind.Local).AddTicks(732),
+                            LastUpdate = new DateTime(2022, 11, 13, 16, 57, 17, 709, DateTimeKind.Local).AddTicks(287),
                             Name = "Rebecca Crocker",
                             Phone = "6613332211",
                             Role = "Server"
@@ -134,7 +134,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "765 Atlantic St",
                             Availability = "MWF",
                             Email = "iward@email.com",
-                            LastUpdate = new DateTime(2022, 11, 11, 16, 39, 3, 691, DateTimeKind.Local).AddTicks(733),
+                            LastUpdate = new DateTime(2022, 11, 13, 16, 57, 17, 709, DateTimeKind.Local).AddTicks(289),
                             Name = "Ian Ward",
                             Phone = "8057778899",
                             Role = "Server"
@@ -207,15 +207,15 @@ namespace JSarad_C868_Capstone.Migrations
                             CreatedBy = 1,
                             CreatedOn = new DateTime(2022, 10, 21, 16, 30, 0, 0, DateTimeKind.Unspecified),
                             EndTime = new DateTime(2022, 11, 10, 20, 0, 0, 0, DateTimeKind.Unspecified),
-                            EventDate = new DateTime(2022, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventDate = new DateTime(2022, 11, 10, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             EventName = "Ledford LLC. Luncheon",
                             Food = true,
                             Guests = 50,
-                            LastUpdate = new DateTime(2022, 11, 11, 16, 39, 3, 691, DateTimeKind.Local).AddTicks(744),
+                            LastUpdate = new DateTime(2022, 11, 13, 16, 57, 17, 709, DateTimeKind.Local).AddTicks(300),
                             Location = "888 Corporate Way",
                             Notes = "",
                             StartTime = new DateTime(2022, 11, 10, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = "Corporate Event"
+                            Type = "Corporate"
                         });
                 });
 
