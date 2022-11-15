@@ -23,7 +23,7 @@
     <br /><br />
 
     <!--search bar (Controllers/Event/Index(string search)-->
-    <form method="get" asp-action="Index">
+    <form method="post" asp-action="Index">
         <p>
             <input type="search" placeholder="Search Event By Type" value="@ViewData["GetEvent"]" name="search" style="width:500px;" />
             <input type="submit" value="Search" class="btn btn-primary" />

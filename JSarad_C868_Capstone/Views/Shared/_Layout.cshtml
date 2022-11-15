@@ -45,6 +45,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">Employees</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Reports" asp-action="Index">Reports</a>
+                        </li>
                        
                     </ul>
                     <div class="text-end">
@@ -77,24 +80,6 @@
                 </div>
             </div>
 
-            @*<!--Approval Dialog-->
-            <div class="modal fade" id="approvalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <h4 class="modal-title" id="myModalLabel">Requires Approval</h4>
-                        </div>
-                        <div class="modal-body" id="approvalModalBody"> </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="confirm">Ok</button>
-                            @*<button type="submit" class="btn btn-danger" id="confirm-delete">Delete</button>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
             @RenderBody()
         </main>
     </div>

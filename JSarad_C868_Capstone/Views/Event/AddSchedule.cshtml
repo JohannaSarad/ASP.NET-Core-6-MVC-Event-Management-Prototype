@@ -143,6 +143,7 @@
                                     <thead >
                                         <tr >
                                                     @* style="display:table; width:100%; box-sizing:border-box;" class="table-primary"*@
+                                        <th>Schedule Id</th>
                                             <th>Employee Id</th>
                                             <th>Employee Name</th>
                                             <th>Start Time</th>
@@ -159,10 +160,14 @@
                                             foreach (var schedule in Model.Schedules)
                                             {
                                                 int index = Model.Schedules.IndexOf(schedule);
-                                                <tr id="rowIndex_@index" class="table-light" 
-                                                   controller="Event" Action="Selection" data-id="@schedule.EmployeeId" data-index="@index">
+                                                <tr id="row_@index" class="table-light"
+                                        controller="Event" action="Selection" data-id="@schedule.EmployeeId">
+                                               @* data-index="@index"*@
                                                    @* selectable*@
                                                     @* style="display:table; width:100%; box-sizing:border-box"*@
+                                                    @*<td> @schedule.ScheduleId</td>*@
+                                                <td>@schedule.ScheduleId</td>
+                                                    <input type="hidden" asp-for="Schedules[index].ScheduleId" />
                                                     <td >@schedule.EmployeeId</td>
                                                     <input type="hidden" asp-for="Schedules[index].EmployeeId" />
                                                     <td >@schedule.EmployeeName</td>
@@ -174,8 +179,12 @@
                                                     <td class="w-100 btn-group" role="group">
                                                         @*<a asp-controller="Client" asp-action="Edit" asp-route-id="@schedule.EmployeeId" style="text-decoration:none"> 
                                                             <i class="bi bi-pencil-square"></i> &emsp; Edit &emsp;</a>  @*class="btn btn-primary mx-2"*@
-                                                        <a asp-controller="Event" asp-action="RemoveSchedule" asp-route-id="@schedule.EmployeeId" style="text-decoration:none">
-                                                            <i class="bi bi-trash"></i> Remove</a> @*class="btn btn-danger mx-2"*@
+                                                        @*<a asp-controller="Event" asp-action="RemoveSchedule" asp-route-id="@schedule.EmployeeId" style="text-decoration:none">
+                                                            <i class="bi bi-trash"></i> Remove</a>*@ @*class="btn btn-danger mx-2"*@
+                                                    <a class="btn btn-danger delete-unselectable" id="#deleteUnselectable" data-controller="Event" data-Action="RemoveSchedule" data-id="@schedule.ScheduleId"
+                                                        data-index="@index" data-body-message="Are you sure you want to remove this schedule?">
+                                                        <i class="bi bi-trash"></i> Remove
+                                                    </a>
                                                     </td>
                                                    @* style="border-collapse:collapse; border:none; width:33.33%; word-break: break-all; padding: 5px; border-bottom: none; display:none"*@
                                                 </tr>
