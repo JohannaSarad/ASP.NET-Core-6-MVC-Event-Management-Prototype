@@ -4,7 +4,6 @@ namespace JSarad_C868_Capstone.ViewModels
 {
     public class EventScheduleViewModel
     {
-
         public Event Event { get; set; }
         public Client Client { get; set; }
         //public Employee Employee { get; set; }

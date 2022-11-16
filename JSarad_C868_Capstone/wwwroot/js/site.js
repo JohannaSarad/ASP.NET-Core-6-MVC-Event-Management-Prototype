@@ -87,6 +87,7 @@ $((function () {
             success: function (response) {
                 $(".selectionResult").val(response);
                 $("#selectedId").val(id);
+                $("#selectedIndex").val(index);
             }
         })
     });
@@ -104,8 +105,6 @@ $(function () {
     var id;
     var controller;
     var action;
-
-    var targetModal; 
 
     //onclick from index to open modal
     $('button[data-bs-toggle="ajax-modal"]').click(function (e) {
@@ -135,7 +134,7 @@ $(function () {
         var url = "/" + controller + "/" + action + "/" + id;
         console.log(url);
         $.get(url).done(function (data) {
-            alert(data);
+            /*alert(data);*/
 
             placeholderElement.html(data);
             placeholderElement.find('.modal').modal('show');
@@ -186,7 +185,7 @@ $(function () {
         /*$('#datepicker').val('#date');*/
         ////$('#startTime').val(returnStart);
         ////$('#endTime').val(returnEnd);
-        alert(sendViewModel);
+        /*alert(sendViewModel);*/
         
         //alert($('#datepicker').val() + " " + $('#endTime').val());
        /* alert(form.Event.EventDate.Date + " " + form.Event.StartTime.TimeOfDay);*/
@@ -217,66 +216,17 @@ $(function () {
         var id = $('#selectedId').val();
         controller = $(target).data('controller');
         action = $(target).data('action');
-        var form = $(this).parents('.modal').find('form');
 
         if (id == 0 || id == null || id == "") {
             alert("Please Select a Record to View");
             return;
         }
         var url = "/" + controller + "/" + action + "/" + id;
-       /* window.location.replace(url);*/
-        /*location.assign(url);*/
-        window.location.href = url;
-        
+        window.location.replace(url);
     });
 }());
 
-//checks input for AddSchedule
-//$(function () {
-//    $("#addSchedule").on('click', (e) => {
-//        e.preventDefault
-//        target = e.target;
-//        /*var id = $('#selectedId').val();*/
-//        console.log(id);
-//        /*var start = $('#start').val();*/
-//        console.log(start);
-//        var end = $('#end').val();
-//        console.log(end);
-//        controller = $(target).data('controller');
-//        action = $(target).data('action');
-//        var obj = {};
-//        obj.id = $('#selectedId').val();
-//        obj.start = $('#start').val();
-//        obj.end = $('#end').val();
-
-//        if (id == 0 || id == null || id == "") {
-//            alert("Please Select an Employee for this Schedule");
-//            return;
-//        }
-//        var url = "/" + controller + "/" + action + "/" + id;
-//        //$.post(url, Json.Stringify(obj)).done(function (data) {
-//        //    if (data === true) {
-//        //        return
-//        //    }
-//        //});
-
-//        $.ajax({
-//            type: 'POST',
-//            url: url
-//            /*data: { "employeeId": id, "start": start, "end": end}*/
-//            //dataType: 'json',
-//            //success: AjaxSucceeded,
-//            //error: AjaxFailed
-//        });
-//    })
-//})
-
-//$(function () {
-//    $("#hardSetValues").on('click')
-//}
-
-
-//function for delete action without selectable rows
+//function for delete action without selectable rows called from (Event.AddSchedule)
 $((function () {
 
     var target;
@@ -300,7 +250,7 @@ $((function () {
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-bs-dismiss="modal" id="cancel-delete-unselectable">Cancel</button>
-                                    <button type="submit" class="btn btn-danger" id="confirm-delete">Delete</button>
+                                    <button type="submit" class="btn btn-danger" id="confirm-delete-unselectable">Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -312,7 +262,6 @@ $((function () {
 
         target = e.target;
         id = $(target).data('id');
-        /*id = $("#selectedId").val();*/
         index = $(target).data('index');
         
         controller = $(target).data('controller');
@@ -326,22 +275,18 @@ $((function () {
         pathToDelete = "/" + controller + "/" + action + "/" + id;
         $(".delete-modal-body").text(bodyMessage);
         $("#deleteUnselectableModal").modal('show');
-        //console.log(pathToDelete);
+       
     });
 
-    $("#confirm-delete").on('click', () => {
-       /* alert(test);*/
+    $("#confirm-delete-unselectable").on('click', () => {
         $.ajax({
             type: "POST",
             url: pathToDelete,
             success: function () {
                 $("#deleteUnselectableModal").modal("hide");
-                $("#row_" + index).remove();
-                //location.reload;
-                //return;
-                //this is wrong needs to remove the row at index not at id
-               /* $("#selectedId").val("");*/
+                $("#row_" + id).remove();
             }
         });
     });
 }()));
+               

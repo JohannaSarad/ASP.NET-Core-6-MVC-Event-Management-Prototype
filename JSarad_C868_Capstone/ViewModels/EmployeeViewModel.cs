@@ -3,8 +3,10 @@ using Microsoft.Build.Framework;
 
 namespace JSarad_C868_Capstone.ViewModels
 {
+    
     public class EmployeeViewModel
     {
+        public string? Title { get; set; }
         public bool Monday { get; set; } = false;
         public bool Tuesday { get; set; } = false;
         public bool Wednesday { get; set; } = false;

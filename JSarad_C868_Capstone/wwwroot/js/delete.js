@@ -33,9 +33,12 @@
         target = e.target;
         //id = $(target).data('id');
         id = $("#selectedId").val();
+        index = $("#selectedIndex");
         controller = $(target).data('controller');
         action = $(target).data('action');
-        
+        alert(id);
+        alert(controller);
+        alert(action);
         var bodyMessage = $(target).data('body-message');
         pathToDelete = "/" + controller + "/" + action + "/" + id;
         $(".delete-modal-body").text(bodyMessage);

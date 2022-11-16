@@ -45,43 +45,41 @@ namespace JSarad_C868_Capstone.Controllers
         [HttpGet]
         public IActionResult Modify(int id)
         {
-            Client client;
+            ClientViewModel viewModel = new ClientViewModel();
             if (id == 0)
             {
-                client = new Client();
+                viewModel.Client = new Client();
+                viewModel.Title = "Add CLient";
             }
             else
             {
-                client= _db.Clients.Find(id);
+                viewModel.Client = _db.Clients.Find(id);
+                viewModel.Title = "Edit Client";
                
             }
-            return PartialView("_ModifyClientModalPartial", client); ;
+            return PartialView("_ModifyClientModalPartial", viewModel); ;
         }
 
-        //POST: Client/Modify/{Client}
+        //POST: Client/Modify/{id}
         /* retrieves modified client and sends validation success or fail back to site.js Modify Object Function*/
         [HttpPost]
-        public IActionResult Modify(Client client)
+        public IActionResult Modify(ClientViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                if (client.Id == 0)
+                if (viewModel.Client.Id == 0)
                 {
-                    //Uodate your event date entity
-                    //Event ev = new Event();
-                    //ev.EventStart = 
-
-                    _db.Clients.Add(client);
+                    _db.Clients.Add(viewModel.Client);
                     _db.SaveChanges();
                 }
                 else
                 {
-                    _db.Clients.Update(client);
+                    _db.Clients.Update(viewModel.Client);
                     _db.SaveChanges();
                 }
                 return Ok(true);
             }
-            return PartialView("_ModifyClientModalPartial", client);
+            return PartialView("_ModifyClientModalPartial", viewModel);
         }
 
 

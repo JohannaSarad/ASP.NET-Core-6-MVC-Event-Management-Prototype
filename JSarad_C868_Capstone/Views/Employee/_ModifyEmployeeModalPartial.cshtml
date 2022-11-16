@@ -5,7 +5,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="addEmpoyeeLabel">Add Employee</h4>
+                <h4 class="modal-title" id="addEmpoyeeLabel">@Html.Raw(Model.Title)</h4>
                 <button type=button class="close" data-bs-dismiss="modal">
                     <span>x</span>
                 </button>
@@ -17,7 +17,7 @@
                 
                     
                     <div class="form-group">
-                        <input asp-for="Employee.Id" class="form-control"  />
+                        <input asp-for="Employee.Id" class="form-control"/>
                         @*<input asp-for="Employee.Availability" class="form-control"  type="hidden"/>*@
                         <label asp-for="Employee.Role"></label>
                         <select asp-for="Employee.Role" id="roleSelection" class="form-control z-index-2">

@@ -5,30 +5,27 @@
     
    
     <div class="row">
-       @* <div class="col-md-4">*@
+       
         <div class="row pb-2">
             <h2 class="text-primary">Event Details & Scheduling</h2>
         </div>
-       @* </div>*@
+       
     </div>
     <br /><br />
 
     <div id="PlaceHolderHere"></div>
-    @*<div class="outer-wrapper">*@
-        <form method="post">
-            <div class="row">
-                <div class="col md-4">
-                    <div class="outer-wrapper">
+    <form method="post">
+        <div class="row">
+            <div class="col md-4">
+                  <div class="outer-wrapper">
                         <div class="container p-2 style="height:55vh>
                             <div class="mb-3">
                                 <h4> Event Details </h4>
                                 <hr />
                                 
-                            <input asp-for="Event.Id" type="hidden" class="eventId" />
-                            <input asp-for="Client.Id" type="hidden" class="clientId" />
+                                <input asp-for="Event.Id" type="hidden" class="eventId" />
+                                <input asp-for="Client.Id" type="hidden" class="clientId" />
                                 <p><b> Event Date: </b> @($"{Model.Event.StartTime.ToLongDateString()}")</p>
-                             
-                            
                                 <p><b> Event Time: </b> @($"{Model.Event.StartTime.ToShortTimeString()}") - @($"{Model.Event.EndTime.ToShortTimeString()}")</p>
                                 @*<p><b> End Time: </b> </p>*@
                                 <p><b> Type: </b> @($"{Model.Event.Type}")</p>
@@ -47,14 +44,13 @@
                         </div>
                     </div>
                 </div>
+                             
                 <div class="col-md-8 pt-4">
                     <div class="small-outer-wrapper">
                         <div class="small-tc">
                             <div class="table-wrapper">
                                 <!--table row headers-->
-                               @* <div class="container" style="height:30vh;">*@
                                 <table class="table table-bordered border-dark table-primary table-hover table-sm">
-                                    @* id="singleRowSelect" style="border-collapse:collapse; height:200px; table-layout:fixed;"*@
                                     <thead>
                                         <tr>
                                             <th>Id</th>
@@ -64,9 +60,9 @@
                                             <th>Phone</th>
                                         </tr>
                                     </thead>
+                                
                                     <!--table body and population info-->
                                     <tbody>
-
                                         @if (Model.EmployeeList != null && Model.EmployeeList.Any())
                                         {
                                             foreach (var employee in Model.EmployeeList)
@@ -91,127 +87,114 @@
                                         }
                                     </tbody>
                                 </table>
-                               @* </div>*@
                             </div>
                         </div>
                     </div>
-           
-         
-                    <div class="row pt-2 pb-2">
+                            
+                <div class="row pt-2 pb-2">
                     <input asp-for="EmployeeSchedule.EmployeeId" id="selectedId" /> @*name="employeeId"*@ @*type="hidden"*@
-                        @* <div class="container" style="height:10vh;">*@
-                        <div class="col-3 form-group">
-                            <label>Employee Name</label>
-                            <input asp-for="EmployeeSchedule.EmployeeName" class="selectionResult" style="display:flex" readonly /> @*name="employeeName"*@
-                            @* form-control*@
-                         </div>
-                        <div class="col-2 form-group">
-                            <div class="input-append">
-                            <label asp-for="EmployeeSchedule.StartTime" style="display:flex">Start Time</label>
-                                <input asp-for="EmployeeSchedule.StartTime" type="time" /> @*name="start"*@
-                                @*<input asp-for="EmployeeSchedule.StartTime" type="hidden" id="start" />*@ @*name="start"*@
-                                <span class="add-on">
+                    @* <div class="container" style="height:10vh;">*@
+                    <div class="col-3 form-group">
+                        <label>Employee Name</label>
+                        <input asp-for="EmployeeSchedule.EmployeeName" class="selectionResult" style="display:flex" readonly /> @*name="employeeName"*@
+                        @* form-control*@
+                        </div>
+                    <div class="col-2 form-group">
+                        <div class="input-append">
+                        <label asp-for="EmployeeSchedule.StartTime" style="display:flex">Start Time</label>
+                            <input asp-for="EmployeeSchedule.StartTime" type="time" /> @*name="start"*@
+                            @*<input asp-for="EmployeeSchedule.StartTime" type="hidden" id="start" />*@ @*name="start"*@
+                            <span class="add-on">
+                            <i data-time-icon="icon-time"></i>
+                            </span> @*style="display:flex"*@
+                        </div>
+                    </div>
+                    <div class="col-2 form-group">
+                        <div class="input-append">
+                            <label asp-for="EmployeeSchedule.EndTime" style="display:flex">End Time</label>
+                            <input asp-for="EmployeeSchedule.EndTime" type="time" /> @*id="end"*@ @*name="end"*@
+                            @*<input asp-for="EmployeeSchedule.EndTime" type="hidden" />*@ @*name="end"*@
+                            <span class="add-on">
                                 <i data-time-icon="icon-time"></i>
-                                </span> @*style="display:flex"*@
-                            </div>
-                        </div>
-                        <div class="col-2 form-group">
-                            <div class="input-append">
-                                <label asp-for="EmployeeSchedule.EndTime" style="display:flex">End Time</label>
-                                <input asp-for="EmployeeSchedule.EndTime" type="time" /> @*id="end"*@ @*name="end"*@
-                                @*<input asp-for="EmployeeSchedule.EndTime" type="hidden" />*@ @*name="end"*@
-                                <span class="add-on">
-                                    <i data-time-icon="icon-time"></i>
-                                </span>
-                            </div>
-                        </div>
-                   
-                        <div class="col-5 form-group pt-3 text-end">
-                                
-                            <button class="btn btn-primary" formaction="/Event/ScheduleEmployee/" style="width:150px">Add To Schedule</button> @*id="addSchedule" data-controller="Event" data-action="ScheduleEmployee"*@ 
-                           
+                            </span>
                         </div>
                     </div>
-           
-           
-                    <div class="small-outer-wrapper">
-                        <div class="small-tc">
-                            <div class="table-wrapper">
-                                @*<div class="row mb-3">*@
-                                    @*<div class="container" style="height:30vh">*@
-                                <table class="table table-bordered border-dark table-hover table-primary table-sm">
-                                    <thead >
-                                        <tr >
-                                                    @* style="display:table; width:100%; box-sizing:border-box;" class="table-primary"*@
-                                        <th>Schedule Id</th>
-                                            <th>Employee Id</th>
-                                            <th>Employee Name</th>
-                                            <th>Start Time</th>
-                                            <th>End TIme</th>
-                                            <th></th>
-                                                    @* style="width:25%; word-break: break-all; padding: 5px;"*@
-                                        </tr>
-                                    </thead>
-                                    <!--table body and population info-->
-                                    <tbody >
-                                        @*style="display:block; height:200px; overflow-y:scroll; border: 1px solid black;"*@
-                                        @if (Model.Schedules != null)
+                    
+                    <div class="col-5 form-group pt-3 text-end">
+                        <button class="btn btn-primary" type="submit" formaction="AddSchedule" id="readyDocument" style="width:150px">Add To Schedule
+
+                        </button> @*id="addSchedule" data-controller="Event" data-action="ScheduleEmployee"*@ @*formaction="/Event/ScheduleEmployee/"*@
+                    </div>
+                </div>
+                
+         
+                <div class="small-outer-wrapper">
+                    <div class="small-tc">
+                        <div class="table-wrapper">
+                            @*<div class="row mb-3">*@
+                                @*<div class="container" style="height:30vh">*@
+                            <table class="table table-bordered border-dark table-hover table-primary table-sm">
+                                <thead >
+                                    <tr >
+                                                @* style="display:table; width:100%; box-sizing:border-box;" class="table-primary"*@
+                                    <th>Schedule Id</th>
+                                        <th>Employee Id</th>
+                                        <th>Employee Name</th>
+                                        <th>Start Time</th>
+                                        <th>End TIme</th>
+                                        <th></th>
+                                                @* style="width:25%; word-break: break-all; padding: 5px;"*@
+                                    </tr>
+                                </thead>
+                                <!--table body and population info-->
+                                <tbody >
+                                    @*style="display:block; height:200px; overflow-y:scroll; border: 1px solid black;"*@
+                                    @if (Model.Schedules != null)
+                                    {
+                                        foreach (var schedule in Model.Schedules)
                                         {
-                                            foreach (var schedule in Model.Schedules)
-                                            {
-                                                int index = Model.Schedules.IndexOf(schedule);
-                                                <tr id="row_@index" class="table-light"
-                                        controller="Event" action="Selection" data-id="@schedule.EmployeeId">
-                                               @* data-index="@index"*@
-                                                   @* selectable*@
-                                                    @* style="display:table; width:100%; box-sizing:border-box"*@
-                                                    @*<td> @schedule.ScheduleId</td>*@
-                                                <td>@schedule.ScheduleId</td>
-                                                    <input type="hidden" asp-for="Schedules[index].ScheduleId" />
-                                                    <td >@schedule.EmployeeId</td>
-                                                    <input type="hidden" asp-for="Schedules[index].EmployeeId" />
-                                                    <td >@schedule.EmployeeName</td>
-                                                    <input type="hidden" asp-for="Schedules[index].EmployeeName" />
-                                                    <td asp-format="time">@schedule.StartTime.ToShortTimeString()</td>
-                                                    <input type="hidden" asp-for="Schedules[index].StartTime"  />
-                                                    <td  asp-format="time">@schedule.EndTime.ToShortTimeString()</td>
-                                                    <input type="hidden" asp-for="Schedules[index].EndTime"  />
-                                                    <td class="w-100 btn-group" role="group">
-                                                        @*<a asp-controller="Client" asp-action="Edit" asp-route-id="@schedule.EmployeeId" style="text-decoration:none"> 
-                                                            <i class="bi bi-pencil-square"></i> &emsp; Edit &emsp;</a>  @*class="btn btn-primary mx-2"*@
-                                                        @*<a asp-controller="Event" asp-action="RemoveSchedule" asp-route-id="@schedule.EmployeeId" style="text-decoration:none">
-                                                            <i class="bi bi-trash"></i> Remove</a>*@ @*class="btn btn-danger mx-2"*@
-                                                    <a class="btn btn-danger delete-unselectable" id="#deleteUnselectable" data-controller="Event" data-Action="RemoveSchedule" data-id="@schedule.ScheduleId"
-                                                        data-index="@index" data-body-message="Are you sure you want to remove this schedule?">
-                                                        <i class="bi bi-trash"></i> Remove
-                                                    </a>
-                                                    </td>
-                                                   @* style="border-collapse:collapse; border:none; width:33.33%; word-break: break-all; padding: 5px; border-bottom: none; display:none"*@
-                                                </tr>
-                                            }
+                                            int index = Model.Schedules.IndexOf(schedule);
+                                            <tr id="row_@schedule.ScheduleId" class="table-light"
+                                    controller="Event" action="Selection" data-id="@schedule.EmployeeId">
+                                            @* data-index="@index"*@
+                                                @* selectable*@
+                                                @* style="display:table; width:100%; box-sizing:border-box"*@
+                                                @*<td> @schedule.ScheduleId</td>*@
+                                            <td>@schedule.ScheduleId</td>
+                                                <input type="hidden" asp-for="Schedules[index].ScheduleId" />
+                                                <td >@schedule.EmployeeId</td>
+                                                <input type="hidden" asp-for="Schedules[index].EmployeeId" />
+                                                <td >@schedule.EmployeeName</td>
+                                                <input type="hidden" asp-for="Schedules[index].EmployeeName" />
+                                                <td asp-format="time">@schedule.StartTime.ToShortTimeString()</td>
+                                                <input type="hidden" asp-for="Schedules[index].StartTime"  />
+                                                <td  asp-format="time">@schedule.EndTime.ToShortTimeString()</td>
+                                                <input type="hidden" asp-for="Schedules[index].EndTime"  />
+                                                <td class="w-100 btn-group" role="group">
+                                                    @*<a asp-controller="Client" asp-action="Edit" asp-route-id="@schedule.EmployeeId" style="text-decoration:none"> 
+                                                        <i class="bi bi-pencil-square"></i> &emsp; Edit &emsp;</a>  @*class="btn btn-primary mx-2"*@
+                                                    @*<a asp-controller="Event" asp-action="RemoveSchedule" asp-route-id="@schedule.EmployeeId" style="text-decoration:none">
+                                                        <i class="bi bi-trash"></i> Remove</a>*@ @*class="btn btn-danger mx-2"*@
+                                                <a class="btn btn-danger delete-unselectable" id="#deleteUnselectable" data-controller="Event" data-action="RemoveSchedule" data-id="@schedule.ScheduleId"
+                                                    data-index="@index" data-body-message="Are you sure you want to remove this schedule?">
+                                                    <i class="bi bi-trash"></i> Remove
+                                                </a>
+                                                </td>
+                                                @* style="border-collapse:collapse; border:none; width:33.33%; word-break: break-all; padding: 5px; border-bottom: none; display:none"*@
+                                            </tr>
                                         }
-                                    </tbody>
-                                </table>
-                            </div>
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <div class="row">
-                    <button class="btn btn-primary" formaction="/Event/CheckOT/"  style="width:150px">Check Overtime</button> @*formaction="/AddSchedule"*@
-                    </div>
-                        
-                        @*<div class="buttons">
-                            *@
-                             <!--navigating back to Event page-->
-                   
-                            @*<a asp-controller="Event" asp-action="Index" class="btn btn-secondary" style="width:150px">
-                                Back To List
-                            </a>*@
-                          @*</div>*@
-           
-                       @* </div>*@
+                </div>
+                <div class="row">
+                    <button class="btn btn-primary" formaction="/Event/CheckOT" style="width:150px">Check Overtime</button> @*formaction="/AddSchedule"*@
                 </div>
             </div>
-        </form>
+        </div>
+    </form>
 </div>
 @section Scripts {
     <script type="text/javascript">
@@ -221,19 +204,13 @@
             $('#errorModal').modal('show');
 
         }
-
-        //function openApprovalModal(strMessage) {
-        //    var approvalDiv = document.getElementById("approvalModalBody");
-        //    approvalDiv.innerHTML = strMessage;
-        //    $('#approvalModal').modal('show');
-
-        //}
-
-        $(document).ready(function () {
-            var msg = "@TempData["Error"]";
-            if (msg)
-                openErrorModal(msg);
+        $('#readyDocument').on('click', () => {
+            $(document).ready(function () {
+                var msg = "@TempData["Error"]";
+                if (msg)
+                    openErrorModal(msg);
            
+            });
         });
 
     </script>

@@ -48,11 +48,13 @@ namespace JSarad_C868_Capstone.Controllers
             if (id == 0)
             {
                 viewModel.Employee = new Employee();
+                viewModel.Title = "Add Employee";
             }
             else
             {
                 viewModel.Employee = _db.Employees.Find(id);
                 viewModel = CharsToDays(viewModel);
+                viewModel.Title = "Edit Employee";
             }
             return PartialView("_ModifyEmployeeModalPartial", viewModel); ;
         }

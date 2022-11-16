@@ -5,13 +5,15 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="modifyLabel">Add Event</h4>
+                <h4 class="modal-title" id="modifyLabel"> @Html.Raw(Model.Title)</h4>
                 <button type=button class="close" data-bs-dismiss="modal">
                     <span>x</span>
                 </button>
             </div>
+            <div class="container" style="word-wrap:break-word; padding-left:20px; padding-right:20px;">
             <div class="row">
-                <p class="text text-danger" id="eventDateEditNotice"> </p>
+                <p class="text text-primary"> @Html.Raw(Model.Notice)</p> 
+                </div>
                
             </div>
             <form action="Event/Modify" method="Post" runat="server" autocomplete="off">
@@ -23,7 +25,7 @@
                         <div class="col form-group">
                             <div>
                                 <label>Event Date</label>
-                                <input asp-for="Event.EventDate" id="datepicker" type="date" /> @*value="Event.EventDate"*@
+                                <input asp-for="Event.EventDate" id="datepicker" type="date" /> 
                                  
                                 <span class="add-on">
                                     <i data-date-icon="icon-calendar">

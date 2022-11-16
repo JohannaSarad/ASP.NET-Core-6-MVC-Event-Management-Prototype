@@ -1,13 +1,11 @@
-﻿
-
-@model Client
+﻿@model JSarad_C868_Capstone.ViewModels.ClientViewModel
 
 
 <div class="modal modal-fade" id="modifyClient">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="addClientLabel">Add Client</h4>
+                <h4 class="modal-title" id="addClientLabel"></h4> @*@Html.Raw(Model.Title)*@
                 <button type=button class="close" data-bs-dismiss="modal">
                     <span>x</span>
                 </button>
@@ -18,31 +16,31 @@
 
 
                     <div class="form-group">
-                        <input asp-for="Id" class="form-control" />
-                        <label asp-for="Name"></label>
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
+                        <input asp-for="Client.Id" class="form-control" />
+                        <label asp-for="Client.Name"></label>
+                        <input asp-for="Client.Name" class="form-control" />
+                        <span asp-validation-for="Client.Name" class="text-danger"></span>
                     </div>
 
                     @* <div class="mb-3">*@
                     <div class="form-group">
-                        <label asp-for="Phone"></label>
-                        <input asp-for="Phone" class="form-control" />
-                        <span asp-validation-for="Phone" class="text-danger"></span>
+                        <label asp-for="Client.Phone"></label>
+                        <input asp-for="Client.Phone" class="form-control" />
+                        <span asp-validation-for="Client.Phone" class="text-danger"></span>
                     </div>
 
                     @*<div class="mb-3">*@
                     <div class="form-group">
-                        <label asp-for="Email"></label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
+                        <label asp-for="Client.Email"></label>
+                        <input asp-for="Client.Email" class="form-control" />
+                        <span asp-validation-for="Client.Email" class="text-danger"></span>
                     </div>
 
                     @*<div class="mb-3">*@
                     <div class="form-group">
-                        <label asp-for="Address"></label>
-                        <input asp-for="Address" class="form-control" />
-                        <span asp-validation-for="Address" class="text-danger"></span>
+                        <label asp-for="Client.Address"></label>
+                        <input asp-for="Client.Address" class="form-control" />
+                        <span asp-validation-for="Client.Address" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="modal-footer">
