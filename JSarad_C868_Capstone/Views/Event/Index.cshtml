@@ -9,7 +9,7 @@
         <div class="col-6">
             <h2 class="text-primary">Event Information</h2>
         </div>
-        <div class="col-6 text-end">
+        <div class="col-6 text-end" style="margin-top:20px">
             <!--button to _ModifyEventModalPartial "Add" (js.ModifyObject)-->
             <button type="button" class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyEvent"
                     data-controller="Event" data-action="Modify" data-modify-type="Add">
@@ -73,45 +73,27 @@
         @*hidden input field for selected employee (js call back)*@
         <input id="selectedId" class="form-control" type="hidden"/>
         <div class="buttons">
-                <!--button call to modify modal "Edit" (Modify Object function site.js) -->
-                <button class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyEvent"
-                        data-controller="Event" data-action="Modify" data-modify-type="Edit">
-                        Edit
-                </button>
-                 
-                <!--button call to delete modal (js.delete.js)-->
-                <a class="btn btn-danger delete" id="#delete"
-                   data-controller="Event" data-Action="DeletePOST"
-                   data-body-message="Are you sure you want to delete this event?">
-                    <i class="bi bi-trash"></i> Delete
-                </a>
 
-                <!--button call to Add Event employee Schedule (Open Add Schedule function site.js ->/Event/AddSchedule/{id})-->
-                <a class="btn btn-primary" id="details"
-                   data-controller="Event" data-action="AddSchedule">
-                    <i class="bi bi-trash"></i> Details & Scheduling
-                </a>
+            <!--button call to Add Event employee Schedule (Open Add Schedule function site.js ->/Event/AddSchedule/{id})-->
+            <a class="btn btn-secondary" id="details"
+               data-controller="Event" data-action="AddSchedule">
+                <i class="bi bi-trash"></i> Details & Scheduling
+            </a>
+            
+            <!--button call to modify modal "Edit" (Modify Object function site.js) -->
+            <button class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyEvent"
+                    data-controller="Event" data-action="Modify" data-modify-type="Edit">
+                    Edit
+            </button>
+                 
+            <!--button call to delete modal (js.delete.js)-->
+            <a class="btn btn-danger delete" id="#delete"
+                data-controller="Event" data-Action="DeletePOST"
+                data-body-message="Are you sure you want to delete this event?">
+                <i class="bi bi-trash"></i> Delete
+            </a>
         </div>
     </div>
 </div>
 
-
-@*@section scripts{
-    <partial name="_ValidationScriptsPartial" />
-}*@
-
-@*@section Scripts {
-    <script type="text/javascript">
-        function openErrorModal(strMessage) {
-            var errorDiv = document.getElementById("errorModalBody");
-            erroDiv.InnerHTML = strMessage;
-            $('#errorModal').modal('show');
-
-        }
-        $(document.).ready(function () {
-            var msg = "@ViewData["Error"]";
-            if (msg) 
-                openErrorModal(msg);
-        }
-    </script>*@
-}
+                

@@ -44,16 +44,17 @@ $((function () {
         //validate id has been selected
         if (id == null || id == " " || id == 0)
         {
-            id = 0;
-            bodyMessage = "Please select a record to delete";
-            document.getElementById("confirm-delete").style.visibility = "hidden";
+            var errorDiv = document.getElementById("errorModalBody");
+            errorDiv.innerHTML = "Please Select a Record to View";
+            $('#errorModal').modal('show');
+            return;
         }
         else
         {
             bodyMessage = $(target).data('body-message');
         }
         
-        alert(id);
+       /* alert(id);*/
         pathToDelete = "/" + controller + "/" + action + "/" + id;
         $(".delete-modal-body").text(bodyMessage);
         $("#deleteModal").modal('show');

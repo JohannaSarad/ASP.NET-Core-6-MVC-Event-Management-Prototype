@@ -12,6 +12,7 @@ namespace JSarad_C868_Capstone.ViewModels
         public Event Event { get; set; }
         [Required]
         public string ClientName { get; set; }
+        public List<Client> Clients { get; set; }
     }
 }
        

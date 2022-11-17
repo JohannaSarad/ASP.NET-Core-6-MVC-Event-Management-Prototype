@@ -114,7 +114,6 @@ $(function () {
             id = $("#selectedId").val();
             //alerts if object is not selected
             if (id == null || id == "") {
-               /* alert("Please Select a Record to Edit");*/
                     var errorDiv = document.getElementById("errorModalBody");
                     errorDiv.innerHTML = "Please Select a Record to Edit";
                     $('#errorModal').modal('show');
@@ -160,7 +159,7 @@ $(function () {
 });
 
 //Open Add Schedule
-//gets id from view and posts to open details&scheduling for Event.AddSchedule on button click
+//gets id from view and posts to open details&scheduling for /Event/AddSchedule/{id} and /Employee/EmployeeSchedule/{id} on button click
 $(function () {
     $("#details").on('click', (e) => {
         e.preventDefault
@@ -171,7 +170,10 @@ $(function () {
 
         //alerts if no id is selected
         if (id == 0 || id == null || id == "") {
-            alert("Please Select a Record to View");
+            /*alert("Please Select a Record to View");*/
+            var errorDiv = document.getElementById("errorModalBody");
+            errorDiv.innerHTML = "Please Select a Record to View";
+            $('#errorModal').modal('show');
             return;
         }
         var url = "/" + controller + "/" + action + "/" + id;

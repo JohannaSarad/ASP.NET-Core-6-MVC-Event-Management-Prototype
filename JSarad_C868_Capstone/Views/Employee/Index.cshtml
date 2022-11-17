@@ -8,7 +8,7 @@
         <div class="col-6">
             <h2 class="text-primary">Employee Information</h2>
         </div>
-        <div class="col-6 text-end">
+        <div class="col-6 text-end" style="margin-top:20px">
             <!--button to modify modal "Add" (Modify Objec function site.js) -->
             <button type="button" class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyEmployee" 
                      data-controller="Employee" data-action="Modify" data-modify-type="Add">
@@ -78,10 +78,11 @@
         <input id="selectedId" class="form-control" type="hidden"/>
         <input id="selectedIndex" class"form-control" type="hidden" />
         <div class="buttons">
-            <!--button to View details and Schedule-->
-            <a class="btn btn-primary" id="details"
+            
+            <!--button to View details and Schedule (Details function site.js)-->
+            <a class="btn btn-secondary" id="details"
                 data-controller="Employee" data-action="EmployeeSchedule">
-                <i class="bi bi-trash"></i> Details & Scheduling
+                <i class="bi bi-trash"></i> Details & Schedule
             </a>
             <!--button call to modify modal "Edit"-->
             <button class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyEmployee"

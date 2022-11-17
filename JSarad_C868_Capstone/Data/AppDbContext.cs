@@ -7,6 +7,7 @@ namespace JSarad_C868_Capstone.Data
     public class AppDbContext : DbContext
     {
         //establish connection with Entity Framework
+        public static User currentUser { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }

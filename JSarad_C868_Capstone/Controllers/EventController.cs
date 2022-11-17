@@ -105,14 +105,16 @@ namespace JSarad_C868_Capstone.Controllers
         [HttpPost]
         public IActionResult Modify(EventViewModel viewModel)
         {
+            bool isClient = false;
+            var clients = _db.Clients;
             int eventId = viewModel.Event.Id;
             var eventSchedule = from es in _db.EventSchedules where es.EventId == eventId select es;
-            //Event originalEvent = _db.Events.Find(eventId);
-            //DateTime originalStartTime = originalEvent.StartTime;
-            //DateTime originalEndTime = originalEvent.EndTime;
 
             viewModel.Event.StartTime = viewModel.Event.EventDate.Date + viewModel.Event.StartTime.TimeOfDay;
             viewModel.Event.EndTime = viewModel.Event.EventDate.Date + viewModel.Event.EndTime.TimeOfDay;
+            viewModel.Event.CreatedBy = DataService.currentUser.Id;
+            viewModel.Event.CreatedOn = DateTime.Now;
+            
             TimeSpan open = new TimeSpan(06, 00, 00);
             TimeSpan close = new TimeSpan(23, 00, 00);
 
@@ -127,13 +129,21 @@ namespace JSarad_C868_Capstone.Controllers
                 ModelState.AddModelError("Event.EndTime", "* Events must be scheduled during hours of operation between 6:00 am and 11:00 pm");
             }
 
+            foreach(Client client in clients)
+            {
+                if (client.Name == viewModel.ClientName)
+                {
+                    isClient = true;
+                    break;
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 //viewModel.Event.ClientId = viewModel.Client.Id;
                 if (eventId == 0)
                 {
                     _db.Events.Add(viewModel.Event);
-                    //_db.SaveChanges();
                 }
                 else
                 {
@@ -149,8 +159,6 @@ namespace JSarad_C868_Capstone.Controllers
                 _db.SaveChanges();
                 return Ok(true);
             }
-            //check if date was changed and if there was an employee schedule associated
-            
             return PartialView("_ModifyEventModalPartial", viewModel);
         }
 

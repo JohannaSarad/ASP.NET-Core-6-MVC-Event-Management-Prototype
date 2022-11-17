@@ -9,11 +9,14 @@ namespace JSarad_C868_Capstone.Controllers
     public class LoginController : Controller
     {
 
+        //public static User CurrentUser { get; set; }
+        public DataService dataService;    
         private readonly AppDbContext _db;
 
-        public LoginController(AppDbContext db)
+        public LoginController(AppDbContext db, DataService dataService)
         {
             _db = db;
+            this.dataService = dataService;
         }
         [HttpGet]
         public IActionResult Index()
@@ -28,7 +31,7 @@ namespace JSarad_C868_Capstone.Controllers
         {
             int adminId;
             var admin = _db.Users.ToList();
-
+           
             if (!ModelState.IsValid) 
             {
                 return View("Index", administrator);
@@ -40,6 +43,8 @@ namespace JSarad_C868_Capstone.Controllers
                 if (user.Username == administrator.Username && user.Password == administrator.Password)
                 {
                     adminId = user.Id;
+                    DataService.currentUser = _db.Users.Find(adminId);
+                   
                     var claims = new List<Claim> 
                     { 
                         new Claim(ClaimTypes.Name, "admin"),

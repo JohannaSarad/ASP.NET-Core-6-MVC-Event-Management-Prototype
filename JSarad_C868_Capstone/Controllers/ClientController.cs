@@ -5,24 +5,27 @@ using JSarad_C868_Capstone.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 
+
 namespace JSarad_C868_Capstone.Controllers
 {
     [Authorize]
     public class ClientController : Controller
     {
-        
+        public DataService dataService { get; set; }
         public Client SelectedClient { get; set; }
         private readonly AppDbContext _db;
 
         public ClientController(AppDbContext db)
         {
             _db = db;
+           
         }
         
         //retrieves clients from database and populates client table
         public IActionResult Index()
         {
             var clients = _db.Clients;
+            //var clients = dataService.GetClients();
             return View(clients);
         }
 
@@ -54,6 +57,7 @@ namespace JSarad_C868_Capstone.Controllers
             else
             {
                 viewModel.Client = _db.Clients.Find(id);
+
                 viewModel.Title = "Edit Client";
                
             }

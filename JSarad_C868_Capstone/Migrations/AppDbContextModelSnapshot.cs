@@ -63,7 +63,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Id = 1,
                             Address = "123 Country Road",
                             Email = "eledford@email.com",
-                            LastUpdate = new DateTime(2022, 11, 16, 16, 15, 27, 857, DateTimeKind.Local).AddTicks(1761),
+                            LastUpdate = new DateTime(2022, 11, 17, 10, 4, 18, 928, DateTimeKind.Local).AddTicks(9333),
                             Name = "Edwin Ledford",
                             Phone = "6613332222"
                         });
@@ -119,7 +119,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "2414 Loma Linda Dr",
                             Availability = "MTWRFSU",
                             Email = "jsarad2@wgu.edu",
-                            LastUpdate = new DateTime(2022, 11, 16, 16, 15, 27, 857, DateTimeKind.Local).AddTicks(1794),
+                            LastUpdate = new DateTime(2022, 11, 17, 10, 4, 18, 928, DateTimeKind.Local).AddTicks(9376),
                             Name = "Johanna Sarad",
                             Phone = "6614444763",
                             Role = "Bartender"
@@ -130,7 +130,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "345 Mullberry Way",
                             Availability = "TRFSU",
                             Email = "rcrocker@email.com",
-                            LastUpdate = new DateTime(2022, 11, 16, 16, 15, 27, 857, DateTimeKind.Local).AddTicks(1797),
+                            LastUpdate = new DateTime(2022, 11, 17, 10, 4, 18, 928, DateTimeKind.Local).AddTicks(9379),
                             Name = "Rebecca Crocker",
                             Phone = "6613332211",
                             Role = "Server"
@@ -141,7 +141,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "765 Atlantic St",
                             Availability = "MWF",
                             Email = "iward@email.com",
-                            LastUpdate = new DateTime(2022, 11, 16, 16, 15, 27, 857, DateTimeKind.Local).AddTicks(1799),
+                            LastUpdate = new DateTime(2022, 11, 17, 10, 4, 18, 928, DateTimeKind.Local).AddTicks(9381),
                             Name = "Ian Ward",
                             Phone = "8057778899",
                             Role = "Server"
@@ -221,7 +221,7 @@ namespace JSarad_C868_Capstone.Migrations
                             EventName = "Ledford LLC. Luncheon",
                             Food = true,
                             Guests = 50,
-                            LastUpdate = new DateTime(2022, 11, 16, 16, 15, 27, 857, DateTimeKind.Local).AddTicks(1810),
+                            LastUpdate = new DateTime(2022, 11, 17, 10, 4, 18, 928, DateTimeKind.Local).AddTicks(9394),
                             Location = "888 Corporate Way",
                             Notes = "",
                             StartTime = new DateTime(2022, 11, 10, 16, 0, 0, 0, DateTimeKind.Unspecified),
