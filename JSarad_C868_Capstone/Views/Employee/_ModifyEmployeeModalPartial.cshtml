@@ -1,6 +1,6 @@
 ﻿@model JSarad_C868_Capstone.ViewModels.EmployeeViewModel
 
-@*@Html.AntiForgeryToken()*@
+<!-- _ModifyEmployeeModal (shows/hides from Modify Object function in site.js, on buttonclick Add or Edit of /Employee/Index.cshtml)-->
 <div class="modal modal-fade" id="modifyEmployee">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -12,13 +12,11 @@
 
             </div>
             <form action="Employee/Modify" method="Post" runat="server" autocomplete="off">
-                @*action="/Employee/Add/"*@
             <div class="modal-body">
                 
                     
                     <div class="form-group">
-                        <input asp-for="Employee.Id" class="form-control"/>
-                        @*<input asp-for="Employee.Availability" class="form-control"  type="hidden"/>*@
+                        <input asp-for="Employee.Id" class="form-control" type="hidden"/>
                         <label asp-for="Employee.Role"></label>
                         <select asp-for="Employee.Role" id="roleSelection" class="form-control z-index-2">
                             <option value="none" selected disabled hidden>--Select Role--</option>

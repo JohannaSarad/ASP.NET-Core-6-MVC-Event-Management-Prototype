@@ -1,6 +1,6 @@
 ﻿@model JSarad_C868_Capstone.ViewModels.EventViewModel
 
-
+<!-- _ModifyEmployeeModal (shows/hides from Modify Object function in site.js, on buttonclick Add or Edit of /Event/Index.cshtml)-->
 <div class="modal modal-fade modifyModal" id="modifyEvent">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -127,8 +127,10 @@
                             </div>
                          </div>
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                        <!--submits to /Event/Modify/{viewModel}-->
                         <button type="submit" class="btn btn-primary" id="savechanges" data-bs-save="modal">Save</button>
                     </div>
                 

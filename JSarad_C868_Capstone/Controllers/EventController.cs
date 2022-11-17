@@ -157,15 +157,17 @@ namespace JSarad_C868_Capstone.Controllers
         [HttpPost]
         public IActionResult DeletePOST(int? id)
         {
-            var selectedEvent = _db.Events.Find(id);
-            if (selectedEvent == null)
+            if (id == null || id == 0)
             {
-                return NotFound();
+                var selectedEvent = _db.Events.Find(id);
+                if (selectedEvent == null)
+                {
+                    return NotFound();
+                }
+                _db.Events.Remove(selectedEvent);
+                _db.SaveChanges();
             }
-            _db.Events.Remove(selectedEvent);
-            _db.SaveChanges();
             return RedirectToAction("Index");
-
         }
 
         [HttpGet]

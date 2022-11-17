@@ -12,8 +12,6 @@ namespace JSarad_C868_Capstone.Controllers
     [Authorize]
     public class EmployeeController : Controller
     {
-        //public IEnumerable<Employee> EmployeeList { get; set; }
-        //public Employee? SelectedEmployee { get; set; }*/
         private readonly AppDbContext _db;
 
         public EmployeeController(AppDbContext db)
@@ -27,7 +25,8 @@ namespace JSarad_C868_Capstone.Controllers
             return View(employees);
         }
 
-        //search
+        //search function 
+        //Get: /Employee/Index/{string}
         [HttpGet]
         public async Task<IActionResult> Index(string search)
         {
@@ -64,6 +63,17 @@ namespace JSarad_C868_Capstone.Controllers
         public IActionResult Modify(EmployeeViewModel viewModel)
         {
             viewModel.Employee.Availability = DaysToChars(viewModel);
+
+            if (viewModel.Employee.Phone != null)
+            {
+                char firstCharacter = viewModel.Employee.Phone[0];
+                //check that ph
+                if (firstCharacter == '0')
+                {
+                    ModelState.AddModelError("Employee.Phone", "The Phone field is not a valid phone number");
+                }
+            }
+            
 
             if (ModelState.IsValid)
             {

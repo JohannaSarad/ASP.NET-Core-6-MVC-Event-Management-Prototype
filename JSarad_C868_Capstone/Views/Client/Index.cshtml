@@ -1,18 +1,15 @@
 ﻿@model IEnumerable<Client>
-@*@{
-    ViewData["Title"] = "Index";
-}*@
 
-
-    <div id="PlaceHolderHere"></div>
-<div class="container p3" >
+<!--placeholder for _ModifyClientModalPartial (Modify Object function in site.js)-->
+<div id="PlaceHolderHere"></div>
+<div class="container p3" style="height:83vh">
     <div class="row pt-4">
         <div class="col-6">
             <h2 class="text-primary">Client Information</h2>
         </div>
        
         <div class="col-6 text-end">
-            <!--button to modify modal "Add" -->
+            <!--button to modify modal "Add" (Modify Objec function site.js) -->
             <button type="button" class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyClient"
                     data-controller="Client" data-action="Modify" data-modify-type="Add">
                 Add Client
@@ -21,7 +18,7 @@
     </div>
     <br /><br />
 
-    <!--search bar-->
+    <!--search bar and button (/Client/Index/{string}-->
     <form method="get" asp-action="Index">
         <p>
             <input type="search" placeholder="Search Client Name Or Email" value="@ViewData["GetCLient"]" name="search" style="width:500px;" />
@@ -29,7 +26,7 @@
             <a asp-action="Index">Get All Clients</a>
         </p>
     </form>
-    <!--table row headers-->
+    <!--table body and population info for Event (/Client/Index)-->
     <div class="outer-wrapper">
         <div class="tc">
             <div class="table-wrapper">
@@ -43,7 +40,7 @@
                             <th>Address</th>
                         </tr>
                     </thead>
-                    <!--table body and population info-->
+                    
                     <tbody>
                         @*@if (Model.ClientList != null)
                         {*@
@@ -69,17 +66,16 @@
         <input id="selectedId" class="form-control" />
         <div class="buttons">
 
-                <!--button call to modify modal 'Edit"-->
+                <!--button call to modify modal 'Edit" (Modify Object function site.js)-->
                 <button class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyClient"
                 data-controller="Client" data-action="Modify" data-modify-type="Edit">Edit</button>
                     
-                <!--button call to delete modal (js.delete.js)-->
+                <!--button call to delete modal (delete.js)-->
                 <a class="btn btn-danger delete" id="#delete"
                    data-controller="Client" data-Action="DeletePOST"
                    data-body-message="Are you sure you want to delete this client?">
                     <i class="bi bi-trash"></i> Delete
                 </a>
-            @*</div>*@
          </div>
     </div>
 </div>

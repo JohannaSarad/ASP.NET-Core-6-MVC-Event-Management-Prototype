@@ -1,11 +1,12 @@
 ﻿//function for delete action with selectable rows called from Index.cshtml (Client, Employee, Event)
 $((function () {
-    
+
     var target;
     var pathToDelete;
     var id;
     var controller;
     var action;
+    var bodyMessage;
 
     $('body').append(`
                     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -20,8 +21,9 @@ $((function () {
                                 <div class="modal-body delete-modal-body">
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-bs-dismiss="modal" id="cancel-delete">Cancel</button>
                                     <button type="submit" class="btn btn-danger" id="confirm-delete">Delete</button>
+                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cancel-delete" value=" ">Cancel</button>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -34,12 +36,24 @@ $((function () {
         e.preventDefault();
 
         target = e.target;
-        //id = $(target).data('id');
-        id = $("#selectedId").val();
-        index = $("#selectedIndex");
         controller = $(target).data('controller');
         action = $(target).data('action');
-        var bodyMessage = $(target).data('body-message');
+        index = $("#selectedIndex");
+        id = $("#selectedId").val();
+
+        //validate id has been selected
+        if (id == null || id == " " || id == 0)
+        {
+            id = 0;
+            bodyMessage = "Please select a record to delete";
+            document.getElementById("confirm-delete").style.visibility = "hidden";
+        }
+        else
+        {
+            bodyMessage = $(target).data('body-message');
+        }
+        
+        alert(id);
         pathToDelete = "/" + controller + "/" + action + "/" + id;
         $(".delete-modal-body").text(bodyMessage);
         $("#deleteModal").modal('show');

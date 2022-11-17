@@ -8,9 +8,8 @@ namespace JSarad_C868_Capstone.ViewModels
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string SelectedUser { get; set; }
-        //public IEnumerable<User> UserSelectList { get; set; }
+       
         public List<SelectListItem> UserSelectList { get; set; }
-        //public int UserId { get; set; }
-        //public string Username { get; set; }
+        
     }
 }

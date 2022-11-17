@@ -114,7 +114,10 @@ $(function () {
             id = $("#selectedId").val();
             //alerts if object is not selected
             if (id == null || id == "") {
-                alert("Please Select a Record to Edit");
+               /* alert("Please Select a Record to Edit");*/
+                    var errorDiv = document.getElementById("errorModalBody");
+                    errorDiv.innerHTML = "Please Select a Record to Edit";
+                    $('#errorModal').modal('show');
                 return;
             }
         }
@@ -156,6 +159,7 @@ $(function () {
     });
 });
 
+//Open Add Schedule
 //gets id from view and posts to open details&scheduling for Event.AddSchedule on button click
 $(function () {
     $("#details").on('click', (e) => {

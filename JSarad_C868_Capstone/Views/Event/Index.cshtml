@@ -1,13 +1,10 @@
 ﻿@model IEnumerable<EventListDetails>
-@*@{
-    ViewData["Title"] = "Index";
-}*@
 
-<!--placeholder for _ModifyEventModalPartial-->
+<!--placeholder for _ModifyEventModalPartial (Modify Object function in site.js-->
 <div id="PlaceHolderHere"></div>
 
 
-<div class="container p3">
+<div class="container p3" style="height:83vh">
     <div class="row pt-4">
         <div class="col-6">
             <h2 class="text-primary">Event Information</h2>
@@ -22,7 +19,7 @@
     </div>
     <br /><br />
 
-    <!--search bar (Controllers/Event/Index(string search)-->
+    <!--search bar and button (/Event/Index/string)-->
     <form method="post" asp-action="Index">
         <p>
             <input type="search" placeholder="Search Event By Type" value="@ViewData["GetEvent"]" name="search" style="width:500px;" />
@@ -30,7 +27,8 @@
             <a asp-action="Index">Get All Events</a>
         </p>
     </form>
-    <!--table row headers-->
+    
+    <!--table body and population info for Event (/Event/Index)-->
     <div class="outer-wrapper">
         <div class="tc">
             <div class="table-wrapper">
@@ -47,25 +45,25 @@
                             <th>Contact Phone</th>
                         </tr>
                     </thead>
-                    <!--table body and population info for Event (Controllers/Event/Index)-->
+                    
                     <tbody>
                        
                         @*track index of IEnumerable*@
                         @{int index = -1;
-                            @foreach (var item in Model)
+                                    @foreach (var item in Model)
                             { 
                                 index++;
-                                <tr id="row_@item.EventId" class="table-light selectable" controller="Event" Action="Selection" 
-                                    data-id="@item.EventId" data-index="@index">
-                                    <td>@item.EventId</td>
-                                    <td>@item.EventName</td>
-                                    <td>@item.Type </td>
-                                    <td>@item.EventDate.ToShortDateString()</td>
-                                    <td>@item.StartTime.ToShortTimeString()</td>
-                                    <td>@item.EndTime.ToShortTimeString()</td>
-                                    <td>@item.ContactName</td>
-                                    <td>@item.Phone</td>
-                                </tr>
+                                        <tr id="row_@item.EventId" class="table-light selectable" controller="Event" Action="Selection" 
+                                            data-id="@item.EventId" data-index="@index">
+                                            <td>@item.EventId</td>
+                                            <td>@item.EventName</td>
+                                            <td>@item.Type </td>
+                                            <td>@item.EventDate.ToShortDateString()</td>
+                                            <td>@item.StartTime.ToShortTimeString()</td>
+                                            <td>@item.EndTime.ToShortTimeString()</td>
+                                            <td>@item.ContactName</td>
+                                            <td>@item.Phone</td>
+                                        </tr>
                             }
                         }
                     </tbody>
@@ -73,9 +71,9 @@
             </div>
         </div>
         @*hidden input field for selected employee (js call back)*@
-        <input id="selectedId" class="form-control" />
+        <input id="selectedId" class="form-control" type="hidden"/>
         <div class="buttons">
-                <!--button call to modify modal "Edit" (js.ModifyObject) -->
+                <!--button call to modify modal "Edit" (Modify Object function site.js) -->
                 <button class="btn btn-primary" data-bs-toggle="ajax-modal" data-target="#modifyEvent"
                         data-controller="Event" data-action="Modify" data-modify-type="Edit">
                         Edit
@@ -88,7 +86,7 @@
                     <i class="bi bi-trash"></i> Delete
                 </a>
 
-                <!--button call to Add Event employee Schedule Controllers/Event/AddSchedule-->
+                <!--button call to Add Event employee Schedule (Open Add Schedule function site.js ->/Event/AddSchedule/{id})-->
                 <a class="btn btn-primary" id="details"
                    data-controller="Event" data-action="AddSchedule">
                     <i class="bi bi-trash"></i> Details & Scheduling
@@ -96,6 +94,8 @@
         </div>
     </div>
 </div>
+
+
 @*@section scripts{
     <partial name="_ValidationScriptsPartial" />
 }*@
