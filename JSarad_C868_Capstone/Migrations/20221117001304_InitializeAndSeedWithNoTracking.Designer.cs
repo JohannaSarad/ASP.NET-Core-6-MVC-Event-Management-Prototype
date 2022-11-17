@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JSarad_C868_Capstone.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221114225813_initialize")]
-    partial class initialize
+    [Migration("20221117001304_InitializeAndSeedWithNoTracking")]
+    partial class InitializeAndSeedWithNoTracking
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,18 +34,21 @@ namespace JSarad_C868_Capstone.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
@@ -61,7 +64,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Id = 1,
                             Address = "123 Country Road",
                             Email = "eledford@email.com",
-                            LastUpdate = new DateTime(2022, 11, 14, 14, 58, 13, 166, DateTimeKind.Local).AddTicks(2997),
+                            LastUpdate = new DateTime(2022, 11, 16, 16, 13, 3, 840, DateTimeKind.Local).AddTicks(6009),
                             Name = "Edwin Ledford",
                             Phone = "6613332222"
                         });
@@ -77,21 +80,24 @@ namespace JSarad_C868_Capstone.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Availability")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
@@ -99,7 +105,8 @@ namespace JSarad_C868_Capstone.Migrations
 
                     b.Property<string>("Role")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -112,7 +119,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "2414 Loma Linda Dr",
                             Availability = "MTWRFSU",
                             Email = "jsarad2@wgu.edu",
-                            LastUpdate = new DateTime(2022, 11, 14, 14, 58, 13, 166, DateTimeKind.Local).AddTicks(3033),
+                            LastUpdate = new DateTime(2022, 11, 16, 16, 13, 3, 840, DateTimeKind.Local).AddTicks(6050),
                             Name = "Johanna Sarad",
                             Phone = "6614444763",
                             Role = "Bartender"
@@ -123,7 +130,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "345 Mullberry Way",
                             Availability = "TRFSU",
                             Email = "rcrocker@email.com",
-                            LastUpdate = new DateTime(2022, 11, 14, 14, 58, 13, 166, DateTimeKind.Local).AddTicks(3035),
+                            LastUpdate = new DateTime(2022, 11, 16, 16, 13, 3, 840, DateTimeKind.Local).AddTicks(6053),
                             Name = "Rebecca Crocker",
                             Phone = "6613332211",
                             Role = "Server"
@@ -134,7 +141,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "765 Atlantic St",
                             Availability = "MWF",
                             Email = "iward@email.com",
-                            LastUpdate = new DateTime(2022, 11, 14, 14, 58, 13, 166, DateTimeKind.Local).AddTicks(3037),
+                            LastUpdate = new DateTime(2022, 11, 16, 16, 13, 3, 840, DateTimeKind.Local).AddTicks(6055),
                             Name = "Ian Ward",
                             Phone = "8057778899",
                             Role = "Server"
@@ -169,7 +176,8 @@ namespace JSarad_C868_Capstone.Migrations
 
                     b.Property<string>("EventName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("Food")
                         .HasColumnType("bit");
@@ -182,7 +190,8 @@ namespace JSarad_C868_Capstone.Migrations
 
                     b.Property<string>("Location")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
@@ -192,7 +201,8 @@ namespace JSarad_C868_Capstone.Migrations
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -211,7 +221,7 @@ namespace JSarad_C868_Capstone.Migrations
                             EventName = "Ledford LLC. Luncheon",
                             Food = true,
                             Guests = 50,
-                            LastUpdate = new DateTime(2022, 11, 14, 14, 58, 13, 166, DateTimeKind.Local).AddTicks(3048),
+                            LastUpdate = new DateTime(2022, 11, 16, 16, 13, 3, 840, DateTimeKind.Local).AddTicks(6092),
                             Location = "888 Corporate Way",
                             Notes = "",
                             StartTime = new DateTime(2022, 11, 10, 16, 0, 0, 0, DateTimeKind.Unspecified),
@@ -221,40 +231,26 @@ namespace JSarad_C868_Capstone.Migrations
 
             modelBuilder.Entity("JSarad_C868_Capstone.Models.EventSchedule", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
                     b.Property<int>("EventId")
                         .HasColumnType("int");
 
                     b.Property<int>("ScheduleId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("EventId", "ScheduleId");
 
                     b.ToTable("EventSchedules");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
                             EventId = 1,
                             ScheduleId = 1
                         },
                         new
                         {
-                            Id = 2,
                             EventId = 1,
                             ScheduleId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            EventId = 1,
-                            ScheduleId = 3
                         });
                 });
 
@@ -284,15 +280,15 @@ namespace JSarad_C868_Capstone.Migrations
                         {
                             Id = 1,
                             EmployeeId = 1,
-                            EndTime = new DateTime(2022, 11, 10, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartTime = new DateTime(2022, 11, 10, 4, 30, 0, 0, DateTimeKind.Unspecified)
+                            EndTime = new DateTime(2022, 11, 10, 20, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new DateTime(2022, 11, 10, 16, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
                             EmployeeId = 2,
-                            EndTime = new DateTime(2022, 11, 10, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartTime = new DateTime(2022, 11, 10, 4, 30, 0, 0, DateTimeKind.Unspecified)
+                            EndTime = new DateTime(2022, 11, 10, 20, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new DateTime(2022, 11, 10, 16, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -306,11 +302,13 @@ namespace JSarad_C868_Capstone.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
 
                     b.HasKey("Id");
 

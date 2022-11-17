@@ -1,13 +1,8 @@
-﻿//function LogIn()
-//{
-//    var placeholderElement = $('#PlaceHolderHere');
-//}
-
-
-
+﻿
 //autoComplete user input text for client name
 function AutoComplete() {
-    
+
+    //FIX ME!! autocomplete not working until the second letter
     var controller = document.getElementById("completeTxt").getAttribute("controller");
     var action = document.getElementById("completeTxt").getAttribute("action");
     var url = "/" + controller + "/" + action + "/";
@@ -95,9 +90,9 @@ $((function () {
         
 //Modify Object Function
 
-/*replaces index placeholder with popup modal, checks if object is new or update,
-  calls for serverside validation on save, runs loop to repopulate modal on serverside validation fail, 
-  alerts if object is not selected, closes modal and reloads list on serverside validation success)*/
+/* For _Modify""ModalPartials (Client, Employee, Event) replaces index placeholder div in In Index.cshtml for Client, 
+ * Employee and Event with popup modal, 
+ */
 $(function () {
     var placeholderElement = $('#PlaceHolderHere');
     console.log(placeholderElement);
@@ -106,21 +101,18 @@ $(function () {
     var controller;
     var action;
 
-    //onclick from index to open modal
+    //onclick from index to open modal recieves controller action and modify type from caller
     $('button[data-bs-toggle="ajax-modal"]').click(function (e) {
         target = e.target;
-        
         controller = $(target).data('controller');
         action = $(target).data('action');
-        //targetModal = $(target).data('target');
-        //alert(targetModal);
-        
         var addOrEdit = $(target).data('modify-type');
-        
+
+        //check if object is new or being updated
         if (addOrEdit == 'Edit')
         {
             id = $("#selectedId").val();
-            /*document.querySelector('#eventDateEditNotice').innerHTML = "event notice";*/
+            //alerts if object is not selected
             if (id == null || id == "") {
                 alert("Please Select a Record to Edit");
                 return;
@@ -132,67 +124,24 @@ $(function () {
         }
         
         var url = "/" + controller + "/" + action + "/" + id;
-        console.log(url);
+        
+        //displays modal
         $.get(url).done(function (data) {
-            /*alert(data);*/
-
             placeholderElement.html(data);
             placeholderElement.find('.modal').modal('show');
         });
-
-        //$('targetModal').on('show.bs.modal', function (event) {
-        //    $(this).find('#eventDateEditNotice').text("event notice")
-        //});
-
-        //$('.modal').on('show.bs.modal', function (event) {
-        //    if (addOrEdit == 'Edit') {
-        //        $(this).find('h4.modal-title').text("Edit Modal");
-        //        $(this).find('p#eventDateEditNotice').text("Edit Notice")
-        //    }
-
-        //});
     })
-
-    
 
     //onclick to save modal form information
     placeholderElement.on('click', '[data-bs-save="modal"]', function (event) {
-        
         event.preventDefault();
-        /*sections formatting datetimes are only used for  _ModifyEventModalPartial*/
-
-        //store user selected date without time and times without date from datepicker (for _ModifyEventModalPartial)
-        //var returnDate = $('#datepicker').val();
-        //var returnStart = $('#startTime').val();
-        //var returnEnd = $('#endTime').val()
-
-        //append date to times store as values for hidden fields so they will pass validation on send (for _ModifyEventModalPartial)
-        //$('#date').val($('#datepicker').val() + " " + $('#startTime').val());
-        //$('#start').val($('#datepicker').val() + " " + $('#startTime').val());
-        //$('#end').val($('#datepicker').val() + " " + $('#endTime').val());
-
-        //remove fields passing only time and only date so form will pass validation (for _ModifyEventModalPartial)
-        //$('#datepicker').remove();
-        //$('#startTime').remove();
-        //$('#endTime').remove();
-
+        
         //get form and form action and serialize (for Employee, Client, and Event _Modify""ModalPartials)
         var form = $(this).parents('.modal').find('form');
         var actionUrl = form.attr('action');
         var sendViewModel = form.serialize();
 
-        //recreate date and time fields with only date and times (returns to new body if validation fails for _ModifyModalPartial)
-        /*$('#datepicker').val('#date');*/
-        ////$('#startTime').val(returnStart);
-        ////$('#endTime').val(returnEnd);
-        /*alert(sendViewModel);*/
-        
-        //alert($('#datepicker').val() + " " + $('#endTime').val());
-       /* alert(form.Event.EventDate.Date + " " + form.Event.StartTime.TimeOfDay);*/
-        //alert(form.Event.EventStart.Date);
-        
-        /*alert(sendViewModel);*/
-
+        //call to serverside validation on save
         $.post(actionUrl, sendViewModel).done(function (data) {
             if (data === true) {
                 placeholderElement.find('.modal').modal('hide');
@@ -200,15 +149,14 @@ $(function () {
                 return;
             }
 
+            //serverside validation fail reload modal body with validation errors
             var newBody = $('.modal-body', data);
-            alert(newBody);
-            
             placeholderElement.find('.modal-body').replaceWith(newBody);
         });
     });
 });
 
-//gets id from view and posts to open details&scheduling for events and employees on button click
+//gets id from view and posts to open details&scheduling for Event.AddSchedule on button click
 $(function () {
     $("#details").on('click', (e) => {
         e.preventDefault
@@ -217,6 +165,7 @@ $(function () {
         controller = $(target).data('controller');
         action = $(target).data('action');
 
+        //alerts if no id is selected
         if (id == 0 || id == null || id == "") {
             alert("Please Select a Record to View");
             return;
@@ -256,28 +205,27 @@ $((function () {
                         </div>
                     </div>`);
 
-    //Delete  Action
+    /* gets action, controller, id, index, and body mesage values from sender in Event.AddSchedule.cshtml and displays 
+     * delete modal
+     */
     $(".delete-unselectable").on('click', (e) => {
         e.preventDefault();
-
         target = e.target;
         id = $(target).data('id');
         index = $(target).data('index');
-        
         controller = $(target).data('controller');
         action = $(target).data('action');
-        console.log(id);
-        console.log(index);
-        console.log(controller);
-        console.log(action);
-
         var bodyMessage = $(target).data('body-message');
         pathToDelete = "/" + controller + "/" + action + "/" + id;
+
         $(".delete-modal-body").text(bodyMessage);
         $("#deleteUnselectableModal").modal('show');
-       
     });
 
+    /* posts to Event.RemoveSchecule to remove employee schedule from AddSchedule on modal confirm delete click, closes modal
+     * and
+     * removes selected row from view 
+     */
     $("#confirm-delete-unselectable").on('click', () => {
         $.ajax({
             type: "POST",

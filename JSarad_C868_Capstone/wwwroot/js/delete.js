@@ -1,4 +1,5 @@
-﻿$((function () {
+﻿//function for delete action with selectable rows called from Index.cshtml (Client, Employee, Event)
+$((function () {
     
     var target;
     var pathToDelete;
@@ -26,7 +27,9 @@
                         </div>
                     </div>`);
 
-    //Delete Action
+    /*gets action, controller, id, index, and body mesage values from senders and displays
+     * delete modal
+     */
     $(".delete").on('click', (e) => {
         e.preventDefault();
 
@@ -36,16 +39,16 @@
         index = $("#selectedIndex");
         controller = $(target).data('controller');
         action = $(target).data('action');
-        alert(id);
-        alert(controller);
-        alert(action);
         var bodyMessage = $(target).data('body-message');
         pathToDelete = "/" + controller + "/" + action + "/" + id;
         $(".delete-modal-body").text(bodyMessage);
         $("#deleteModal").modal('show');
-        //console.log(pathToDelete);
+        
     });
 
+    /* posts to DeletePOST action respectively for Client, Employee, and Event on modal confirm delete click 
+     * based on id selected from view, closes modal, and removes selected row from view
+     * */
     $("#confirm-delete").on('click', () => {
         $.ajax({
             type: "POST",

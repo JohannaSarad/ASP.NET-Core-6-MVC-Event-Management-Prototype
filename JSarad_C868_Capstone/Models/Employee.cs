@@ -8,16 +8,20 @@ namespace JSarad_C868_Capstone.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Required]
-       
+        
+        [Required, StringLength(50)]
         public string Name { get; set; }
-        [Required, Phone]
+        
+        [Required, Phone, StringLength(15)]
         public string Phone { get; set; }
-        [Required, EmailAddress]
+        
+        [Required, EmailAddress, StringLength(150)]
         public string Email { get; set; }
-        [Required]
+        
+        [Required, StringLength(200)]
         public string Address { get; set; }
-        [Required]
+        
+        [Required, StringLength(50)]
         public string Role { get; set; }
         
         public string? Availability { get; set; }

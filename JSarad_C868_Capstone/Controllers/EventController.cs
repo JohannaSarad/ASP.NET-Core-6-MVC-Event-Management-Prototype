@@ -92,7 +92,9 @@ namespace JSarad_C868_Capstone.Controllers
                 var client = _db.Clients.Find(viewModel.Event.ClientId);
                 viewModel.ClientName = client.Name;
                 viewModel.Title = "Edit Event";
-                viewModel.Notice = "Notice: making changes to event times and dates will remove any associated employee schedules for that event";
+                viewModel.Notice = "Notice: making changes to event dates will remove any associated employee schedules for this event. " +
+                    "Making changes to event times may cause incorrect employee schedule times. Please double check employee schedule times after making" +
+                    " changes to the event times.";
             }
             return PartialView("_ModifyEventModalPartial", viewModel); ;
         }
@@ -103,7 +105,12 @@ namespace JSarad_C868_Capstone.Controllers
         [HttpPost]
         public IActionResult Modify(EventViewModel viewModel)
         {
-            
+            int eventId = viewModel.Event.Id;
+            var eventSchedule = from es in _db.EventSchedules where es.EventId == eventId select es;
+            //Event originalEvent = _db.Events.Find(eventId);
+            //DateTime originalStartTime = originalEvent.StartTime;
+            //DateTime originalEndTime = originalEvent.EndTime;
+
             viewModel.Event.StartTime = viewModel.Event.EventDate.Date + viewModel.Event.StartTime.TimeOfDay;
             viewModel.Event.EndTime = viewModel.Event.EventDate.Date + viewModel.Event.EndTime.TimeOfDay;
             TimeSpan open = new TimeSpan(06, 00, 00);
@@ -123,37 +130,27 @@ namespace JSarad_C868_Capstone.Controllers
             if (ModelState.IsValid)
             {
                 //viewModel.Event.ClientId = viewModel.Client.Id;
-                if (viewModel.Event.Id == 0)
+                if (eventId == 0)
                 {
                     _db.Events.Add(viewModel.Event);
-                    _db.SaveChanges();
+                    //_db.SaveChanges();
                 }
                 else
                 {
-                    //check if date was changed and if there was an employee schedule associated 
-                    //var eventSchedule = _db.EventSchedules.Where(es => es.EventId == viewModel.Event.Id);
-                    //if (eventSchedule.Any())
-                    //{
-                    //    var oldStart = _db.Events.Find(viewModel.Event.Id).StartTime;
-                    //    var oldEnd = _db.Events.Find(viewModel.Event.Id).EndTime;
-                    //    if ((oldStart != viewModel.Event.StartTime) || (oldEnd != viewModel.Event.EndTime))
-                    //    {
-                    //        //remove eventschedules with event id and schedules where 
-                    //        foreach (EventSchedule schedule in eventSchedule)
-                    //        {
-                    //            var scheduleToRemove = _db.Schedules.Find(schedule.ScheduleId);
-                    //            _db.Schedules.Remove(scheduleToRemove);
-                    //            _db.EventSchedules.Remove(schedule);
-                    //        }
-                    //        //_db.SaveChanges();
-                    //    }
-                    //}
-
-                    _db.Events.Update(viewModel.Event);
-                    _db.SaveChanges();
+                    if (eventSchedule.Any())
+                    {
+                        bool canUpdate = IsScheduleConflictRemoved(eventId, viewModel.Event.StartTime);
+                        if (canUpdate) 
+                        {
+                            _db.Events.Update(viewModel.Event);
+                        }
+                    }
                 }
+                _db.SaveChanges();
                 return Ok(true);
             }
+            //check if date was changed and if there was an employee schedule associated
+            
             return PartialView("_ModifyEventModalPartial", viewModel);
         }
 
@@ -478,6 +475,23 @@ namespace JSarad_C868_Capstone.Controllers
             }
             return includes;
 
+        }
+
+        public bool IsScheduleConflictRemoved(int id, DateTime start)
+        {
+            var selectedEvent= _db.Events.Find(id);
+            if (start.Date != selectedEvent.StartTime.Date)
+            {
+                var eventSchedules = _db.EventSchedules.Where(e => e.EventId == id).ToList();
+                foreach (var eventSchedule in eventSchedules)
+                {
+                    Schedule employeeSchedule = _db.Schedules.Where(s => s.Id == eventSchedule.ScheduleId).FirstOrDefault();
+                    _db.Schedules.Remove(employeeSchedule);
+                    _db.EventSchedules.Remove(eventSchedule);
+                }
+            _db.SaveChanges();
+            }
+            return true;
         }
 
         //public List<Employee> GetEmployees()

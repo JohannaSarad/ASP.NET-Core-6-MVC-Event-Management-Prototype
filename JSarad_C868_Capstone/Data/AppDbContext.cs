@@ -22,6 +22,8 @@ namespace JSarad_C868_Capstone.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<EventSchedule>().HasKey(e => new { e.EventId, e.ScheduleId });
+            
             builder.Entity<User>().HasData(
                 new User
                 {
@@ -99,36 +101,30 @@ namespace JSarad_C868_Capstone.Data
             builder.Entity<EventSchedule>().HasData(
                 new EventSchedule
                 {
-                    Id = 1,
+                    //Id = 1,
                     EventId = 1,
                     ScheduleId = 1
                 },
                 new EventSchedule
                 {
-                    Id = 2,
+                    //Id = 2,
                     EventId = 1,
                     ScheduleId = 2
-                },
-                new EventSchedule
-                {
-                    Id = 3,
-                    EventId = 1,
-                    ScheduleId = 3
                 });
             builder.Entity<Schedule>().HasData(
                 new Schedule
                 {
                     Id = 1,
                     EmployeeId = 1,
-                    StartTime = new DateTime(2022, 11, 10, 4, 30, 00),
-                    EndTime = new DateTime(2022, 11, 10, 10, 00, 00)
+                    StartTime = new DateTime(2022, 11, 10, 16, 00, 00),
+                    EndTime = new DateTime(2022, 11, 10, 20, 00, 00)
                 },
                 new Schedule
                 {
                     Id = 2,
                     EmployeeId = 2,
-                    StartTime = new DateTime(2022, 11, 10, 4, 30, 00),
-                    EndTime = new DateTime(2022, 11, 10, 10, 00, 00)
+                    StartTime = new DateTime(2022, 11, 10, 16, 00, 00),
+                    EndTime = new DateTime(2022, 11, 10, 20, 00, 00)
                 });
         }
     }
