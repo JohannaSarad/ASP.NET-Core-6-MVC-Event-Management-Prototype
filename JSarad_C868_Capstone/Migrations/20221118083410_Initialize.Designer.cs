@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JSarad_C868_Capstone.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221117180419_Initialize")]
+    [Migration("20221118083410_Initialize")]
     partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,7 +65,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Id = 1,
                             Address = "123 Country Road",
                             Email = "eledford@email.com",
-                            LastUpdate = new DateTime(2022, 11, 17, 10, 4, 18, 928, DateTimeKind.Local).AddTicks(9333),
+                            LastUpdate = new DateTime(2022, 11, 18, 0, 34, 9, 832, DateTimeKind.Local).AddTicks(6690),
                             Name = "Edwin Ledford",
                             Phone = "6613332222"
                         });
@@ -121,7 +121,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "2414 Loma Linda Dr",
                             Availability = "MTWRFSU",
                             Email = "jsarad2@wgu.edu",
-                            LastUpdate = new DateTime(2022, 11, 17, 10, 4, 18, 928, DateTimeKind.Local).AddTicks(9376),
+                            LastUpdate = new DateTime(2022, 11, 18, 0, 34, 9, 832, DateTimeKind.Local).AddTicks(6727),
                             Name = "Johanna Sarad",
                             Phone = "6614444763",
                             Role = "Bartender"
@@ -132,7 +132,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "345 Mullberry Way",
                             Availability = "TRFSU",
                             Email = "rcrocker@email.com",
-                            LastUpdate = new DateTime(2022, 11, 17, 10, 4, 18, 928, DateTimeKind.Local).AddTicks(9379),
+                            LastUpdate = new DateTime(2022, 11, 18, 0, 34, 9, 832, DateTimeKind.Local).AddTicks(6730),
                             Name = "Rebecca Crocker",
                             Phone = "6613332211",
                             Role = "Server"
@@ -143,7 +143,7 @@ namespace JSarad_C868_Capstone.Migrations
                             Address = "765 Atlantic St",
                             Availability = "MWF",
                             Email = "iward@email.com",
-                            LastUpdate = new DateTime(2022, 11, 17, 10, 4, 18, 928, DateTimeKind.Local).AddTicks(9381),
+                            LastUpdate = new DateTime(2022, 11, 18, 0, 34, 9, 832, DateTimeKind.Local).AddTicks(6732),
                             Name = "Ian Ward",
                             Phone = "8057778899",
                             Role = "Server"
@@ -196,6 +196,7 @@ namespace JSarad_C868_Capstone.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Notes")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartTime")
@@ -223,7 +224,7 @@ namespace JSarad_C868_Capstone.Migrations
                             EventName = "Ledford LLC. Luncheon",
                             Food = true,
                             Guests = 50,
-                            LastUpdate = new DateTime(2022, 11, 17, 10, 4, 18, 928, DateTimeKind.Local).AddTicks(9394),
+                            LastUpdate = new DateTime(2022, 11, 18, 0, 34, 9, 832, DateTimeKind.Local).AddTicks(6744),
                             Location = "888 Corporate Way",
                             Notes = "",
                             StartTime = new DateTime(2022, 11, 10, 16, 0, 0, 0, DateTimeKind.Unspecified),

@@ -9,14 +9,14 @@ namespace JSarad_C868_Capstone.Controllers
     public class LoginController : Controller
     {
 
-        //public static User CurrentUser { get; set; }
-        public DataService dataService;    
+        public static User CurrentUser { get; set; }
+        public DataService dataService;
         private readonly AppDbContext _db;
 
-        public LoginController(AppDbContext db, DataService dataService)
+        public LoginController(AppDbContext db)
         {
             _db = db;
-            this.dataService = dataService;
+            //this.dataService = dataService;
         }
         [HttpGet]
         public IActionResult Index()
@@ -44,7 +44,7 @@ namespace JSarad_C868_Capstone.Controllers
                 {
                     adminId = user.Id;
                     DataService.currentUser = _db.Users.Find(adminId);
-                   
+
                     var claims = new List<Claim> 
                     { 
                         new Claim(ClaimTypes.Name, "admin"),

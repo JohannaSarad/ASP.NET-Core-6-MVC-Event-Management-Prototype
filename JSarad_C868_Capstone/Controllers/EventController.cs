@@ -3,6 +3,7 @@ using JSarad_C868_Capstone.Models;
 using JSarad_C868_Capstone.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography.Xml;
 
@@ -23,7 +24,7 @@ namespace JSarad_C868_Capstone.Controllers
         }
 
         // /Event
-        //Returns Event List View
+        //Returns Event List View Including Client name and Phone
         public IActionResult Index()
         {
             var events = from e in _db.Events
@@ -40,8 +41,6 @@ namespace JSarad_C868_Capstone.Controllers
                              ContactName = c.Name,
                              Phone = c.Phone
                          };
-            
-            
             return View(events);
         }
 
@@ -78,6 +77,7 @@ namespace JSarad_C868_Capstone.Controllers
         public IActionResult Modify(int id)
         {
             EventViewModel viewModel = new EventViewModel();
+           
             if (id == 0)
             {
                 viewModel.Event = new Event();
@@ -91,11 +91,13 @@ namespace JSarad_C868_Capstone.Controllers
                 viewModel.Event = _db.Events.Find(id);
                 var client = _db.Clients.Find(viewModel.Event.ClientId);
                 viewModel.ClientName = client.Name;
+               
                 viewModel.Title = "Edit Event";
                 viewModel.Notice = "Notice: making changes to event dates will remove any associated employee schedules for this event. " +
                     "Making changes to event times may cause incorrect employee schedule times. Please double check employee schedule times after making" +
                     " changes to the event times.";
             }
+            
             return PartialView("_ModifyEventModalPartial", viewModel); ;
         }
 
@@ -106,7 +108,7 @@ namespace JSarad_C868_Capstone.Controllers
         public IActionResult Modify(EventViewModel viewModel)
         {
             bool isClient = false;
-            var clients = _db.Clients;
+            //var clients = _db.Clients;
             int eventId = viewModel.Event.Id;
             var eventSchedule = from es in _db.EventSchedules where es.EventId == eventId select es;
 
@@ -117,8 +119,10 @@ namespace JSarad_C868_Capstone.Controllers
             
             TimeSpan open = new TimeSpan(06, 00, 00);
             TimeSpan close = new TimeSpan(23, 00, 00);
+            
+           
 
-            if (viewModel.Event.StartTime > viewModel.Event.EndTime)
+            if ((viewModel.Event.StartTime > viewModel.Event.EndTime) || (viewModel.Event.StartTime == viewModel.Event.EndTime))
             {
                 ModelState.AddModelError("Event.EndTime", "* Event start time must be before Event end time");
             }
@@ -129,14 +133,26 @@ namespace JSarad_C868_Capstone.Controllers
                 ModelState.AddModelError("Event.EndTime", "* Events must be scheduled during hours of operation between 6:00 am and 11:00 pm");
             }
 
-            foreach(Client client in clients)
+            if (viewModel.ClientName != null)
             {
-                if (client.Name == viewModel.ClientName)
+                var clients = _db.Clients;
+                foreach(var client in clients)
                 {
-                    isClient = true;
-                    break;
+                    if (client.Name == viewModel.ClientName)
+                    {
+                        viewModel.Event.ClientId = client.Id;
+                        isClient = true;
+                        break;
+                    }
                 }
             }
+
+            if(!isClient)
+            {
+                ModelState.AddModelError("ClientName", "No client by this name exists");
+            }
+
+            
 
             if (ModelState.IsValid)
             {
@@ -231,7 +247,7 @@ namespace JSarad_C868_Capstone.Controllers
 
             //FIX ME!!! long list of validations starts here try to move to their own methods
 
-            bool saveEnabled = false;
+            //bool saveEnabled = false;
 
             //validate employee selected for schedule
             if (viewModel.EmployeeSchedule.EmployeeId == 0)
@@ -240,13 +256,21 @@ namespace JSarad_C868_Capstone.Controllers
                 return View("AddSchedule", viewModel);
             }
 
+            //untested
+            if ((start > end) || (start == end))
+            {
+                TempData["Error"] = "Schedule start time must be before Schedule end time";
+                return View("AddSchedule", viewModel);
+            }
+
             //validate employee schedule is within operation hours
-            if ((viewModel.Event.EndTime.TimeOfDay > close) || (viewModel.Event.StartTime.TimeOfDay < open) || 
-                (viewModel.Event.EndTime.TimeOfDay < open) || (viewModel.Event.StartTime.TimeOfDay > close))
+            if ((viewModel.EmployeeSchedule.EndTime.TimeOfDay > close) || (viewModel.EmployeeSchedule.StartTime.TimeOfDay < open) || 
+                (viewModel.EmployeeSchedule.EndTime.TimeOfDay < open) || (viewModel.EmployeeSchedule.StartTime.TimeOfDay > close))
             {
                 TempData["Error"] = "Employees must be scheduled during hours of operation between 6:00 am and 11:00 pm";
                 return View("AddSchedule", viewModel);
             }
+            //also need to check that starttime != endtime
 
             //validate employee availability for event
             if ((viewModel.Event.StartTime.DayOfWeek == DayOfWeek.Monday && !selectedEmployee.Availability.Contains("M"))
@@ -504,35 +528,11 @@ namespace JSarad_C868_Capstone.Controllers
             return true;
         }
 
-        //public List<Employee> GetEmployees()
-        //{
-        //    var employeeList = new List<Employee>();
-        //    if (_db.Employees.Any())
-        //    {
-        //        employeeList = _db.Employees.ToList();
-               
-        //    }
-        //    return employeeList.ToList();
-            
-        //}
-
-    //    [AcceptVerbs("Get", "Post")]
-    //    public JsonResult IsStartTimeFirst(DateTime StartTime, DateTime EndTime)
-    //    {
-
-    //        if (StartTime > EndTime)
-    //        {
-    //            return Json(data: false);
-    //        }
-    //        return Json(data: true);
-    //    }
-
+        
 
     }
 
 }
-
-//To test for ScheduleEmployee
 
 
 

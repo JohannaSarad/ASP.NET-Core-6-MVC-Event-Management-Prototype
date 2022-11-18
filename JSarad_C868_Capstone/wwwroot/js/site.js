@@ -112,6 +112,9 @@ $(function () {
         if (addOrEdit == 'Edit')
         {
             id = $("#selectedId").val();
+            /*document.getElementById("completeTxt").readOnly = true;*/
+            $('#completeText').readOnly = true;
+            
             //alerts if object is not selected
             if (id == null || id == "") {
                     var errorDiv = document.getElementById("errorModalBody");

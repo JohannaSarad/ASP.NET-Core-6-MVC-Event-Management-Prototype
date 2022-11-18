@@ -69,10 +69,25 @@ namespace JSarad_C868_Capstone.Controllers
         [HttpPost]
         public IActionResult Modify(ClientViewModel viewModel)
         {
+            if (!string.IsNullOrEmpty(viewModel.Client.Name))
+            {
+                var clients = _db.Clients;
+                foreach (Client client in clients)
+                {
+                    if (viewModel.Client.Name == client.Name && viewModel.Client.Id != client.Id)
+                    {
+                        ModelState.AddModelError("Client.Name", "There is already a client with this name" +
+                            "\r\n Suggestions: Add middle initial or street name to make client easily identifiable");
+
+                    }
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 if (viewModel.Client.Id == 0)
                 {
+                    
                     _db.Clients.Add(viewModel.Client);
                     _db.SaveChanges();
                 }

@@ -61,10 +61,6 @@
                         </div>
                     </div>
                     
-                    
-                    @*<input asp-for="Event.EventDate" id="date" /> @*type="hidden"*@
-                    @*<input asp-for="Event.StartTime" id="start" /> @*type="hidden"*@
-                    @*<input asp-for="Event.EndTime" id="end" /> @*type="hidden"*@
                     <div class="row" style="margin-bottom:20px">
                         <div class="col-6">
                             <div class="form-group">
@@ -87,11 +83,8 @@
                                     <input asp-for="Event.EventName" class="form-control" />
                                     <span asp-validation-for="Event.EventName" class="text-danger"></span>
                                 </div>
-                                <label>Client Name</label>
-                                <input asp-for="ClientName" type="text" id="completeTxt" oninput="AutoComplete()" class="completeText form-control" controller="Event" action="AutoComplete" />
-                                <input id="hfitem" name="ClientId" />
-                                <input type="hidden" asp-for="Event.ClientId" id="autoId" />
-                                <span asp-validation-for="ClientName" class="text-danger"></span>
+                               
+                   
                                @* type="hidden"*@
                             </div>
                             <div class="form-group">
@@ -121,9 +114,16 @@
                         </div>
                        
                          <div class="col-6">
+                             <div style="padding-bottom:10%;">
+                             <label>Client Name</label>
+                                <input asp-for="ClientName" type="text" id="completeTxt" oninput="AutoComplete()" class="form-control" controller="Event" action="AutoComplete" /> @*completeText*@
+                                <input id="hfitem" name="ClientId" />
+                             <input  asp-for="Event.ClientId" id="autoId" /> @*type="hidden"*@
+                             <span asp-validation-for="ClientName" class="text-danger"></span>
+                            </div>
                             <div class="form-group">
                                 <label asp-for="Event.Notes">Event Notes: </label>
-                                <textarea class="form-control" asp-for="Event.Notes" rows="6"></textarea>
+                                <textarea asp-for="Event.Notes" class="form-control" asp-for="Event.Notes" rows="6"></textarea>
                             </div>
                          </div>
                     </div>

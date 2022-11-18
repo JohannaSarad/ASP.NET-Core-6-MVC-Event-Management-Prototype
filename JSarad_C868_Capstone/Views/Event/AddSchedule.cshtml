@@ -1,15 +1,11 @@
 ﻿@model JSarad_C868_Capstone.ViewModels.EventScheduleViewModel
 
 
-<div class="container" style="height:100vh">
+<div class="container p3" style="height:83vh">
     
    
-    <div class="row">
-       
-        <div class="row pb-2">
-            <h2 class="text-primary">Event Details & Scheduling</h2>
-        </div>
-       
+    <div class="row pt-4">
+        <h2 class="text-primary">Event Details & Scheduling</h2>
     </div>
     <br /><br />
 
@@ -17,9 +13,9 @@
     <form method="post">
         <div class="row">
             <div class="col md-4">
-                  <div class="outer-wrapper">
-                        <div class="container p-2 style="height:55vh>
-                            <div class="mb-3">
+                <div class="p-2 mt-4" style="box-shadow: 0px 0px 3px rgba(0,0,0,0.9); border: 1px solid black;">
+                       @* <div class="container p-2 style="height:55vh>*@
+                           @* <div class="mb-3">*@
                                 <h4> Event Details </h4>
                                 <hr />
                                 
@@ -37,11 +33,11 @@
                                 <p> @($"Contact Phone {Model.Client.Phone}")</p>
                                 <p> @($"Contact Email {Model.Client.Email}")</p>
                                 <p> Notes: </p>
-                                <div class="note-wrapper">
+                                <div class="note-wrapper" style="padding:10px">
                                     <p> @($"{Model.Event.Notes}")</p>
                                 </div>
-                            </div>
-                        </div>
+                            @*</div>*@
+                        @*</div>*@
                     </div>
                 </div>
                              
@@ -91,8 +87,8 @@
                         </div>
                     </div>
                             
-                <div class="row pt-2 pb-2">
-                    <input asp-for="EmployeeSchedule.EmployeeId" id="selectedId" /> @*name="employeeId"*@ @*type="hidden"*@
+                <div class="row mt-3">
+                    <input asp-for="EmployeeSchedule.EmployeeId" id="selectedId" /> @* type="hidden"*@
                     @* <div class="container" style="height:10vh;">*@
                     <div class="col-3 form-group">
                         <label>Employee Name</label>
@@ -127,13 +123,14 @@
                     </div>
                 </div>
                 
-         
+                <div class="pt-2">
                 <div class="small-outer-wrapper">
                     <div class="small-tc">
                         <div class="table-wrapper">
                             @*<div class="row mb-3">*@
                                 @*<div class="container" style="height:30vh">*@
-                            <table class="table table-bordered border-dark table-hover table-primary table-sm">
+                            <table class="table table-bordered border-dark table-primary table-hover table-sm">
+                           
                                 <thead >
                                     <tr >
                                                 @* style="display:table; width:100%; box-sizing:border-box;" class="table-primary"*@
@@ -189,8 +186,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <button class="btn btn-primary" formaction="/Event/CheckOT" style="width:150px">Check Overtime</button> @*formaction="/AddSchedule"*@
+                </div>
+                <div class="row pt-4">
+                    <div class="col-12 text-end">
+                    <button class="btn btn-primary text-end" formaction="/Event/CheckOT" style="width:150px">Check Overtime</button> @*formaction="/AddSchedule"*@
+                </div>
                 </div>
             </div>
         </div>
@@ -204,14 +204,14 @@
             $('#errorModal').modal('show');
 
         }
-        $('#readyDocument').on('click', () => {
+        
             $(document).ready(function () {
                 var msg = "@TempData["Error"]";
                 if (msg)
                     openErrorModal(msg);
            
             });
-        });
+       
 
     </script>
  }
