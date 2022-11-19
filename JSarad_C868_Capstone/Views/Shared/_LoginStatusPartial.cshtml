@@ -1,4 +1,5 @@
-﻿@if (User.Identity.IsAuthenticated)
+﻿
+@if (User.Identity.IsAuthenticated)
 {
     <form method="post" asp-controller="Login" asp-action="Logout">
         

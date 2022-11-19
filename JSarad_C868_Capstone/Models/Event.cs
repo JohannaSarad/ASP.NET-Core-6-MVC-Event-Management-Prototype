@@ -35,7 +35,7 @@ namespace JSarad_C868_Capstone.Models
 
         [DisplayName("Number of Guests")]
         public int Guests { get; set; }
-        public string Notes { get; set; }
+        public string? Notes { get; set; }
 
         [ForeignKey("Client")]
         public int ClientId { get; set; }

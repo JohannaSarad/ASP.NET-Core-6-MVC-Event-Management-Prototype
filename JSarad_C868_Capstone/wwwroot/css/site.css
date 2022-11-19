@@ -45,7 +45,7 @@ th {
     border: 1px solid black;
     box-shadow: 0px 0px 3px rgba(0,0,0,0.9);
     border-radius: 4px;
-    height: 38%;
+    height: 25vh;
     position: relative;
     background-color: white;
 }
@@ -91,7 +91,7 @@ th {
     border: 1px solid black;
     box-shadow: 0px 0px 3px rgba(0,0,0,0.9);
     border-radius: 4px;
-    height: 80%;
+    height: 19vh;
     margin: 20px;
     background-color:white;
 }

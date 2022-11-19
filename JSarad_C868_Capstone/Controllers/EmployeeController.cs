@@ -102,6 +102,17 @@ namespace JSarad_C868_Capstone.Controllers
             {
                 return NotFound();
             }
+
+            var schedules = from s in _db.Schedules where s.EmployeeId == selectedEmployee.Id select s;
+            if (schedules.Any())
+            {
+                foreach (Schedule schedule in schedules)
+                {
+                    var eventSchedule = _db.EventSchedules.Where(e => e.ScheduleId == schedule.Id).FirstOrDefault();
+                    _db.EventSchedules.Remove(eventSchedule);
+                    _db.Schedules.Remove(schedule);
+                }
+            }
             _db.Employees.Remove(selectedEmployee);
             _db.SaveChanges();
             return RedirectToAction("Index");

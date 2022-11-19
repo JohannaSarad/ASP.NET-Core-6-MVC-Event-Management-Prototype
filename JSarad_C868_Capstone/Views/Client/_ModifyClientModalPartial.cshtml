@@ -1,7 +1,7 @@
 ﻿@model JSarad_C868_Capstone.ViewModels.ClientViewModel
 
 <!-- _ModifyEmployeeModal (shows/hides from Modify Object function in site.js, on buttonclick Add or Edit of /Client/Index.cshtml)-->
-<div class="modal modal-fade" id="modifyClient">
+<div class="modal modal-fade" id="modifyClient" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -16,7 +16,7 @@
 
 
                     <div class="form-group">
-                        <input asp-for="Client.Id" class="form-control" />
+                        <input asp-for="Client.Id" class="form-control" type="hidden"/>
                         <label asp-for="Client.Name"></label>
                         <input asp-for="Client.Name" class="form-control" />
                         <span asp-validation-for="Client.Name" class="text-danger"></span>

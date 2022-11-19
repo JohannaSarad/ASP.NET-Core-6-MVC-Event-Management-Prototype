@@ -45,7 +45,7 @@ $((function () {
         if (id == null || id == " " || id == 0)
         {
             var errorDiv = document.getElementById("errorModalBody");
-            errorDiv.innerHTML = "Please Select a Record to View";
+            errorDiv.innerHTML = "Please Select a Record to Delete";
             $('#errorModal').modal('show');
             return;
         }

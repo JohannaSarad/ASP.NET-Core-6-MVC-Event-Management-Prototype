@@ -15,12 +15,13 @@ namespace JSarad_C868_Capstone.Data
 
         public IEnumerable<Client> GetClients()
         {
-            return _db.Clients;
+            IEnumerable<Client> clients = _db.Clients;
+            return clients;
         }
 
         public Client GetClientById(int id)
         {
-            Client client = _db.Clients.Find(id);
+            var client = _db.Clients.Find(id);
             return client;
         }
     }

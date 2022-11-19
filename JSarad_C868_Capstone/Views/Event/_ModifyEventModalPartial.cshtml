@@ -1,7 +1,7 @@
 ﻿@model JSarad_C868_Capstone.ViewModels.EventViewModel
 
 <!-- _ModifyEmployeeModal (shows/hides from Modify Object function in site.js, on buttonclick Add or Edit of /Event/Index.cshtml)-->
-<div class="modal modal-fade modifyModal" id="modifyEvent">
+<div class="modal modal-fade modifyModal" id="modifyEvent" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -123,7 +123,7 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="Event.Notes">Event Notes: </label>
-                                <textarea asp-for="Event.Notes" class="form-control" asp-for="Event.Notes" rows="6"></textarea>
+                                <textarea asp-for="Event.Notes" class="form-control" value="" rows="6"></textarea>
                             </div>
                          </div>
                     </div>
