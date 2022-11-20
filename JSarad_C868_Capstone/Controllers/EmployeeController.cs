@@ -72,6 +72,11 @@ namespace JSarad_C868_Capstone.Controllers
                 {
                     ModelState.AddModelError("Employee.Phone", "The Phone field is not a valid phone number");
                 }
+
+                else if ((viewModel.Employee.Phone.Length > 15) || (viewModel.Employee.Phone.Length < 7)) 
+                {
+                    ModelState.AddModelError("Employee.Phone", "Phone number must be between 7 and 15 digits");
+                }
             }
             
 

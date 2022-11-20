@@ -88,6 +88,21 @@ namespace JSarad_C868_Capstone.Controllers
                 }
             }
 
+            if (viewModel.Client.Phone != null)
+            {
+                char firstCharacter = viewModel.Client.Phone[0];
+                //check that ph
+                if (firstCharacter == '0')
+                {
+                    ModelState.AddModelError("Client.Phone", "The Phone field is not a valid phone number");
+                }
+
+                else if ((viewModel.Client.Phone.Length > 15) || (viewModel.Client.Phone.Length < 7))
+                {
+                    ModelState.AddModelError("Client.Phone", "Phone number must be between 7 and 15 digits");
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 if (viewModel.Client.Id == 0)

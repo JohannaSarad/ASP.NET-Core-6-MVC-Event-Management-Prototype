@@ -7,20 +7,20 @@
             <h2 class="text-primary">Event Planner Report</h2>
         </div>
     </div>
-    <br /><br />
-    <form method="post">
+    <br />
+    <form method="post" asp-action="Search">
         @* method="get" asp-action="Index"*@
-    <div class="row mb-3">
+        <div class="row mb-3">
             <div class="col-4 form-group" style="margin-top:7px">
                 <label class="d-inline-block"> Select Events created by : </label> 
                 <select asp-for="SelectedUser" asp-items="Model.UserSelectList"  
                         class="form-select form-select-sm d-inline" style="width:auto ">
                     @* padding-left: 20px; padding-right: 20px;*@
-            </select>
+                </select>
                 
-        </div>
+            </div>
             <div class="col-3 form-group" style="margin-top:7px">
-            <div>
+            @*<div>*@
                 <label>Starting on : </label>
                 <input asp-for="StartDate" id="datepicker" type="date" /> 
                 <span class="add-on">
@@ -28,9 +28,9 @@
                     </i>
                 </span>
             </div>
-        </div>
+       @* </div>*@
             <div class="col form-group" style="margin-top:7px">
-            <div>
+           @* <div>*@
                 <label>Ending on : </label>
                 <input asp-for="EndDate" id="datepicker2" type="date" /> 
 
@@ -38,14 +38,14 @@
                     <i data-date-icon="icon-calendar">
                     </i>
                 </span>
+           @* </div>*@
+            </div>
+            <div class="col form-group text-end">
+                <button type="submit" class="btn btn-primary" style="width:7vw"> Apply Filters </button> @*value="Search"*@ @*asp-controller="Reports" asp-action="ApplyFilters"*@
             </div>
         </div>
-        <div class="col form-group text-end">
-            <button type="submit" class="btn btn-primary" style="width:7vw" asp-controller="Reports" asp-action="ApplyFilters"> Apply Filters </button> @*value="Search"*@
-        </div>
-    </div>
-    </form>
-    <div class="outer-wrapper">
+   
+        <div class="outer-wrapper">
         <div class="tc">
             <div class="table-wrapper">
                 <table class="table table-bordered border-dark table-primary table-hover" style="width:100%">
@@ -76,7 +76,7 @@
                                 index++;
                                 <tr  class="table-light">
                                     <td>@item.CreatedBy</td>
-                                    <td>@item.CreatedOn</td>
+                                    <td>@item.CreatedOn.ToShortDateString()</td>
                                     <td>@item.EventName </td>
                                     <td>@item.Type</td>
                                     <td>@item.EventDate.ToShortDateString()</td>
@@ -90,7 +90,8 @@
                 </table>
             </div>
         </div>
-    </div>
+        </div>
+    </form>
 </div>
 
     

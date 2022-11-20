@@ -41,7 +41,7 @@ namespace JSarad_C868_Capstone.Models
         public int ClientId { get; set; }
         
         public int? CreatedBy { get; set; }
-        public DateTime? CreatedOn { get; set; } // changes when added
+        public DateTime CreatedOn { get; set; } // changes when added
 
         public DateTime LastUpdate { get; set; } = DateTime.Now; //changes when updated
         //string 

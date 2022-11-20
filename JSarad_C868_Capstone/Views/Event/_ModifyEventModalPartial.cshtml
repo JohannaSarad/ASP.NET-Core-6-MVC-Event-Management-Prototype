@@ -117,8 +117,8 @@
                              <div style="padding-bottom:10%;">
                              <label>Client Name</label>
                                 <input asp-for="ClientName" type="text" id="completeTxt" oninput="AutoComplete()" class="form-control" controller="Event" action="AutoComplete" /> @*completeText*@
-                                <input id="hfitem" name="ClientId" />
-                             <input  asp-for="Event.ClientId" id="autoId" /> @*type="hidden"*@
+                                <input id="hfitem" name="ClientId" type="hidden" />
+                                <input asp-for="Event.ClientId" id="autoId" type="hidden" /> 
                              <span asp-validation-for="ClientName" class="text-danger"></span>
                             </div>
                             <div class="form-group">

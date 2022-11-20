@@ -16,12 +16,12 @@
             </button>
         </div>
     </div>
-    <br /><br />
+    <br />
 
     <!--search bar and button (/Client/Index/{string}-->
     <form method="get" asp-action="Index">
         <p>
-            <input type="search" placeholder="Search Client Name Or Email" value="@ViewData["GetCLient"]" name="search" style="width:500px;" />
+            <input type="search" placeholder="Search Client Name Or Email" value="@ViewData["GetClient"]" name="search" style="width:500px;" />
             <input type="submit" value="Search" class="btn btn-primary" />
             <a asp-action="Index">Get All Clients</a>
         </p>
@@ -63,7 +63,7 @@
             </div>
         </div>
         @*hidden input field for selected client (js call back)*@
-        <input id="selectedId" class="form-control" />
+        <input id="selectedId" class="form-control" type="hidden"/>
         <div class="buttons">
 
                 <!--button call to modify modal 'Edit" (Modify Object function site.js)-->
