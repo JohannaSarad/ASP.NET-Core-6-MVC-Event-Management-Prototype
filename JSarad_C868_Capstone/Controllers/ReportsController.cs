@@ -26,7 +26,7 @@ namespace JSarad_C868_Capstone.Controllers
             viewModel.UserSelectList = BindSelectList();
             viewModel.StartDate = DateTime.Now;
             viewModel.EndDate = DateTime.Now;
-            viewModel.EventList = _db.Events.ToList();
+            viewModel.EventList = _db.Events.OrderBy(e => e.StartTime).ToList();
             //viewModel.UserSelectList.Insert(0, new SelectListItem
             //{
             //    Text = "All Planners",
@@ -50,11 +50,60 @@ namespace JSarad_C868_Capstone.Controllers
             ModelState.Clear();
             viewModel.UserSelectList = BindSelectList();
             int userId = Convert.ToInt32(viewModel.SelectedUser);
-            if (userId == 0)
+            viewModel.EventList = new List<Event>();
+            //viewModel.StartDate = DateTime.Now;
+            //viewModel.EndDate = DateTime.Now;
+
+            if ((viewModel.OrderByPlanner) && (userId > 0))
+            {
+                if (viewModel.OrderByDates == true)
+                {
+                    viewModel.EventList = (from e in _db.Events
+                                           where e.CreatedBy == userId  
+                                           && e.EventDate.Date >= viewModel.StartDate.Date
+                                           && e.EventDate.Date <= viewModel.EndDate.Date
+                                           select new Event
+                                           {
+                                               Id = e.Id,
+                                               EventName = e.EventName,
+                                               EventDate = e.EventDate,
+                                               StartTime = e.StartTime,
+                                               EndTime = e.EndTime,
+                                               Type = e.Type,
+                                               Guests = e.Guests,
+                                               //Food = e.Food,
+                                               //Bar = e.Bar,
+                                               CreatedBy = e.CreatedBy,
+                                               CreatedOn = e.CreatedOn,
+                                               ClientId = e.ClientId
+                                           }).ToList();
+                }
+                else
+                {
+                    viewModel.EventList = (from e in _db.Events
+                                           where e.CreatedBy == userId
+                                           select new Event
+                                           {
+                                               Id = e.Id,
+                                               EventName = e.EventName,
+                                               EventDate = e.EventDate,
+                                               StartTime = e.StartTime,
+                                               EndTime = e.EndTime,
+                                               Type = e.Type,
+                                               Guests = e.Guests,
+                                               //Food = e.Food,
+                                               //Bar = e.Bar,
+                                               CreatedBy = userId,
+                                               CreatedOn = e.CreatedOn,
+                                               ClientId = e.ClientId
+                                           }).ToList();
+                }
+            }
+            else if (viewModel.OrderByDates)
             {
                 viewModel.EventList = (from e in _db.Events
-                                       where e.StartTime >= viewModel.StartDate
-                                       && e.EndTime <= viewModel.EndDate
+                                       where e.EventDate.Date >= viewModel.StartDate.Date
+                                       && e.EventDate.Date <= viewModel.EndDate.Date
                                        select new Event
                                        {
                                            Id = e.Id,
@@ -70,37 +119,13 @@ namespace JSarad_C868_Capstone.Controllers
                                            CreatedOn = e.CreatedOn,
                                            ClientId = e.ClientId
                                        }).ToList();
-
             }
             else
             {
-                //viewModel.EventList (temporarilyt switched with queryResult
-                viewModel.EventList = (from e in _db.Events
-                                       where
-                                      e.CreatedBy == userId && e.StartTime >= viewModel.StartDate
-                                      && e.EndTime <= viewModel.EndDate
-                                       select new Event
-                                       {
-                                           Id = e.Id,
-                                           EventName = e.EventName,
-                                           EventDate = e.EventDate,
-                                           StartTime = e.StartTime,
-                                           EndTime = e.EndTime,
-                                           Type = e.Type,
-                                           Guests = e.Guests,
-                                           //Food = e.Food,
-                                           //Bar = e.Bar,
-                                           CreatedBy = userId,
-                                           CreatedOn = e.CreatedOn,
-                                           ClientId = e.ClientId
-                                       }).ToList();
+                TempData["Error"] = "Please select an event planner";
+                return RedirectToAction("Index", viewModel);
             }
             return View("Index", viewModel);
-            //if (!string.IsNullOrEmpty(search))
-            //{
-            //    searchQuery = searchQuery.Where(e => e.Type.Contains(search)).OrderBy(s => s.StartTime);
-            //}
-            //return View(await queryFilter.AsNoTracking().ToListAsync());
         }
 
         public List<SelectListItem> BindSelectList()

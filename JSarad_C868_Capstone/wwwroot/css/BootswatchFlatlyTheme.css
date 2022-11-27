@@ -4250,6 +4250,7 @@ textarea.form-control-lg {
     margin-right: var(--bs-navbar-brand-margin-end);
     font-size: var(--bs-navbar-brand-font-size);
     color: var(--bs-navbar-brand-color);
+    color: lightgray;
     text-decoration: none;
     white-space: nowrap;
 }

@@ -8,9 +8,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="JSarad_C868_Capstone.Data.AppDbContext">
-    <Position X="2.25" Y="0.5" Width="2.5" />
+    <Position X="2.25" Y="1.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAACAAAAAAAACAACAAAAAAGkIAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAACAAAAAAAAAAACAAAAAAGkIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Data\AppDbContext.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -22,17 +22,24 @@
     </TypeIdentifier>
   </Class>
   <Class Name="JSarad_C868_Capstone.Models.Event">
-    <Position X="0.5" Y="3.75" Width="1.75" />
+    <Position X="5.25" Y="4" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAiAAAAAAgAAAAAgAIAAAAQIIAiAAAAAQAAAgBAAAk=</HashCode>
       <FileName>Models\Event.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="JSarad_C868_Capstone.Data.DataService">
-    <Position X="5" Y="3.5" Width="1.5" />
+  <Class Name="JSarad_C868_Capstone.Data.Constants">
+    <Position X="5" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Data\DataService.cs</FileName>
+      <FileName>Data\Constants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JSarad_C868_Capstone.Models.EventListDetails">
+    <Position X="5.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAgAAgAAAAIIAgAAAAAQAAIABAAAA=</HashCode>
+      <FileName>Models\EventListDetails.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

@@ -29,8 +29,10 @@ namespace JSarad_C868_Capstone.Controllers
 
         // /Event
         //Returns Event List View Including Client name and Phone
+
         public IActionResult Index()
         {
+
             var events = from e in _db.Events
                          join c in _db.Clients on e.ClientId equals c.Id
                          select new EventListDetails
@@ -45,14 +47,17 @@ namespace JSarad_C868_Capstone.Controllers
                              ContactName = c.Name,
                              Phone = c.Phone
                          };
-            var orderedEvents = events.OrderBy(e => e.StartTime);
-            return View(orderedEvents);
-            //not ordering dates properly all of the sudden
+
+
+            events = events.OrderBy(e => e.StartTime);
+
+            return View(events.ToList());
+
         }
 
-        //Event Table Search (returns Events by type)
-        [HttpGet]
-        public async Task<IActionResult> Index(string search)
+        //Event list view with table search option (returns Events by type)
+        [HttpPost]
+        public async Task<IActionResult> Index(string? search)
         {
             ViewData["GetEvent"] = search;
             var searchQuery = from e in _db.Events
@@ -69,10 +74,15 @@ namespace JSarad_C868_Capstone.Controllers
                                   ContactName = c.Name,
                                   Phone = c.Phone
                               };
-            
+
             if (!string.IsNullOrEmpty(search))
             {
                 searchQuery = searchQuery.Where(e => e.Type.Contains(search)).OrderBy(s => s.StartTime);
+            }
+            else
+            {
+                searchQuery = searchQuery.OrderBy(s => s.StartTime);
+                return View("Index", searchQuery);
             }
             return View(await searchQuery.AsNoTracking().ToListAsync());
         }
@@ -125,31 +135,31 @@ namespace JSarad_C868_Capstone.Controllers
 
             viewModel.Event.StartTime = viewModel.Event.EventDate.Date + viewModel.Event.StartTime.TimeOfDay;
             viewModel.Event.EndTime = viewModel.Event.EventDate.Date + viewModel.Event.EndTime.TimeOfDay;
-            viewModel.Event.CreatedBy = DataService.currentUser.Id;
+            viewModel.Event.CreatedBy = Constants.currentUser.Id;
             viewModel.Event.CreatedOn = DateTime.Now;
-            
-            //TimeSpan open = new TimeSpan(06, 00, 00);
-            //TimeSpan close = new TimeSpan(23, 00, 00);
             
             if (string.IsNullOrEmpty(viewModel.Event.Notes))
             {
                 viewModel.Event.Notes = "...";
             }
 
-            // create start before end method
-            //if ((viewModel.Event.StartTime > viewModel.Event.EndTime) || (viewModel.Event.StartTime == viewModel.Event.EndTime))
+            // validate start time is scheduled before end time
             isStartBeforeEnd = _schedulingService.IsStartBeforeEnd(viewModel.Event.StartTime, viewModel.Event.EndTime);
             if (!isStartBeforeEnd)
             {
                 ModelState.AddModelError("Event.EndTime", "* Event start time must be before Event end time");
             }
 
-            //if ((viewModel.Event.EndTime.TimeOfDay > close) || (viewModel.Event.StartTime.TimeOfDay < open)
-            //    || (viewModel.Event.EndTime.TimeOfDay < open) || (viewModel.Event.StartTime.TimeOfDay > close))
+            //validate start and end time are during business hours
             isBusinessHours = _schedulingService.IsDuringBusinessHours(viewModel.Event.StartTime, viewModel.Event.EndTime);
             if(!isBusinessHours)
             {
                 ModelState.AddModelError("Event.EndTime", "* Events must be scheduled during hours of operation between 6:00 am and 11:00 pm");
+            }
+
+            if (viewModel.Event.Guests < 0)
+            {
+                ModelState.AddModelError("Event.Guests", "The number of guests cannot be negative");
             }
 
             if (viewModel.ClientName != null)
@@ -202,8 +212,8 @@ namespace JSarad_C868_Capstone.Controllers
         [HttpPost]
         public IActionResult DeletePOST(int? id)
         {
-            if (id == null || id == 0)
-            {
+            //if (id == null || id == 0)
+            //{
                 var selectedEvent = _db.Events.Find(id);
                 if (selectedEvent == null)
                 {
@@ -222,7 +232,7 @@ namespace JSarad_C868_Capstone.Controllers
                 }
                 _db.Events.Remove(selectedEvent);
                 _db.SaveChanges();
-            }
+            //}
             return RedirectToAction("Index");
         }
 

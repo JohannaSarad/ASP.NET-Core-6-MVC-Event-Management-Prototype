@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor(); //added for highlighting nav links
 //inject connection
 
 builder.Services.AddDbContext<AppDbContext>(options => {

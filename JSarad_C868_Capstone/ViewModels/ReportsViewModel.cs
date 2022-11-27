@@ -10,6 +10,8 @@ namespace JSarad_C868_Capstone.ViewModels
         public string SelectedUser { get; set; }
        
         public List<SelectListItem> UserSelectList { get; set; }
+        public bool OrderByPlanner { get; set; } = false;
+        public bool OrderByDates { get; set; } = false;
         
     }
 }

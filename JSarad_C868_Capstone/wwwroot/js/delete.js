@@ -72,6 +72,7 @@ $((function () {
                 $("#deleteModal").modal("hide");
                 $("#row_" + id).remove();
                 $("#selectedId").val("");
+                location.reload();
             }
         });
     });

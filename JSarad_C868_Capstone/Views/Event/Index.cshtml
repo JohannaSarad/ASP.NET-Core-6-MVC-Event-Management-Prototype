@@ -20,7 +20,7 @@
     <br />
 
     <!--search bar and button (/Event/Index/string)-->
-    <form method="get" asp-action="Index">
+    <form method="post" asp-action="Index">
         <p>
             <input type="search" placeholder="Search Event By Type" value="@ViewData["GetEvent"]" name="search" style="width:500px;" />
             <input type="submit" value="Search" class="btn btn-primary" />
@@ -35,14 +35,15 @@
                 <table class="table table-bordered border-dark table-primary table-hover" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Event Id</th>
-                            <th>Event Name</th>
-                            <th>Event Type</th>
                             <th>Event Date</th>
                             <th>Start Time</th>
                             <th>End Time</th>
+                           @* <th>Event Id</th>*@
+                            <th>Event Name</th>
+                            <th>Event Type</th>
                             <th>Contact Name</th>
                             <th>Contact Phone</th>
+                           
                         </tr>
                     </thead>
                     
@@ -50,20 +51,21 @@
                        
                         @*track index of IEnumerable*@
                         @{int index = -1;
-                                    @foreach (var item in Model)
+                            @foreach (var item in Model)
                             { 
                                 index++;
-                                        <tr id="row_@item.EventId" class="table-light selectable" controller="Event" Action="Selection" 
-                                            data-id="@item.EventId" data-index="@index">
-                                            <td>@item.EventId</td>
-                                            <td>@item.EventName</td>
-                                            <td>@item.Type </td>
-                                            <td>@item.EventDate.ToShortDateString()</td>
-                                            <td>@item.StartTime.ToShortTimeString()</td>
-                                            <td>@item.EndTime.ToShortTimeString()</td>
-                                            <td>@item.ContactName</td>
-                                            <td>@item.Phone</td>
-                                        </tr>
+                                <tr id="row_@item.EventId" class="table-light selectable" controller="Event" Action="Selection" 
+                                    data-id="@item.EventId" data-index="@index">
+                                    @*<td>@item.EventId</td>*@
+                                    <td>@item.EventDate.ToShortDateString()</td>
+                                    <td>@item.StartTime.ToShortTimeString()</td>
+                                    <td>@item.EndTime.ToShortTimeString()</td>
+                                    <td>@item.EventName</td>
+                                    <td>@item.Type </td>
+                                   
+                                    <td>@item.ContactName</td>
+                                    <td>@item.Phone</td>
+                                </tr>
                             }
                         }
                     </tbody>
@@ -95,5 +97,12 @@
         </div>
     </div>
 </div>
-
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".active").removeClass("active");
+            $("#link-event").addClass("active");
+        });
+    </script>
+ }
                 

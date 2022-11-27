@@ -49,6 +49,7 @@ $((function () {
         var selectedRow = e.target.parentElement;
         var id = $(selectedRow).data('id');
         var index = $(selectedRow).data('index');
+        alert(index);
         var controller = selectedRow.getAttribute("controller");
         var action = selectedRow.getAttribute("action");
         var url = "/" + controller + "/" + action + "/" + id;
@@ -61,6 +62,7 @@ $((function () {
                 for (var cell = 0; cell < tdArray.length; cell++)
                 {
                     tdArray[cell].style.backgroundColor = "#71EEDD";
+                    /*tdArray[cell].style.backgroundColor = "#63b8a7";*/
                     //FIX ME!!! need to remove hover for these cells
                 }
             }
