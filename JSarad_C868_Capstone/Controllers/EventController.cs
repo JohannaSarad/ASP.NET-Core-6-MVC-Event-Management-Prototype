@@ -263,7 +263,7 @@ namespace JSarad_C868_Capstone.Controllers
                                        StartTime = s.StartTime,
                                        EndTime = s.EndTime
                                    }).ToList();
-            return View("AddSchedule", viewModel); ;
+            return View("AddSchedule", viewModel); 
         }
 
         [HttpPost]
@@ -280,10 +280,10 @@ namespace JSarad_C868_Capstone.Controllers
             var schedules = from s in _db.Schedules where s.EmployeeId == selectedEmployee.Id select s;
             DateTime start = viewModel.Event.StartTime.Date + viewModel.EmployeeSchedule.StartTime.TimeOfDay;
             DateTime end = viewModel.Event.StartTime.Date + viewModel.EmployeeSchedule.EndTime.TimeOfDay;
-            
+
             //validate employee selected for schedule
-            //if (viewModel.EmployeeSchedule.EmployeeId == 0)
-            if(selectedEmployee.Id == 0)
+            if (viewModel.EmployeeSchedule.EmployeeId == 0)
+            //if(selectedEmployee.Id == 0)
             {
                 TempData["Error"] = "Please select the employee you would like to add to schedule";
                 return View("AddSchedule", viewModel);
@@ -439,7 +439,7 @@ namespace JSarad_C868_Capstone.Controllers
                         weeklyHours = (weekShiftLength.Days * 24) + weekShiftLength.Hours;
                         weeklyMinutes = weekShiftLength.Minutes;
 
-                        if (shiftHours > 8 || weeklyHours > 40)
+                        if (shiftHours > 8 || weeklyHours > 40) // this needs to be inside of the for
                         {
                             string ot = "";
                             if (shiftHours > 8)
@@ -454,7 +454,11 @@ namespace JSarad_C868_Capstone.Controllers
                             }
                             employeeOvertime.Add(ot);
                             shiftLength = new TimeSpan();
+                            weekShiftLength = new TimeSpan();
                             weeklyHours = 0;
+                            weeklyMinutes = 0;
+                            shiftHours = 0;
+                            shiftMinutes = 0;
                         }
                     }
                 }

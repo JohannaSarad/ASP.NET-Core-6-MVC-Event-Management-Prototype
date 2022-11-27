@@ -129,7 +129,7 @@ namespace JSarad_C868_Capstone.Controllers
             EmployeeScheduleViewModel viewModel= new EmployeeScheduleViewModel();
             viewModel.Employee = _db.Employees.Find(id);
             viewModel.Schedule = (from s in _db.Schedules
-                                  where s.Id == id
+                                  where s.EmployeeId == id orderby s.StartTime
                                   select new Schedule
                                   {
                                       Id = s.Id,
