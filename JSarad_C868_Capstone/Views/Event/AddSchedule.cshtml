@@ -210,15 +210,14 @@
             var errorDiv = document.getElementById("errorModalBody");
             errorDiv.innerHTML = (strMessage);
             $('#errorModal').modal('show');
-
         }
         
-            $(document).ready(function () {
-                var msg = "@TempData["Error"]";
-                if (msg)
-                    openErrorModal(msg);
+        $(document).ready(function () {
+            var msg = "@TempData["Error"]";
+            if (msg)
+                openErrorModal(msg);
            
-            });
+        });
        
 
     </script>

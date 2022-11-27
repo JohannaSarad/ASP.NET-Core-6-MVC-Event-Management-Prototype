@@ -98,6 +98,7 @@ namespace JSarad_C868_Capstone.Data
                     CreatedBy = 1,
                     CreatedOn = new DateTime(2022, 10, 21, 16, 30, 00),
                     Notes = ""
+                    //add one more event created by planner
                 }); 
             builder.Entity<EventSchedule>().HasData(
                 new EventSchedule

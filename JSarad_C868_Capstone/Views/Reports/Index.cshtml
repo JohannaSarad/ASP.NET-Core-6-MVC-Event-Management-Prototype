@@ -2,69 +2,65 @@
 
 
 <div class="container p3" style="height:83vh">
-    <div class="row pt-4">
-        <div class="col-6">
-            <h2 class="text-primary">Event Planner Report</h2>
+    <form method="post" asp-action="Index">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="text-primary">Event Planner Report</h2>
+            </div>
+            
         </div>
-    </div>
-    <br />
-    <form method="post" asp-action="Search">
-        @* method="get" asp-action="Index"*@
-        <div class="col-4">
-            <div class="row">
-           
-                <div class="col">
-                    <div class="form-check">
-                        <input asp-for="OrderByPlanner" class="form-check-input" type="checkbox" />
-                        <label class="form-check-label">Filter By Planner </label>
+        <br />
+    
+        <div class="row mb-3" style="margin-top:7px">
+            <div class="col-4">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-check">
+                            <input asp-for="OrderByPlanner" class="form-check-input" type="checkbox" />
+                            <label class="form-check-label">Filter By Planner </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input asp-for="OrderByDates" class="form-check-input" type="checkbox" />
+                            <label class="form-check-label">Filter By Dates </label>
+                        </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="form-check">
-                        <input asp-for="OrderByDates" class="form-check-input" type="checkbox" />
-                        <label class="form-check-label">Filter By Dates </label>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-6 text-end">
+                <div class="row">
+                    <div class="col form-group" style="margin-top:7px">
+                       @* <label class="d-inline-block"> scheduled by : </label> *@
+                        <select asp-for="SelectedUser" asp-items="Model.UserSelectList"  
+                                class="form-select form-select-sm d-inline" style="width:auto ">
+                            @* padding-left: 20px; padding-right: 20px;*@
+                        </select>
+                    </div>
+                    <div class="col form-group" style="margin-top:7px">
+                        <label> from : </label>
+                        <input asp-for="StartDate" id="datepicker" type="date" /> 
+                        <span class="add-on">
+                            <i data-date-icon="icon-calendar">
+                            </i>
+                        </span>
+                    </div>
+                    <div class="col form-group" style="margin-top:7px">
+                        <label> to : </label>
+                        <input asp-for="EndDate" id="datepicker2" type="date" /> 
+                        <span class="add-on">
+                            <i data-date-icon="icon-calendar">
+                            </i>
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row mb-3" style="margin-top:20px">
-            <div class="col-4 form-group" style="margin-top:15px">
-                <label class="d-inline-block"> Select Events created by : </label> 
-                <select asp-for="SelectedUser" asp-items="Model.UserSelectList"  
-                        class="form-select form-select-sm d-inline" style="width:auto ">
-                    @* padding-left: 20px; padding-right: 20px;*@
-                </select>
-                
-            </div>
-            <div class="col-3 form-group" style="margin-top:7px">
-            @*<div>*@
-                <label>Starting on : </label>
-                <input asp-for="StartDate" id="datepicker" type="date" /> 
-                <span class="add-on">
-                    <i data-date-icon="icon-calendar">
-                    </i>
-                </span>
-            </div>
-        @* </div>*@
-            <div class="col form-group" style="margin-top:7px">
-            @* <div>*@
-                <label>Ending on : </label>
-                <input asp-for="EndDate" id="datepicker2" type="date" /> 
-
-                <span class="add-on">
-                    <i data-date-icon="icon-calendar">
-                    </i>
-                </span>
-            @* </div>*@
-            </div>
-            <div class="col form-group text-end">
-                <button type="submit" class="btn btn-primary" style="width:7vw"> Apply Filters </button> @*value="Search"*@ @*asp-controller="Reports" asp-action="ApplyFilters"*@
-            </div>
-        </div>
-   
-        <div class="med-outer-wrapper">
-            <div class="med-tc">
-                <div class="med-table-wrapper">
+     
+        <div class="outer-wrapper">
+            <div class="tc">
+                <div class="table-wrapper">
                     <table class="table table-bordered border-dark table-primary table-hover" style="width:100%">
                         <thead>
                             <tr>
@@ -75,14 +71,10 @@
                                 <th>Create Date</th>
                                 <th>Event Name</th>
                                 <th>Event Type</th>
-                            
                                 <th># of Guests</th>
                                 @* <th> Includes </th>*@
                             </tr>
                         </thead>
-                               
-
-                               
                         <!--table body and population info for Event (Controllers/Event/Index)-->
                         <tbody>
 
@@ -92,44 +84,57 @@
                                             @foreach (var item in Model.EventList)
                                 {
                                     index++;
-                                                <tr  class="table-light">
-                                                    <td>@item.CreatedBy</td>
-                                                        <td>@item.EventDate.ToShortDateString()</td>
-                                                        <td>@item.StartTime.ToShortTimeString()</td>
-                                                        <td>@item.EndTime.ToShortTimeString()</td>
-                                                    <td>@item.CreatedOn.ToShortDateString()</td>
-                                                    <td>@item.EventName </td>
-                                                    <td>@item.Type</td>
-                                                    <td>@item.Guests</td>
-                                                </tr>
+                                    <tr  class="table-light">
+                                        <td>@item.CreatedBy</td>
+                                        <td>@item.EventDate.ToShortDateString()</td>
+                                        <td>@item.StartTime.ToShortTimeString()</td>
+                                        <td>@item.EndTime.ToShortTimeString()</td>
+                                        <td>@item.CreatedOn.ToShortDateString()</td>
+                                        <td>@item.EventName </td>
+                                        <td>@item.Type</td>
+                                        <td>@item.Guests</td>
+                                    </tr>
                                 }
                             }
                         </tbody>
                     </table>
                 </div>
             </div>
+            <div class="buttons">
+                <a class="btn btn-secondary" asp-action="Index"> View All </a>
+                <button type="submit" class="btn btn-primary"> Apply Filters </button>
+            </div>
+               
         </div>
     </form>
 </div>
+       
+          
 
 @section Scripts {
     <script type="text/javascript">
-        $(document).ready(function () {
-            $(".active").removeClass("active");
-            $("#link-reports").addClass("active");
-            var msg = "@TempData["Error"]";
-                if (msg)
-                    openErrorModal(msg);
-        });
-    
         function openErrorModal(strMessage) {
             var errorDiv = document.getElementById("errorModalBody");
             errorDiv.innerHTML = (strMessage);
             $('#errorModal').modal('show');
-            location.reload();
         }
+        $(document).ready(function () {
+            $(".active").removeClass("active");
+            $("#link-reports").addClass("active");
+            var msg = "@TempData["Error"]";
+            if (msg)
+                openErrorModal(msg);
+        });
     </script>
  }
+          
+            
+       
+   
+                               
+
+                               
+
     
 
 

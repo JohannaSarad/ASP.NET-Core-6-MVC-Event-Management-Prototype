@@ -3,14 +3,8 @@ using JSarad_C868_Capstone.Models;
 using JSarad_C868_Capstone.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System.Drawing;
-using System.Globalization;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.Xml;
-using System.Web;
+
 
 namespace JSarad_C868_Capstone.Controllers
 {
@@ -347,7 +341,7 @@ namespace JSarad_C868_Capstone.Controllers
             _db.Schedules.Add(scheduleToAdd);
             _db.SaveChanges();
 
-            //add scheulde to eventSchedule
+            //add schedule and event to eventSchedule
             EventSchedule eventScheule = new EventSchedule()
             {
                 EventId = viewModel.Event.Id,
@@ -366,7 +360,7 @@ namespace JSarad_C868_Capstone.Controllers
                 EndTime = viewModel.EmployeeSchedule.EndTime
             };
 
-            //create new display list if there are currently no schedules
+            //create or update list of schedules display
             if (viewModel.Schedules == null)
             {
                 viewModel.Schedules = new List<ScheduleDisplayDetails>();
