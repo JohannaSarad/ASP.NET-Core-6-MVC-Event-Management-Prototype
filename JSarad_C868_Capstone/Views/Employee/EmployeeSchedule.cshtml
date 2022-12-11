@@ -1,47 +1,52 @@
 ﻿@model JSarad_C868_Capstone.ViewModels.EmployeeScheduleViewModel
 
-<div class="container" style="height:100vh">
-    <!--page header-->
-    <div class="row">
-        <div class="row pb-2">
+<div class="container p3" style="height:83vh">
+    <div class="row pt-4">
+        <div class="col-6">
             <h2 class="text-primary">Employee Details & Schedule</h2>
-            <hr />
+        </div>
+        <div class="col-6 text-end" style="margin-top:20px">
+            <!--button to return to Events page -->
+            <a class="btn btn-primary text-end" asp-controller="Employee" asp-action="Index" style="width:auto">Return to Employees</a>
         </div>
     </div>
-    <br /><br />
+    <br />
+
     <div class="row">
         <!--Employee Details side panel-->
-        <div class="col md-4">
-            <div class="p-2 mt-4" style="box-shadow: 0px 0px 3px rgba(0,0,0,0.9); border: 1px solid black;">
-                <div class="mb-3">
-                    <p> <b>Employee Id: </b> @($" {Model.Employee.Id}" )</p>
-                    <p> <b>Employee Name: </b>@($" {Model.Employee.Name}")</p>
-                    <p> <b>Employee Role: </b>@($" {Model.Employee.Role}")</p>
-                    <p> <b>Available Days to Work: </b>@($" {Model.Employee.Availability}")</p>
-                    <p> <b>Number of Guests: </b>@($" {Model.Employee.Id}")</p>
-                    <p> <b>Contact Information :</b></p>
-                    <p> <b>Phone Number: </b>@($" {Model.Employee.Phone}")</p>
-                    <p> <b>Email Address: </b>@($" {Model.Employee.Email}")</p>
-                    <p> <b>Home Address:</b>@($" {Model.Employee.Address}")</p>
+        <div class="col md-4" style="padding-top:1.7%;">
+            <div class="outer-wrapper" style="min-height:400px;">
+                <div class="details-container">
+                    <h4 style="margin-top:10px;"><b>@Html.Raw(Model.Employee.Name)</b> </h4>
+                    <hr />
+                    <div class="mb-3">
+                        <p> <b>Employee Id: </b> @($" {Model.Employee.Id}" )</p>
+                    
+                        <p> <b>Employee Role: </b>@($" {Model.Employee.Role}")</p>
+                        <p> <b>Available Days to Work: </b>@($" {Model.Employee.Availability}")</p>
+                    
+                        <p> <b>Contact Information</b></p>
+                        <p> <b>Phone: </b>@($" {Model.Employee.Phone}")</p>
+                        <p> <b>Email Address: </b>@($" {Model.Employee.Email}")</p>
+                        <p> <b>Home Address:</b>@($" {Model.Employee.Address}")</p>
+                    </div>
                 </div>
             </div>
         </div>
                    
-        <!--Employee Scheule Dates-->           
+        <!--Employee Schedule Dates-->           
         <div class="col-md-8 pt-4">
             <div class="outer-wrapper">
                 <div class="tc">
                     <div class="table-wrapper">
                         <!--table row headers-->
                         <table class="table table-bordered border-dark table-primary table-hover table-sm">
-                            @* id="singleRowSelect" style="border-collapse:collapse; height:200px; table-layout:fixed;"*@
                             <thead>
                                 <tr>
                                     <th>Id</th>
                                     <th>Date</th>
                                     <th>Start Time</th>
                                     <th>End Time</th>
-                                    @*<th>Hours</th>*@
                                 </tr>
                             </thead>
                             <!--table body and population info-->
@@ -69,18 +74,8 @@
                                 }
                             </tbody>
                         </table>
-                        @* </div>*@
                     </div>
                 </div>
-            </div>
-            <!--navigating back to Event page-->
-            <div class="buttons">
-                <a asp-controller="Employee" asp-action="Index" class="btn btn-secondary" style="width:150px">
-                    Back To List
-                </a>
-                <a  class="btn btn-secondary" style="width:150px">
-                    Print Schedule
-                </a>
             </div>
         </div>
     </div>

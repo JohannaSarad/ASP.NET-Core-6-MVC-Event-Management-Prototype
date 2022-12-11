@@ -32,11 +32,21 @@ th {
     top: 0px;
 }
 
+.details-wrapper {
+    border: 1px solid black;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.9);
+    border-radius: 4px;
+    height: 65vh;
+    position: relative;
+    background-color: white;
+    min-height: 600px;
+}
 .outer-wrapper {
     border: 1px solid black;
     box-shadow: 0px 0px 3px rgba(0,0,0,0.9);
     border-radius: 4px;
     height: 60vh;
+   
     position: relative;
     background-color: white;
 }
@@ -57,6 +67,7 @@ th {
     height: 24vh;
     position: relative;
     background-color: white;
+    min-height:150px;
 }
 
 .login-outer-wrapper {
@@ -94,6 +105,7 @@ th {
     height: 19vh;
     margin: 20px;
     background-color:white;
+    min-height:100px;
 }
 .tc {
     border: 1px solid black;
@@ -103,6 +115,12 @@ th {
     margin: 20px;
     background-color: white;
    /* overflow-y: scroll;*/
+}
+
+.details-container {
+    height: 45vh;
+    margin: 20px;
+    background-color: white;
 }
 
 .med-table-wrapper {

@@ -58,7 +58,7 @@ namespace JSarad_C868_Capstone_NUnitTests
         //testing available schedule days Thursday "R", Saturday "S", Sunday "U" is available on Sunday, expected result true
         [TestCase("2022-11-27 12:00:00", "RSU", ExpectedResult = true)]
         //testing available schedule days All "MTWRFSU" is available Saturday, expected result true
-        [TestCase("2022-11-26 12:00:00", "MTRFSU", ExpectedResult = true)]
+        [TestCase("2022-11-26 12:00:00", "MTWRFSU", ExpectedResult = true)]
         //testing available schedule days Monday "M", Wednesday "W", Friday "F" is avaialable on Thursday, expected result false 
         [TestCase("2022-11-24 12:00:00", "MWF", ExpectedResult = false)]
         //testing available schedule day Tuesday "T", is avaialable on Wednesday, expected result false 

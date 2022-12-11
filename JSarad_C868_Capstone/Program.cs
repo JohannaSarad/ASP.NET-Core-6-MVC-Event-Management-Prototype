@@ -23,24 +23,11 @@ builder.Services.AddAuthentication("CookieAuth").AddCookie("CookieAuth", options
     //options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.Always;
     //options.
 });
-//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-//            .AddCookie(options =>
-//            {
-//                options.LoginPath = "/Home/Login";
-//                //options.Cookie.Name = ".AspNetCore.Cookies";
-//                //options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-//                //options.SlidingExpiration = true;  //don't know what all this is yet
 
-//            }); //new
 
 
 var app = builder.Build();
 
-//automatically run initializer on app startup
-//using var scope = app.Services.CreateScope();
-//var services = scope.ServiceProvider;
-//var initializer = services.GetRequiredService<DbInitializer>();
-//initializer.Run();
 
 
 

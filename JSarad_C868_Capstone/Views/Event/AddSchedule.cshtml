@@ -2,37 +2,43 @@
 
 
 <div class="container p3" style="height:83vh">
-    
-   
     <div class="row pt-4">
-        <h2 class="text-primary">Event Details & Scheduling</h2>
+        <div class="col-6">
+            <h2 class="text-primary">Event Details & Scheduling</h2>
+        </div>
+        <div class="col-6 text-end" style="margin-top:20px">
+                <!--button to return to Events page -->
+            <a class="btn btn-primary text-end" asp-controller="Event" asp-action="Index" style="width:150px">Return to Events</a>
+        </div>
     </div>
     <br />
-
     <div id="PlaceHolderHere"></div>
     <form method="post">
         <div class="row">
-            <div class="col md-4">
-                <div class="p-2" style="height:65vh; box-shadow: 0px 0px 3px rgba(0,0,0,0.9); border: 1px solid black; ">
-                    <h4 style="margin-top:10px;"><b>@Html.Raw(Model.Event.EventName)</b> </h4>
-                    <hr />
-                    <div style="margin-left:10px; margin-right:10px">
-                        <input asp-for="Event.Id" type="hidden" class="eventId" />
-                        <input asp-for="Client.Id" type="hidden" class="clientId" />
-                        <p><b> Event Date: </b> @($"{Model.Event.StartTime.ToLongDateString()}")</p>
-                        <p><b> Event Time: </b> @($"{Model.Event.StartTime.ToShortTimeString()}") - @($"{Model.Event.EndTime.ToShortTimeString()}")</p>
-                        @*<p><b> End Time: </b> </p>*@
-                        <p><b> Type: </b> @($"{Model.Event.Type}")</p>
-                        <p><b> Location: </b> @($"{Model.Event.Location}")</p>
-                        <p><b> Number of Guests: </b> @($" {Model.Event.Guests}")</p>
-                        <p><b> Event Includes: </b> @($"{Model.Includes}")</p>
-                        @* <h4><b> Contact Information: </b></h4>*@
-                        <p> <b> Contact: </b> @($"{Model.Client.Name}")</p>
-                        <p> <b> Phone: </b>@($"{Model.Client.Phone}")</p>
-                        <p> <b> Email: </b>@($"{Model.Client.Email}")</p>
-                        <p> <b>Notes: </b></p>
-                        <div class="note-wrapper" style="padding:10px">
-                            <p> @($"{Model.Event.Notes}")</p>
+            <div class="col md-4" style="padding-top:1.7%;">
+               @* <div class="p-2" style="height:68vh; box-shadow: 0px 0px 3px rgba(0,0,0,0.9); border: 1px solid black; position: relative; min-height:600px;">*@
+                <div class="details-wrapper">
+                    <div class="details-container">
+                       <h4 style="margin-top:10px;"><b>@Html.Raw(Model.Event.EventName)</b> </h4>
+                        <hr />
+                        <div style="margin-left:10px; margin-right:10px">
+                            <input asp-for="Event.Id" type="hidden" class="eventId" />
+                            <input asp-for="Client.Id" type="hidden" class="clientId" />
+                            <p><b> Event Date: </b> @($"{Model.Event.StartTime.ToLongDateString()}")</p>
+                            <p><b> Event Time: </b> @($"{Model.Event.StartTime.ToShortTimeString()}") - @($"{Model.Event.EndTime.ToShortTimeString()}")</p>
+                            @*<p><b> End Time: </b> </p>*@
+                            <p><b> Type: </b> @($"{Model.Event.Type}")</p>
+                            <p><b> Location: </b> @($"{Model.Event.Location}")</p>
+                            <p><b> Number of Guests: </b> @($" {Model.Event.Guests}")</p>
+                            <p><b> Event Includes: </b> @($"{Model.Includes}")</p>
+                            @* <h4><b> Contact Information: </b></h4>*@
+                            <p> <b> Contact: </b> @($"{Model.Client.Name}")</p>
+                            <p> <b> Phone: </b>@($"{Model.Client.Phone}")</p>
+                            <p> <b> Email Address: </b>@($"{Model.Client.Email}")</p>
+                            <p> <b>Notes: </b></p>
+                            <div class="note-wrapper" style="padding:10px">
+                                <p> @($"{Model.Event.Notes}")</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -131,15 +137,15 @@
                                 @*<div class="container" style="height:30vh">*@
                             <table class="table table-bordered border-dark table-primary table-hover table-sm">
                            
-                                <thead >
+                                <thead>
                                     <tr >
                                                 @* style="display:table; width:100%; box-sizing:border-box;" class="table-primary"*@
                                     <th>Schedule Id</th>
                                         <th>Employee Id</th>
                                         <th>Employee Name</th>
                                         <th>Start Time</th>
-                                        <th>End TIme</th>
-                                        <th></th>
+                                        <th>End Time</th>
+                                        <th style="z-index:2;">Remove </th>
                                                 @* style="width:25%; word-break: break-all; padding: 5px;"*@
                                     </tr>
                                 </thead>
@@ -167,13 +173,13 @@
                                                 <input type="hidden" asp-for="Schedules[index].StartTime"  />
                                                 <td  asp-format="time">@schedule.EndTime.ToShortTimeString()</td>
                                                 <input type="hidden" asp-for="Schedules[index].EndTime"  />
-                                                <td class="w-100 btn-group" role="group">
+                                                <td class="w-100 btn-group" role="group" style="z-index:1;">
                                                     @*<a asp-controller="Client" asp-action="Edit" asp-route-id="@schedule.EmployeeId" style="text-decoration:none"> 
                                                         <i class="bi bi-pencil-square"></i> &emsp; Edit &emsp;</a>  @*class="btn btn-primary mx-2"*@
                                                     @*<a asp-controller="Event" asp-action="RemoveSchedule" asp-route-id="@schedule.EmployeeId" style="text-decoration:none">
                                                         <i class="bi bi-trash"></i> Remove</a>*@ @*class="btn btn-danger mx-2"*@
                                                 <a class="btn btn-danger btn-sm delete-unselectable" id="#deleteUnselectable" data-controller="Event" data-action="RemoveSchedule" data-id="@schedule.ScheduleId"
-                                                    data-index="@index" data-body-message="Are you sure you want to remove this schedule?">
+                                                    data-index="@index" data-body-message="Are you sure you want to remove this schedule?" >
                                                     <i class="bi bi-trash"></i> Remove
                                                 </a>
                                                 </td>
@@ -197,8 +203,9 @@
                         </p>
                     </div>
                     <div class="col-3 text-end" style="margin-top:1vh;">
-                        <button class="btn btn-primary text-end" formaction="/Event/CheckOT" style="width:150px">Check Overtime</button> @*formaction="/AddSchedule"*@
-                </div>
+                        <button class="btn btn-danger text-end" formaction="/Event/CheckOT" style="width:150px">Check Overtime</button> @*formaction="/AddSchedule"*@
+                       
+                    </div>
                 </div>
             </div>
         </div>
@@ -211,14 +218,53 @@
             errorDiv.innerHTML = (strMessage);
             $('#errorModal').modal('show');
         }
+
+        //function preventBack() { location.replace('/Event'); }
         
         $(document).ready(function () {
+            //setTimeout("preventBack()", 0);
+            //window.onload = preventBack;
+            //window.onpageshow = function (evt) { if (evt.persisted) preventBack() }
+            //window.onunload = preventBack();
             var msg = "@TempData["Error"]";
             if (msg)
                 openErrorModal(msg);
+            
+            //function disableBack(){
+            //    window.history.forward()
+            //}
+            //window.onload = disableBack();
+            //window.onpageshow = function(e) {
+            //    if(e.persisted)
+            //    disableBack();
+            //}
            
         });
+
+        window.addEventListener('beforeunload', (e) => {
+            //console.log("beforeunload now");
+            e.preventDefault();
+            location.replace('/Event');
+            //preventBack();
+            //function preventBack() { location.replace('/Event'); }
+        });
+
+        //window.addEventListener('unload', (event) => {
+        //    console.log("unload now");
+        //    preventBack();
+        //});
+        
+        //window.onunload = function () {
+        //    $ajax({
+        //        url: '/Event',
+        //        type: 'GET',
+        //        datatype: "json",
+        //        contentType: "application/json; charset=utf-8"
+        //    });
+        //};
+        //function preventBack() { window.history.forward(); }
        
+        //window.onunload = function () { void (0) };
 
     </script>
  }

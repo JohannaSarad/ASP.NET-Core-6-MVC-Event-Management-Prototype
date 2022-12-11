@@ -49,7 +49,7 @@ $((function () {
         var selectedRow = e.target.parentElement;
         var id = $(selectedRow).data('id');
         var index = $(selectedRow).data('index');
-        alert(index);
+       /* alert(index);*/
         var controller = selectedRow.getAttribute("controller");
         var action = selectedRow.getAttribute("action");
         var url = "/" + controller + "/" + action + "/" + id;
@@ -182,7 +182,9 @@ $(function () {
             return;
         }
         var url = "/" + controller + "/" + action + "/" + id;
-        window.location.replace(url);
+       /* window.location.replace(url);*/
+        /* window.open(url);*/
+        window.location.href = url;
     });
 }());
 
@@ -244,6 +246,7 @@ $((function () {
             success: function () {
                 $("#deleteUnselectableModal").modal("hide");
                 $("#row_" + id).remove();
+               /* location.reload();*/
             }
         });
     });

@@ -4,6 +4,7 @@ using JSarad_C868_Capstone.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 
 namespace JSarad_C868_Capstone.Controllers
@@ -257,7 +258,7 @@ namespace JSarad_C868_Capstone.Controllers
                                        StartTime = s.StartTime,
                                        EndTime = s.EndTime
                                    }).ToList();
-            return View("AddSchedule", viewModel); 
+            return View("AddSchedule", viewModel);
         }
 
         [HttpPost]
@@ -266,7 +267,7 @@ namespace JSarad_C868_Capstone.Controllers
             bool isStartBeforeEnd = false;
             bool isAvailable = false;
             bool isDuringBusinessHours = false;
-            
+
             ModelState.Clear();
             viewModel.Event = _db.Events.Find(viewModel.Event.Id);
             viewModel.Client = _db.Clients.Find(viewModel.Client.Id);
@@ -285,7 +286,7 @@ namespace JSarad_C868_Capstone.Controllers
 
             //validate employee schedule start time before end time
             isStartBeforeEnd = _schedulingService.IsStartBeforeEnd(start, end);
-            if (!isStartBeforeEnd) 
+            if (!isStartBeforeEnd)
             {
                 TempData["Error"] = "Schedule start time must be before Schedule end time";
                 return View("AddSchedule", viewModel);
@@ -293,7 +294,7 @@ namespace JSarad_C868_Capstone.Controllers
 
             //validate employee schedule is within operation hours
             isDuringBusinessHours = _schedulingService.IsDuringBusinessHours(start, end);
-            if(!isDuringBusinessHours)
+            if (!isDuringBusinessHours)
             {
                 TempData["Error"] = "Employees must be scheduled during hours of operation between 6:00 am and 11:00 pm";
                 return View("AddSchedule", viewModel);
@@ -313,11 +314,11 @@ namespace JSarad_C868_Capstone.Controllers
                 foreach (Schedule schedule in schedules)
                 {
                     var overlappingEvent = (from e in _db.Events
-                                           join es in _db.EventSchedules on e.Id equals es.EventId
-                                           join s in _db.Schedules on es.ScheduleId equals s.Id
-                                           where s.Id == schedule.Id
-                                           select e).FirstOrDefault();
-                    
+                                            join es in _db.EventSchedules on e.Id equals es.EventId
+                                            join s in _db.Schedules on es.ScheduleId equals s.Id
+                                            where s.Id == schedule.Id
+                                            select e).FirstOrDefault();
+
                     // validate employee does not have an overlapping schedule
                     if ((schedule.StartTime < start && schedule.EndTime > start) || (schedule.StartTime > start && schedule.EndTime < end) ||
                         (schedule.StartTime < end && schedule.EndTime > end) || (schedule.StartTime == start) || (schedule.StartTime == end) ||
@@ -329,11 +330,11 @@ namespace JSarad_C868_Capstone.Controllers
                     }
                 }
             }
-                            
-            
+
+
             //add schedule to Schedules
-            Schedule scheduleToAdd = new Schedule() 
-            {  
+            Schedule scheduleToAdd = new Schedule()
+            {
                 EmployeeId = viewModel.EmployeeSchedule.EmployeeId,
                 StartTime = start,
                 EndTime = end
@@ -370,7 +371,10 @@ namespace JSarad_C868_Capstone.Controllers
             {
                 viewModel.Schedules.Add(employeeSchedule);
             }
+            viewModel.EmployeeSchedule.StartTime = viewModel.Event.StartTime;
+            viewModel.EmployeeSchedule.EndTime = viewModel.Event.EndTime;
             return View("AddSchedule", viewModel);
+            //return RedirectToAction("AddSchedule", new { id = viewModel.Event.Id });
         }
 
         [HttpPost]
@@ -387,16 +391,16 @@ namespace JSarad_C868_Capstone.Controllers
             DateTime start = viewModel.Event.StartTime.Date + viewModel.EmployeeSchedule.StartTime.TimeOfDay;
             DateTime end = viewModel.Event.StartTime.Date + viewModel.EmployeeSchedule.EndTime.TimeOfDay;
             //get approval for overtime
-            
+
 
             DayOfWeek weekStart = DayOfWeek.Sunday;
             int offset = weekStart - viewModel.Event.StartTime.DayOfWeek;
             DateTime weekStartDate = viewModel.Event.StartTime.Date.AddDays(offset);
             DateTime weekEndDate = weekStartDate.AddDays(7).AddMinutes(-1);
             string overTimeMessage = "";
-           
 
-            if (viewModel.Schedules != null) 
+
+            if (viewModel.Schedules != null)
             {
                 idsInEvent = viewModel.Schedules.Select(s => s.EmployeeId).Distinct().ToList();
                 Employee employee = new Employee();
@@ -409,7 +413,7 @@ namespace JSarad_C868_Capstone.Controllers
                     int shiftMinutes = 0;
                     int weeklyHours = 0;
                     int weeklyMinutes = 0;
-                   
+
                     //float weeklyHours = 0;
                     foreach (int employeeId in idsInEvent)
                     {
@@ -417,13 +421,13 @@ namespace JSarad_C868_Capstone.Controllers
                         var employeeSchedules = from s in _db.Schedules where s.EmployeeId == employeeId select s;
                         foreach (Schedule schedule in employeeSchedules)
                         {
-                            if (start.Date == schedule.StartTime.Date) 
+                            if (start.Date == schedule.StartTime.Date)
                             {
                                 shiftLength += schedule.EndTime.Subtract(schedule.StartTime);
                             }
 
                             //calculate hours employee is scheduled for the week of the event
-                            if ((schedule.StartTime.Date >= weekStartDate.Date) && (schedule.EndTime.Date <= weekEndDate.Date)) 
+                            if ((schedule.StartTime.Date >= weekStartDate.Date) && (schedule.EndTime.Date <= weekEndDate.Date))
                             {
                                 weekShiftLength += schedule.EndTime.Subtract(schedule.StartTime);
                             }
@@ -471,7 +475,7 @@ namespace JSarad_C868_Capstone.Controllers
             TempData["Error"] = "No overtime hours were found for this event";
             return View("AddSchedule", viewModel);
         }
-        
+
         [HttpPost]
         public IActionResult RemoveSchedule(int? id)
         {

@@ -46,7 +46,7 @@ namespace JSarad_C868_Capstone.Controllers
 
                     var claims = new List<Claim> 
                     { 
-                        new Claim(ClaimTypes.Name, "admin"),
+                        new Claim(ClaimTypes.Name, user.Username),
                         new Claim(ClaimTypes.Email, "admin@catering.com")
                     };
                     var identity = new ClaimsIdentity(claims, "CookieAuth");
