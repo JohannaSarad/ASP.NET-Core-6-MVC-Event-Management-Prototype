@@ -281,7 +281,7 @@ namespace JSarad_C868_Capstone.Controllers
             //if(selectedEmployee.Id == 0)
             {
                 TempData["Error"] = "Please select the employee you would like to add to schedule";
-                return View("AddSchedule", viewModel);
+                return RedirectToAction("AddSchedule", new { id = viewModel.Event.Id });
             }
 
             //validate employee schedule start time before end time
@@ -289,7 +289,7 @@ namespace JSarad_C868_Capstone.Controllers
             if (!isStartBeforeEnd)
             {
                 TempData["Error"] = "Schedule start time must be before Schedule end time";
-                return View("AddSchedule", viewModel);
+                return RedirectToAction("AddSchedule", new { id = viewModel.Event.Id });
             }
 
             //validate employee schedule is within operation hours
@@ -297,7 +297,7 @@ namespace JSarad_C868_Capstone.Controllers
             if (!isDuringBusinessHours)
             {
                 TempData["Error"] = "Employees must be scheduled during hours of operation between 6:00 am and 11:00 pm";
-                return View("AddSchedule", viewModel);
+                return RedirectToAction("AddSchedule", new { id = viewModel.Event.Id });
             }
 
             //validate the employee is available for the day of the event
@@ -305,7 +305,7 @@ namespace JSarad_C868_Capstone.Controllers
             if (!isAvailable)
             {
                 TempData["Error"] = ($"{selectedEmployee.Name}'s availability is not open for the event on {viewModel.Event.StartTime.ToLongDateString()}");
-                return View("AddSchedule", viewModel);
+                return RedirectToAction("AddSchedule", new { id = viewModel.Event.Id });
             }
 
             //check for overlapping schedules for selectedEmployee before save
@@ -326,7 +326,7 @@ namespace JSarad_C868_Capstone.Controllers
                     {
                         TempData["Error"] = ($"{selectedEmployee.Name} is already working {overlappingEvent.EventName} on {viewModel.Event.StartTime.ToLongDateString()}" +
                             $" from {schedule.StartTime.ToShortTimeString()} to {schedule.EndTime.ToShortTimeString()}");
-                        return View("AddSchedule", viewModel);
+                        return RedirectToAction("AddSchedule", new { id = viewModel.Event.Id });
                     }
                 }
             }
@@ -373,8 +373,8 @@ namespace JSarad_C868_Capstone.Controllers
             }
             viewModel.EmployeeSchedule.StartTime = viewModel.Event.StartTime;
             viewModel.EmployeeSchedule.EndTime = viewModel.Event.EndTime;
-            return View("AddSchedule", viewModel);
-            //return RedirectToAction("AddSchedule", new { id = viewModel.Event.Id });
+            //return View("AddSchedule", viewModel);
+            return RedirectToAction("AddSchedule", new { id = viewModel.Event.Id });
         }
 
         [HttpPost]

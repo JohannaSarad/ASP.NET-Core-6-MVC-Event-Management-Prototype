@@ -22,7 +22,7 @@
                        <h4 style="margin-top:10px;"><b>@Html.Raw(Model.Event.EventName)</b> </h4>
                         <hr />
                         <div style="margin-left:10px; margin-right:10px">
-                            <input asp-for="Event.Id" type="hidden" class="eventId" />
+                            <input asp-for="Event.Id" type="hidden" class="eventId" id="eventId"/>
                             <input asp-for="Client.Id" type="hidden" class="clientId" />
                             <p><b> Event Date: </b> @($"{Model.Event.StartTime.ToLongDateString()}")</p>
                             <p><b> Event Time: </b> @($"{Model.Event.StartTime.ToShortTimeString()}") - @($"{Model.Event.EndTime.ToShortTimeString()}")</p>
@@ -95,27 +95,27 @@
                             
                 <div class="row mt-3">
                     <input asp-for="EmployeeSchedule.EmployeeId" id="selectedId" type="hidden" />
-                    @* <div class="container" style="height:10vh;">*@
+                   
                     <div class="col-3 form-group">
                         <label>Employee Name</label>
-                        <input asp-for="EmployeeSchedule.EmployeeName" class="selectionResult" style="display:flex" readonly /> @*name="employeeName"*@
-                        @* form-control*@
+                        <input asp-for="EmployeeSchedule.EmployeeName" class="selectionResult" style="display:flex" readonly /> 
+                        
                         </div>
                     <div class="col-2 form-group">
                         <div class="input-append">
                         <label asp-for="EmployeeSchedule.StartTime" style="display:flex">Start Time</label>
-                            <input asp-for="EmployeeSchedule.StartTime" type="time" /> @*name="start"*@
-                            @*<input asp-for="EmployeeSchedule.StartTime" type="hidden" id="start" />*@ @*name="start"*@
+                            <input asp-for="EmployeeSchedule.StartTime" type="time" /> 
+                            
                             <span class="add-on">
                             <i data-time-icon="icon-time"></i>
-                            </span> @*style="display:flex"*@
+                            </span> 
                         </div>
                     </div>
                     <div class="col-2 form-group">
                         <div class="input-append">
                             <label asp-for="EmployeeSchedule.EndTime" style="display:flex">End Time</label>
-                            <input asp-for="EmployeeSchedule.EndTime" type="time" /> @*id="end"*@ @*name="end"*@
-                            @*<input asp-for="EmployeeSchedule.EndTime" type="hidden" />*@ @*name="end"*@
+                            <input asp-for="EmployeeSchedule.EndTime" type="time" /> 
+                          
                             <span class="add-on">
                                 <i data-time-icon="icon-time"></i>
                             </span>
@@ -125,7 +125,7 @@
                     <div class="col-5 form-group pt-3 text-end">
                         <button class="btn btn-primary" type="submit" formaction="AddSchedule" id="readyDocument" style="width:150px">Add To Schedule
 
-                        </button> @*id="addSchedule" data-controller="Event" data-action="ScheduleEmployee"*@ @*formaction="/Event/ScheduleEmployee/"*@
+                        </button> 
                     </div>
                 </div>
                 
@@ -133,25 +133,24 @@
                 <div class="small-outer-wrapper">
                     <div class="small-tc">
                         <div class="small-table-wrapper">
-                            @*<div class="row mb-3">*@
-                                @*<div class="container" style="height:30vh">*@
+                           
                             <table class="table table-bordered border-dark table-primary table-hover table-sm">
                            
                                 <thead>
                                     <tr >
-                                                @* style="display:table; width:100%; box-sizing:border-box;" class="table-primary"*@
+                                                
                                     <th>Schedule Id</th>
                                         <th>Employee Id</th>
                                         <th>Employee Name</th>
                                         <th>Start Time</th>
                                         <th>End Time</th>
                                         <th style="z-index:2;">Remove </th>
-                                                @* style="width:25%; word-break: break-all; padding: 5px;"*@
+                                                
                                     </tr>
                                 </thead>
                                 <!--table body and population info-->
                                 <tbody >
-                                    @*style="display:block; height:200px; overflow-y:scroll; border: 1px solid black;"*@
+                                    
                                     @if (Model.Schedules != null)
                                     {
                                         foreach (var schedule in Model.Schedules)
@@ -159,10 +158,7 @@
                                             int index = Model.Schedules.IndexOf(schedule);
                                             <tr id="row_@schedule.ScheduleId" class="table-light"
                                     controller="Event" action="Selection" data-id="@schedule.EmployeeId">
-                                            @* data-index="@index"*@
-                                                @* selectable*@
-                                                @* style="display:table; width:100%; box-sizing:border-box"*@
-                                                @*<td> @schedule.ScheduleId</td>*@
+                                           
                                             <td>@schedule.ScheduleId</td>
                                                 <input type="hidden" asp-for="Schedules[index].ScheduleId" />
                                                 <td >@schedule.EmployeeId</td>
@@ -174,16 +170,13 @@
                                                 <td  asp-format="time">@schedule.EndTime.ToShortTimeString()</td>
                                                 <input type="hidden" asp-for="Schedules[index].EndTime"  />
                                                 <td class="w-100 btn-group" role="group" style="z-index:1;">
-                                                    @*<a asp-controller="Client" asp-action="Edit" asp-route-id="@schedule.EmployeeId" style="text-decoration:none"> 
-                                                        <i class="bi bi-pencil-square"></i> &emsp; Edit &emsp;</a>  @*class="btn btn-primary mx-2"*@
-                                                    @*<a asp-controller="Event" asp-action="RemoveSchedule" asp-route-id="@schedule.EmployeeId" style="text-decoration:none">
-                                                        <i class="bi bi-trash"></i> Remove</a>*@ @*class="btn btn-danger mx-2"*@
+                                                   
                                                 <a class="btn btn-danger btn-sm delete-unselectable" id="#deleteUnselectable" data-controller="Event" data-action="RemoveSchedule" data-id="@schedule.ScheduleId"
                                                     data-index="@index" data-body-message="Are you sure you want to remove this schedule?" >
                                                     <i class="bi bi-trash"></i> Remove
                                                 </a>
                                                 </td>
-                                                @* style="border-collapse:collapse; border:none; width:33.33%; word-break: break-all; padding: 5px; border-bottom: none; display:none"*@
+                                               
                                             </tr>
                                         }
                                     }
@@ -219,53 +212,16 @@
             $('#errorModal').modal('show');
         }
 
-        //function preventBack() { location.replace('/Event'); }
         
         $(document).ready(function () {
-            //setTimeout("preventBack()", 0);
-            //window.onload = preventBack;
-            //window.onpageshow = function (evt) { if (evt.persisted) preventBack() }
-            //window.onunload = preventBack();
+            
             var msg = "@TempData["Error"]";
             if (msg)
                 openErrorModal(msg);
-            
-            //function disableBack(){
-            //    window.history.forward()
-            //}
-            //window.onload = disableBack();
-            //window.onpageshow = function(e) {
-            //    if(e.persisted)
-            //    disableBack();
-            //}
            
         });
-
-        window.addEventListener('beforeunload', (e) => {
-            //console.log("beforeunload now");
-            e.preventDefault();
-            location.replace('/Event');
-            //preventBack();
-            //function preventBack() { location.replace('/Event'); }
-        });
-
-        //window.addEventListener('unload', (event) => {
-        //    console.log("unload now");
-        //    preventBack();
-        //});
         
-        //window.onunload = function () {
-        //    $ajax({
-        //        url: '/Event',
-        //        type: 'GET',
-        //        datatype: "json",
-        //        contentType: "application/json; charset=utf-8"
-        //    });
-        //};
-        //function preventBack() { window.history.forward(); }
        
-        //window.onunload = function () { void (0) };
-
     </script>
  }
  
