@@ -63,4 +63,4 @@
 #*.RTF   diff=astextplain
 
 ### vendored:
-C868_Capstone/JSarad_C868_Capstone/wwwroot/lib/bootstrap/** linguist-vendored=true
+Sarad_C868_Capstone/wwwroot/lib/bootstrap/** linguist-vendored=true
