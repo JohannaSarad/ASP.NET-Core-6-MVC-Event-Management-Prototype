@@ -61,3 +61,5 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+C868_Capstone\JSarad_C868_Capstone\wwwroot\lib\bootstrap\** linguist-vendored
