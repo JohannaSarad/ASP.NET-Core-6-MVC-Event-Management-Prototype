@@ -238,7 +238,7 @@ $((function () {
     /* posts to Event.RemoveSchecule to remove employee schedule from AddSchedule on modal confirm delete click, closes modal
      * and
      * removes selected row from view 
-     */
+     *///
     $("#confirm-delete-unselectable").on('click', () => {
         $.ajax({
             type: "POST",
