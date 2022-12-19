@@ -4,7 +4,7 @@
 
 This Application is intended to be used by administrative catering company staff. It was designed to allow the user to manage and store, client, employee, and event information, as well as schedule and staff upcoming events. 
 
-##Features 
+## Features 
 * Automatic MSSQL database creation and data migration using Entity Framework
 * User login authentication (with dynamically created Welcome message and Logout link)
 * Dynamic data tables with highlighting selectable rows, and search functionality
@@ -18,13 +18,13 @@ This Application is intended to be used by administrative catering company staff
 * Automated depency deletion upon modification of event dates, or removal of events, employees, or clients.
 * Sample NUnit tests for scheduling validations
 
-##Required Environment to Run Application
+## Required Environment to Run Application
 * Windows 10 or higher
 * MSSQL Server 
 * Visual Studio 2019 or higher  
 * ASP.NET and web development workload for Visual Studio
 
-##Documentation
+## Documentation
 
 Documentation including the following can be viewed [HERE](https://drive.google.com/drive/folders/1eW93DNmTUzO45pPOrCRPjzz2Jma5Sw-g?usp=sharing)
 * User Guide
