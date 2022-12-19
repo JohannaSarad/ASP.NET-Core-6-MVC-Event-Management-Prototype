@@ -10,12 +10,12 @@ This Application is intended to be used by administrative catering company staff
 * Dynamic data tables with highlighting selectable rows, and search functionality
 * Modal Add and Edit forms
 * Modal validation messages, confirmation messages, and alerts
-* Schedule validation that prohibits: 
+* Scheduling validation that prohibits: 
 	* Saving event or employee schedules outside of business hours
 	* Saving overlapping employee schedules
 	* Saving employee schedules outside of employee’s selected availability
 * Overtime checking functionality that allows user to view employee overtime on the day or week of an event
-* Automated depency deletion upon modification of event dates, or removal of events, employees, or clients.
+* Automated depency deletion upon modification of event dates, or removal of events, employees, or clients
 * Sample NUnit tests for scheduling validations
 
 ## Required Environment to Run Application
